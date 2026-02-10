@@ -1,4 +1,3 @@
-import { usePaystackPayment } from 'react-paystack';
 
 interface PaystackConfig {
   reference: string;

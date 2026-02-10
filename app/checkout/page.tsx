@@ -21,9 +21,7 @@ export default function CheckoutPage() {
   const { items, total } = useCart();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState<"paystack" | "cash">(
-    "cash",
-  );
+  const [paymentMethod, setPaymentMethod] = useState<"momo" | "cash">("cash");
   const [isProcessing, setIsProcessing] = useState(false);
   const { initializePayment } = usePaystackCheckout();
 
@@ -33,7 +31,7 @@ export default function CheckoutPage() {
       return;
     }
 
-    if (paymentMethod === "paystack" && (!email || !email.includes("@"))) {
+    if (paymentMethod === "momo" && (!email || !email.includes("@"))) {
       alert("Please enter a valid email for payment");
       return;
     }
@@ -190,6 +188,24 @@ export default function CheckoutPage() {
                 We'll use this to track your order. No signup required.
               </p>
             </Card>
+
+            {paymentMethod === "momo" && (
+              <Card hover={false} className="p-6">
+                <h3 className="text-lg font-serif text-primary mb-4">
+                  Your Email
+                </h3>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 rounded-3xl border-2 border-border focus:border-primary outline-none transition-colors bg-canvas text-primary"
+                />
+                <p className="text-xs text-secondary mt-2">
+                  Required for payment processing
+                </p>
+              </Card>
+            )}
 
             <Card hover={false} className="p-6">
               <h3 className="text-lg font-serif text-primary mb-4">
