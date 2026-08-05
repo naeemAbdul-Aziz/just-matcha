@@ -1,12 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { GuestForm } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
 import { OrderSummarySticky } from '../components/checkout/OrderSummarySticky';
 
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+};
+
 export const CheckoutPage: React.FC = () => {
   return (
-    <div className="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-white transition-colors duration-300 min-h-screen flex flex-col">
+    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-white transition-colors duration-300 min-h-screen flex flex-col">
 
 
       <main className="flex-grow container mx-auto px-4 lg:px-12 pt-28 lg:pt-32 pb-12">
@@ -34,6 +41,6 @@ export const CheckoutPage: React.FC = () => {
           <OrderSummarySticky />
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };

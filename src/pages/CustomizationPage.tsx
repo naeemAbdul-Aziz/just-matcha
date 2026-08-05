@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
+
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+};
 export const CustomizationPage: React.FC = () => {
   const [base, setBase] = useState('ceremonial');
   const [flavors, setFlavors] = useState<Record<string, number>>({});
@@ -9,7 +16,7 @@ export const CustomizationPage: React.FC = () => {
   const [milkLevel, setMilkLevel] = useState(50);
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col relative overflow-x-hidden">
+    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display min-h-screen flex flex-col relative overflow-x-hidden">
       {/* Subtle Background Pattern */}
       <div className="fixed inset-0 bg-pattern pointer-events-none z-0"></div>
 
@@ -30,6 +37,6 @@ export const CustomizationPage: React.FC = () => {
           setMilkLevel={setMilkLevel}
         />
       </main>
-    </div>
+    </motion.div>
   );
 };

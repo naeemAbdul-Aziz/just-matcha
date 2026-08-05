@@ -1,11 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { StatusTracker } from '../components/success/StatusTracker';
 import { OrderDetails } from '../components/success/OrderDetails';
 
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+};
+
 export const OrderSuccessPage: React.FC = () => {
   return (
-    <div className="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col">
+    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col">
 
 
       <main className="flex-grow flex items-center justify-center pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -88,6 +95,6 @@ export const OrderSuccessPage: React.FC = () => {
       </main>
 
 
-    </div>
+    </motion.div>
   );
 };

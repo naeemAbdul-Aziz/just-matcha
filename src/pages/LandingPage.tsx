@@ -1,12 +1,19 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { HeroSection } from '../components/landing/HeroSection';
 import { MenuSection } from '../components/landing/MenuSection';
 import { StorySection } from '../components/landing/StorySection';
 import { Link } from 'react-router-dom';
 
+const pageVariants = {
+  initial: { opacity: 0, y: 15 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+};
+
 export const LandingPage: React.FC = () => {
   return (
-    <div>
+    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
       <HeroSection />
       <MenuSection />
       <StorySection />
@@ -18,6 +25,6 @@ export const LandingPage: React.FC = () => {
           <span className="font-medium max-w-0 group-hover:max-w-[150px] whitespace-nowrap overflow-hidden transition-all duration-500 ease-in-out">Custom Order</span>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };

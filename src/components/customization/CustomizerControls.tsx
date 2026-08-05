@@ -421,8 +421,8 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 </label>
                 
                 <div className="flex justify-end mt-10">
-                  <button onClick={() => navigate('/checkout')} className="group relative px-10 py-4 bg-primary-dark text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/30">
-                    <span className="absolute inset-0 w-full h-full bg-black/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
+                  <button onClick={() => navigate('/checkout')} className="group relative px-10 py-4 bg-background-dark text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/30">
+                    <span className="absolute inset-0 w-full h-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
                     <span className="relative flex items-center gap-2 font-bold tracking-wide">Review Order <span className="material-icons text-sm">check_circle</span></span>
                   </button>
                 </div>

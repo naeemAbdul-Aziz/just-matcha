@@ -13,12 +13,12 @@ export const GuestForm: React.FC = () => {
           <input
             type="text"
             id="name"
-            className="block w-full px-5 py-3 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
+            className="block w-full px-5 pt-6 pb-2 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
             placeholder="Full Name"
           />
           <label
             htmlFor="name"
-            className="absolute left-5 top-3.5 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-3 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
+            className="absolute left-5 top-4 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-2.5 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-2.5 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
           >
             Full Name
           </label>
@@ -30,12 +30,12 @@ export const GuestForm: React.FC = () => {
             <input
               type="tel"
               id="phone"
-              className="block w-full px-5 py-3 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
+              className="block w-full px-5 pt-6 pb-2 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
               placeholder="Phone Number"
             />
             <label
               htmlFor="phone"
-              className="absolute left-5 top-3.5 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-3 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
+              className="absolute left-5 top-4 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-2.5 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-2.5 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
             >
               Phone Number
             </label>
@@ -44,12 +44,12 @@ export const GuestForm: React.FC = () => {
             <input
               type="text"
               id="city"
-              className="block w-full px-5 py-3 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
+              className="block w-full px-5 pt-6 pb-2 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
               placeholder="City / Area"
             />
             <label
               htmlFor="city"
-              className="absolute left-5 top-3.5 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-3 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
+              className="absolute left-5 top-4 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-2.5 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-2.5 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
             >
               City / Area
             </label>
@@ -61,16 +61,16 @@ export const GuestForm: React.FC = () => {
           <input
             type="text"
             id="address"
-            className="block w-full px-5 py-3 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
+            className="block w-full px-5 pt-6 pb-2 text-base text-brand-dark dark:text-white bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent peer transition-all shadow-sm placeholder-transparent"
             placeholder="Delivery Address & Landmark"
           />
           <label
             htmlFor="address"
-            className="absolute left-5 top-3.5 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-3 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
+            className="absolute left-5 top-4 text-slate-400 dark:text-slate-500 transition-all duration-200 pointer-events-none origin-[0] peer-focus:-translate-y-2.5 peer-focus:scale-75 peer-focus:text-brand-dark peer-not-placeholder-shown:-translate-y-2.5 peer-not-placeholder-shown:scale-75 peer-not-placeholder-shown:text-brand-dark"
           >
             Delivery Address & Landmark
           </label>
-          <span className="material-icons absolute right-5 top-3.5 text-slate-300 pointer-events-none">location_on</span>
+          <span className="material-icons absolute right-5 top-4 text-slate-300 pointer-events-none">location_on</span>
         </div>
       </div>
     </section>

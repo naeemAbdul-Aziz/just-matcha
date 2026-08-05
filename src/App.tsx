@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { LandingPage } from './pages/LandingPage';
 import { CustomizationPage } from './pages/CustomizationPage';
 import { CheckoutPage } from './pages/CheckoutPage';
@@ -13,14 +14,16 @@ function App() {
   return (
     <>
       {!isAdmin && <Navbar />}
-      <main className="min-h-screen">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/customize" element={<CustomizationPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/success" element={<OrderSuccessPage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
-        </Routes>
+      <main className="min-h-screen relative">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/customize" element={<CustomizationPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/success" element={<OrderSuccessPage />} />
+            <Route path="/admin" element={<AdminDashboardPage />} />
+          </Routes>
+        </AnimatePresence>
       </main>
       {!isAdmin && <Footer />}
     </>
