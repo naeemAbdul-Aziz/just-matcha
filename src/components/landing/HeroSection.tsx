@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const HeroSection: React.FC = () => {
   return (
-    <header className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
+    <header className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full matcha-gradient opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-soft-green/30 blur-3xl rounded-full pointer-events-none"></div>
@@ -25,10 +25,10 @@ export const HeroSection: React.FC = () => {
             Sweet, inviting, and purely authentic. Experience the luxury of layered ceremonial matcha, whisked with soul and delivered fresh to your door.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4">
-            <Link to="/customize" className="group relative px-8 py-4 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
+          <div className="flex flex-row items-center gap-3 sm:gap-6 pt-4">
+            <Link to="/customize" className="group relative px-6 py-3 md:px-8 md:py-4 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
               <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-              <span className="relative flex items-center gap-2 font-medium tracking-wide">
+              <span className="relative flex items-center gap-2 font-medium tracking-wide whitespace-nowrap">
                 Order Your Cup
                 <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </span>
@@ -38,11 +38,11 @@ export const HeroSection: React.FC = () => {
               <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-primary transition-colors">
                 <span className="material-icons text-lg">play_arrow</span>
               </div>
-              <span className="font-medium text-sm">See the pour</span>
+              <span className="font-medium text-sm whitespace-nowrap">See the pour</span>
             </button>
           </div>
 
-          <div className="pt-12 flex items-center gap-8 border-t border-gray-200/50">
+          <div className="pt-6 sm:pt-12 flex items-center gap-6 sm:gap-8 border-t border-gray-200/50">
             <div className="text-center">
               <p className="font-serif text-2xl text-text-dark">4.9</p>
               <p className="text-xs text-text-light uppercase tracking-wide">Rating</p>
@@ -66,16 +66,9 @@ export const HeroSection: React.FC = () => {
             />
 
             {/* Floating Badge */}
-            <div className="absolute bottom-8 right-8 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-lg transform transition-transform group-hover:translate-y-[-5px]">
-              <div className="flex items-center gap-3">
-                <div className="bg-soft-green p-2 rounded-full">
-                  <span className="material-icons text-primary-dark text-lg">eco</span>
-                </div>
-                <div>
-                  <p className="text-xs text-text-light uppercase tracking-wider font-bold">Grade</p>
-                  <p className="text-sm font-serif text-text-dark">Ceremonial Premium</p>
-                </div>
-              </div>
+            <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 bg-white/40 backdrop-blur-md border border-white/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.12)] transform transition-transform group-hover:translate-y-[-5px] flex items-center gap-2">
+              <span className="material-icons text-primary-dark text-sm sm:text-base drop-shadow-sm">eco</span>
+              <span className="text-xs sm:text-sm font-medium text-slate-900 tracking-wide whitespace-nowrap drop-shadow-sm">Ceremonial Grade</span>
             </div>
           </div>
 

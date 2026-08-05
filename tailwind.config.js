@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#13ec37",
-        "primary-dark": "#0eb52b", // Unified primary-dark
+        "primary": "#2eb052", // Leafy matcha green
+        "primary-dark": "#16a34a", // Deeper ceremonial green
         "soft-green": "#e3f4d8",
         "cream": "#f8f1e7",
         "cream-accent": "#fdfdfb",

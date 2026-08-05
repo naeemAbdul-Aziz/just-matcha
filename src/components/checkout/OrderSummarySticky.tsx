@@ -72,7 +72,7 @@ export const OrderSummarySticky: React.FC = () => {
 
         {/* Mobile Button (Duplicate for better UX on mobile stacking) */}
         <div className="pt-8 lg:hidden pb-8">
-          <Link to="/success" className="w-full bg-brand-dark hover:bg-black text-white font-bold text-lg py-5 rounded-xl shadow-luxury flex items-center justify-center gap-2 transition-all">
+          <Link to="/success" className="w-full bg-brand-dark hover:bg-black text-white font-bold text-lg py-5 rounded-full shadow-luxury flex items-center justify-center gap-2 transition-all">
             <span>Complete Order</span>
             <span className="material-icons">arrow_forward</span>
           </Link>

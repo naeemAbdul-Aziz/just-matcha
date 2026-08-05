@@ -10,12 +10,9 @@ import { Footer } from './components/layout/Footer';
 function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
-  const isCheckout = location.pathname === '/checkout';
-  const isSuccess = location.pathname === '/success';
-
   return (
     <>
-      {!isAdmin && !isCheckout && !isSuccess && <Navbar />}
+      {!isAdmin && <Navbar />}
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -25,7 +22,7 @@ function App() {
           <Route path="/admin" element={<AdminDashboardPage />} />
         </Routes>
       </main>
-      {!isAdmin && !isCheckout && !isSuccess && <Footer />}
+      {!isAdmin && <Footer />}
     </>
   );
 }

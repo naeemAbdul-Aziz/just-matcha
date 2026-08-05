@@ -2,7 +2,7 @@ import React from 'react';
 
 export const ProductVisualizer: React.FC = () => {
   return (
-    <div className="w-full lg:w-1/2 sticky top-24">
+    <div className="w-full">
       <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-soft group">
         {/* Main Product Image */}
         <img
@@ -12,11 +12,11 @@ export const ProductVisualizer: React.FC = () => {
           data-alt="Premium matcha latte with perfect foam in a ceramic cup"
         />
         {/* Floating Detail Badge */}
-        <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur-md rounded-xl border border-white/20 shadow-lg">
+        <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/40 dark:bg-black/40 backdrop-blur-md rounded-xl border border-white/50 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-lg font-bold mb-1">Ceremonial Grade • Takoradi Harvest</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Notes of umami, sweet cream, and fresh grass.</p>
+              <h3 className="text-lg font-bold mb-1 text-slate-900 dark:text-white drop-shadow-sm">Ceremonial Grade</h3>
+              <p className="text-sm text-slate-700 dark:text-slate-300 drop-shadow-sm">Notes of umami, sweet cream, and fresh grass.</p>
             </div>
             <div className="flex gap-2">
               <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary" title="Vegan">

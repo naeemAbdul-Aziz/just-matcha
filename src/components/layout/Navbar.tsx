@@ -18,12 +18,12 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={cn(
-      "fixed w-full z-50 top-0 transition-all duration-300 py-6",
-      scrolled ? "py-3" : ""
+      "fixed w-full z-50 top-0 transition-all duration-300 pt-4 md:pt-6 pb-2",
+      scrolled ? "pt-2 md:pt-3" : ""
     )}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className={cn(
-          "rounded-full px-8 py-4 flex justify-between items-center transition-all duration-300",
+          "rounded-full px-5 py-2.5 md:px-8 md:py-3 flex justify-between items-center transition-all duration-300",
           !scrolled ? "glass-effect shadow-sm" : "bg-white/80 backdrop-blur-md shadow-sm border border-white/20"
         )}>
           {/* Logo */}

@@ -24,12 +24,9 @@ export const OrderSummaryBar: React.FC<OrderSummaryBarProps> = ({ base, collagen
             Ready in ~15 mins
           </div>
         </div>
-        <div className="flex w-full sm:w-auto gap-3">
-          <button className="flex-1 sm:flex-none p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors flex items-center justify-center">
-            <span className="material-icons text-slate-600 dark:text-slate-300">favorite_border</span>
-          </button>
-          <Link to="/checkout" className="flex-grow sm:flex-none bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg shadow-glow hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 min-w-[200px]">
-            <span>Add to Bag</span>
+        <div className="flex w-full sm:w-auto">
+          <Link to="/checkout" className="w-full sm:w-auto bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-full shadow-glow hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 min-w-[200px]">
+            <span>Proceed to Payment</span>
             <span className="material-icons text-sm">arrow_forward</span>
           </Link>
         </div>

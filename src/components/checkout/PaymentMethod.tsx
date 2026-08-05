@@ -23,7 +23,7 @@ export const PaymentMethod: React.FC = () => {
             checked={selected === 'momo'}
             onChange={() => setSelected('momo')}
           />
-          <div className="p-6 rounded-2xl border-2 border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 transition-all duration-300 h-full flex flex-col justify-between shadow-sm hover:shadow-md">
+          <div className="p-6 rounded-[2.5rem] border-2 border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 transition-all duration-300 h-full flex flex-col justify-between shadow-sm hover:shadow-md">
             <div className="flex justify-between items-start mb-4">
               <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
                 <span className="material-icons">smartphone</span>
@@ -48,7 +48,7 @@ export const PaymentMethod: React.FC = () => {
             checked={selected === 'cash'}
             onChange={() => setSelected('cash')}
           />
-          <div className="p-6 rounded-2xl border-2 border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 transition-all duration-300 h-full flex flex-col justify-between shadow-sm hover:shadow-md">
+          <div className="p-6 rounded-[2.5rem] border-2 border-slate-100 dark:border-white/5 bg-white dark:bg-white/5 peer-checked:border-primary peer-checked:bg-primary/5 hover:border-primary/50 transition-all duration-300 h-full flex flex-col justify-between shadow-sm hover:shadow-md">
             <div className="flex justify-between items-start mb-4">
               <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
                 <span className="material-icons">payments</span>

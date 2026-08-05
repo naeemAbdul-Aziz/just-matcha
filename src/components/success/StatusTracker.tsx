@@ -2,7 +2,7 @@ import React from 'react';
 
 export const StatusTracker: React.FC = () => {
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-8 shadow-sm">
+    <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-sm">
       <h3 className="text-lg font-semibold mb-6 text-slate-900 dark:text-white">Order Status</h3>
       <div className="relative">
         {/* Vertical line connecting steps */}
