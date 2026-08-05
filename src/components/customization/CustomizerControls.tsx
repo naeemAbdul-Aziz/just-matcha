@@ -100,7 +100,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
       : 'bg-transparent border-b border-gray-200 dark:border-white/10 rounded-none my-0 hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer'}
   `;
 
-  const stepHeaderClass = (step: number) => `
+  const stepHeaderClass = (_step: number) => `
     w-full flex items-center justify-between px-6 py-6 transition-colors text-left
   `;
 
