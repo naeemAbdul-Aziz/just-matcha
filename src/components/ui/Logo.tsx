@@ -8,7 +8,7 @@ interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const Logo: React.FC<LogoProps> = ({ className, ...props }) => {
   return (
     <img 
-      src="/logo.jpg" 
+      src="/logo.jpeg" 
       alt="Just Matcha Logo" 
       className={cn("rounded-full object-cover", className)} 
       {...props}
