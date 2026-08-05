@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
             </Link>
 
             <button className="flex items-center gap-3 text-text-dark hover:text-primary transition-colors group">
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-primary transition-colors">
+              <div className="w-10 h-10 rounded-full bg-cream shadow-sm flex items-center justify-center group-hover:shadow-md transition-all group-hover:scale-105">
                 <span className="material-icons text-lg">play_arrow</span>
               </div>
               <span className="font-medium text-sm whitespace-nowrap">See the pour</span>
