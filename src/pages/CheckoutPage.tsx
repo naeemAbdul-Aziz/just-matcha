@@ -22,7 +22,7 @@ export const CheckoutPage: React.FC = () => {
             <PaymentMethod />
 
             <div className="pt-6 hidden lg:block">
-              <Link to="/success" className="w-full bg-brand-dark hover:bg-black text-white font-bold text-lg py-5 rounded-full shadow-luxury hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+              <Link to="/success" className="w-full bg-background-dark hover:bg-black text-white font-bold text-lg py-4 rounded-full shadow-luxury hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                 <span>Complete Order</span>
                 <span className="material-icons">arrow_forward</span>
               </Link>

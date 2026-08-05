@@ -10,11 +10,11 @@ export const OrderSuccessPage: React.FC = () => {
 
       <main className="flex-grow flex items-center justify-center pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Abstract Background Illustrations */}
-        <div className="absolute top-20 left-10 opacity-5 pointer-events-none transform -rotate-12">
-          <span className="material-icons text-9xl text-primary">local_cafe</span>
+        <div className="absolute top-20 left-10 opacity-[0.03] pointer-events-none transform -rotate-12">
+          <span className="material-icons text-7xl text-primary">local_cafe</span>
         </div>
-        <div className="absolute bottom-20 right-10 opacity-5 pointer-events-none transform rotate-12">
-          <span className="material-icons text-9xl text-primary">eco</span>
+        <div className="absolute bottom-20 right-10 opacity-[0.03] pointer-events-none transform rotate-12">
+          <span className="material-icons text-7xl text-primary">eco</span>
         </div>
 
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
@@ -35,7 +35,7 @@ export const OrderSuccessPage: React.FC = () => {
             </div>
 
             {/* Unique Order Code Card */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 shadow-sm relative overflow-hidden group">
+            <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-sm relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <span className="material-icons text-6xl text-primary">qr_code_2</span>
               </div>
@@ -60,7 +60,7 @@ export const OrderSuccessPage: React.FC = () => {
             <OrderDetails />
 
             {/* Map Preview Card */}
-            <div className="bg-slate-200 dark:bg-slate-800 rounded-[2.5rem] h-48 w-full relative overflow-hidden group">
+            <div className="bg-slate-200 dark:bg-slate-800 rounded-3xl h-40 md:h-48 w-full relative overflow-hidden group">
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCijjJGiJT8lsikuL9SexgqnvFWnyV9Gacpc25zIddLmpVo_ZUA5S0pJJGn2xMZ37fJ1xGBMoYDFiFJr8_t2_wxdVNlFfQaiYCewfWJgkaDWSidTaAS6E_huU_vZpg27LEa7AINCAIdd9bA2lQTTgqxD3C95aNvnm62WEbwzJ_qzOF2Wg0TLujUDOqt5JiCych9aRyEAmxS3oFRVhtfXnJs4mgA1r6OeRo13bU83hE8x-RYA1Ook0tImGCg5Q2O2YiiMBs3yvsemVY"
                 alt="Map showing streets of Accra Ghana"
@@ -79,7 +79,7 @@ export const OrderSuccessPage: React.FC = () => {
               <button className="w-full py-3 px-4 rounded-full border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                 Need Help?
               </button>
-              <Link to="/customize" className="flex items-center justify-center w-full py-3 px-4 rounded-full bg-primary text-slate-900 font-bold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20">
+              <Link to="/customize" className="flex items-center justify-center w-full py-3 px-4 rounded-full bg-background-dark text-white font-bold hover:bg-black transition-colors shadow-lg shadow-background-dark/20">
                 Shop Again
               </Link>
             </div>

@@ -5,9 +5,7 @@ export const OrderSummarySticky: React.FC = () => {
   return (
     <div className="lg:col-span-5 relative">
       <div className="sticky top-8">
-        <div className="bg-primary/10 dark:bg-white/5 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-luxury border border-primary/20 relative overflow-hidden">
-          {/* Decorative gradient blob */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="bg-white dark:bg-slate-900 backdrop-blur-sm rounded-3xl p-5 md:p-6 lg:p-8 shadow-sm border border-slate-200 dark:border-white/10 relative overflow-hidden">
 
           <h2 className="text-2xl font-bold text-brand-dark dark:text-white mb-6 relative z-10">Your Custom Cup</h2>
 
@@ -72,7 +70,7 @@ export const OrderSummarySticky: React.FC = () => {
 
         {/* Mobile Button (Duplicate for better UX on mobile stacking) */}
         <div className="pt-8 lg:hidden pb-8">
-          <Link to="/success" className="w-full bg-brand-dark hover:bg-black text-white font-bold text-lg py-5 rounded-full shadow-luxury flex items-center justify-center gap-2 transition-all">
+          <Link to="/success" className="w-full bg-background-dark hover:bg-black text-white font-bold text-lg py-4 rounded-full shadow-luxury flex items-center justify-center gap-2 transition-all">
             <span>Complete Order</span>
             <span className="material-icons">arrow_forward</span>
           </Link>
