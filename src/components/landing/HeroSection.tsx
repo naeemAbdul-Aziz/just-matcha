@@ -26,7 +26,7 @@ export const HeroSection: React.FC = () => {
           </p>
 
           <div className="flex flex-row items-center gap-3 sm:gap-6 pt-4">
-            <Link to="/customize" className="group relative px-6 py-3 md:px-8 md:py-4 bg-white text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
+            <Link to="/customize" className="group relative px-6 py-3 md:px-8 md:py-4 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
               <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
               <span className="relative flex items-center gap-2 font-medium tracking-wide whitespace-nowrap">
                 Order Your Cup
