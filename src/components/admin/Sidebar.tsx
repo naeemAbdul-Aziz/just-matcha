@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Logo } from '../ui/Logo';
 
 export const Sidebar: React.FC = () => {
   return (
     <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-[#152a18] border-r border-slate-100 dark:border-slate-800 z-50">
       <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">J</div>
+        <Logo className="w-8 h-8" />
         <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Just Matcha</h1>
       </div>
 

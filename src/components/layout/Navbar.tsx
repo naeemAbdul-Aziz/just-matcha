@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
+import { Logo } from '../ui/Logo';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +29,7 @@ export const Navbar: React.FC = () => {
         )}>
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-serif font-bold text-lg group-hover:scale-110 transition-transform">J</div>
+            <Logo className="w-8 h-8 group-hover:scale-110 transition-transform" />
             <span className="font-serif font-bold text-xl tracking-tight text-text-dark">Just Matcha<span className="text-primary">.</span></span>
           </Link>
 
