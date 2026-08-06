@@ -11,9 +11,11 @@ import { Footer } from './components/layout/Footer';
 function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const isCustomize = location.pathname === '/customize';
+  const showNavbar = !isAdmin && !isCustomize;
   return (
     <>
-      {!isAdmin && <Navbar />}
+      {showNavbar && <Navbar />}
       <main className="min-h-screen relative">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>

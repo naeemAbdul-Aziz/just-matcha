@@ -11,14 +11,50 @@ interface CustomizerControlsProps {
   matchaIntensity: number;
   setMatchaIntensity: (intensity: number) => void;
   sweetener: string | null;
-  setSweetener: (s: string | null) => void;
+  setSweetener: (sweetener: string | null) => void;
   sweetnessLevel: number;
-  setSweetnessLevel: (l: number) => void;
+  setSweetnessLevel: (level: number) => void;
   boosts: Record<string, boolean>;
-  setBoosts: (b: Record<string, boolean>) => void;
+  setBoosts: (boosts: Record<string, boolean>) => void;
   cupMessage: string;
-  setCupMessage: (m: string) => void;
+  setCupMessage: (msg: string) => void;
 }
+
+const DiscreteSlider = ({ value, onChange, steps }: { value: number, onChange: (val: number) => void, steps: {val: number, label: string}[] }) => {
+  return (
+    <div className="relative w-full py-6 mt-4 mb-6">
+      {/* Track */}
+      <div className="absolute top-1/2 left-0 w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-full -translate-y-1/2 overflow-hidden">
+        {/* Tick Marks (Visual Indicators on Track) */}
+        <div className="absolute w-full h-full flex justify-between px-1">
+          {steps.map(step => (
+            <div key={`tick-${step.val}`} className="h-full w-0.5 bg-white/50 dark:bg-black/50 z-0"></div>
+          ))}
+        </div>
+      </div>
+      {/* Active Fill */}
+      <div className="absolute top-1/2 left-0 h-1.5 bg-primary rounded-full -translate-y-1/2 transition-all duration-500 ease-out" style={{ width: `${value}%` }}></div>
+      
+      <div className="relative flex justify-between">
+        {steps.map(step => (
+          <div key={step.val} className="flex flex-col items-center gap-3 cursor-pointer group" onClick={() => onChange(step.val)}>
+            <div className={`w-5 h-5 rounded-full border-4 transition-all duration-300 z-10 
+              ${value >= step.val 
+                ? 'bg-primary border-white dark:border-black shadow-md' 
+                : 'bg-white dark:bg-[#222] border-gray-300 dark:border-gray-600'} 
+              group-hover:scale-125`}
+            ></div>
+            <span className={`text-[10px] sm:text-[11px] uppercase tracking-widest font-extrabold transition-colors duration-300 absolute top-8 whitespace-nowrap
+              ${value === step.val ? 'text-primary dark:text-primary' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600'}
+            `}>
+              {step.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   customerName, setCustomerName,
@@ -32,163 +68,202 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const renderPill = (id: string, label: string, selected: boolean, onClick: () => void, isSmall = false) => {
-    return (
-      <button
-        key={id}
-        onClick={onClick}
-        className={`rounded-full font-medium transition-all duration-200 border whitespace-nowrap 
-          ${isSmall ? 'px-4 py-2 text-xs' : 'px-5 py-2.5 text-sm'}
-          ${selected 
-            ? 'bg-[#E5E5DC] dark:bg-[#2A2A2A] text-slate-900 dark:text-white border-transparent font-bold shadow-sm' 
-            : 'bg-white dark:bg-[#111111] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5'}`}
-      >
-        {label}
-      </button>
-    );
-  };
-
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden bg-white dark:bg-[#111111] rounded-t-[2rem] lg:rounded-[2.5rem]">
-      {/* Scrollable Content Area */}
-      <div className="flex-grow overflow-y-auto custom-scrollbar px-6 lg:px-10 pt-8 pb-32">
+    <div className="w-full h-full flex flex-col relative overflow-hidden font-display">
+      
+      {/* Scrollable Content */}
+      <div className="flex-grow overflow-y-auto pb-48 px-6 sm:px-8 lg:px-12 pt-10 lg:pt-14 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         
-        <h2 className="font-serif text-3xl font-bold text-text-dark dark:text-white mb-8">Customize</h2>
+        <h2 className="text-4xl lg:text-5xl font-serif text-text-dark dark:text-white tracking-tight mb-12">Customize</h2>
 
-        {/* 1. Name */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Share Your Name</label>
-          <input
-            type="text"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            placeholder="e.g. Jules"
-            className="w-full bg-[#f5f5f7] dark:bg-black/20 border-2 border-transparent dark:border-white/10 rounded-xl px-4 py-3 font-serif text-base text-text-dark dark:text-white focus:bg-white dark:focus:bg-transparent focus:border-brand-dark dark:focus:border-white/30 outline-none transition-all placeholder:text-gray-400"
-          />
-        </div>
-
-        {/* 2. Base */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Select Your Drink</label>
-          <div className="flex flex-wrap gap-2.5">
-            {renderPill('ceremonial', 'Ceremonial Grade (GH₵ 45)', base === 'ceremonial', () => setBase('ceremonial'))}
-            {renderPill('premium', 'Latte-Grade (GH₵ 35)', base === 'premium', () => setBase('premium'))}
+        {/* Name */}
+        <section className="mb-16 lg:mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Share Your Name</h3>
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="e.g. Jules" 
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              className="w-full bg-transparent border-b-2 border-gray-200 dark:border-white/20 px-2 py-3 text-2xl text-text-dark dark:text-white placeholder-gray-300 dark:placeholder-gray-700 focus:border-text-dark dark:focus:border-white outline-none transition-colors font-serif italic"
+            />
           </div>
-        </div>
+        </section>
 
-        {/* 3. Milk & Creamers */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Milk & Creamers</label>
-          <div className="flex flex-wrap gap-2.5">
+        {/* Base */}
+        <section className="mb-16 lg:mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Select Your Drink</h3>
+          <div className="flex flex-wrap gap-3">
             {[
-              { id: 'full_cream', label: 'Whole Milk' },
-              { id: 'skimmed', label: 'Skim' },
-              { id: 'oat', label: 'Oat Milk' },
-              { id: 'almond', label: 'Almond Milk' },
-              { id: 'coconut', label: 'Coconut Milk' },
-              { id: 'none', label: 'Water (Clear Matcha)' }
-            ].map(m => renderPill(m.id, m.label, milkType === m.id, () => setMilkType(m.id)))}
-          </div>
-        </div>
-
-        {/* 4. Matcha Intensity */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Matcha Intensity</label>
-          <div className="flex flex-wrap gap-2.5">
-            {[
-              { val: 25, label: 'Mild (Light)' },
-              { val: 50, label: 'Balanced' },
-              { val: 75, label: 'Strong (Intense)' },
-              { val: 100, label: 'Pure (Boldest)' }
-            ].map(i => renderPill(i.val.toString(), i.label, matchaIntensity === i.val, () => setMatchaIntensity(i.val)))}
-          </div>
-        </div>
-
-        {/* 5. Sweeteners */}
-        <div className="mb-10">
-          <div className="flex items-center justify-between mb-3">
-            <label className="block text-sm font-bold text-text-dark dark:text-white">Sweeteners</label>
-            {sweetener && (
-              <button onClick={() => setSweetener(null)} className="text-xs font-semibold text-gray-400 hover:text-brand-dark uppercase tracking-wider">
-                Clear
+              { id: 'ceremonial', name: 'Ceremonial Grade (GHC 45)' },
+              { id: 'latte', name: 'Latte-Grade (GHC 35)' }
+            ].map(b => (
+              <button
+                key={b.id}
+                onClick={() => setBase(b.id)}
+                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
+                  base === b.id 
+                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
+                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
+                }`}
+              >
+                {b.name}
               </button>
-            )}
+            ))}
           </div>
-          <div className="flex flex-wrap gap-2.5">
-            {[
-              { id: 'honey', label: 'Honey' },
-              { id: 'maple_syrup', label: 'Maple Syrup' },
-              { id: 'date_syrup', label: 'Date Syrup' },
-              { id: 'vanilla', label: 'Vanilla' },
-              { id: 'caramel', label: 'Caramel' },
-              { id: 'biscoff', label: 'Biscoff' },
-              { id: 'white_chocolate', label: 'White Chocolate' }
-            ].map(s => renderPill(s.id, s.label, sweetener === s.id, () => setSweetener(s.id)))}
-          </div>
-        </div>
+        </section>
 
-        {/* 6. Sweetness Level */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Sweetness Level</label>
-          <div className="flex flex-wrap gap-2.5">
+        {/* Sweeteners */}
+        <section className="mb-16 lg:mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Sweeteners</h3>
+          <div className="flex flex-wrap gap-3">
             {[
-              { val: 0, label: '0% (Barely There)' },
-              { val: 25, label: '25% (Hint of Sweet)' },
-              { val: 50, label: '50% (Standard)' },
-              { val: 75, label: '75% (Sweeter)' },
-              { val: 100, label: '100% (Extra Sweet)' }
-            ].map(l => renderPill(l.val.toString(), l.label, sweetnessLevel === l.val, () => setSweetnessLevel(l.val)))}
+              { id: 'honey', name: 'Honey' },
+              { id: 'maple_syrup', name: 'Maple Syrup' },
+              { id: 'date_syrup', name: 'Date Syrup' },
+              { id: 'vanilla', name: 'Vanilla' },
+              { id: 'caramel', name: 'Caramel' },
+              { id: 'biscoff', name: 'Biscoff' },
+              { id: 'white_chocolate', name: 'White Chocolate' }
+            ].map(s => (
+              <button
+                key={s.id}
+                onClick={() => setSweetener(sweetener === s.id ? null : s.id)}
+                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
+                  sweetener === s.id 
+                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
+                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
+                }`}
+              >
+                {s.name}
+              </button>
+            ))}
           </div>
-        </div>
+        </section>
 
-        {/* 7. Flavor Boosts */}
-        <div className="mb-10">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Flavor Boosts (Optional)</label>
-          <div className="flex flex-wrap gap-2.5">
+        {/* Sweetness Level */}
+        {sweetener && (
+          <section className="mb-20 animate-fade-in-up">
+            <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4 flex items-center justify-between">
+              Sweetness Level
+              <span className="text-sm font-medium text-black/50 dark:text-white/50">{sweetnessLevel}%</span>
+            </h3>
+            <DiscreteSlider 
+              value={sweetnessLevel} 
+              onChange={setSweetnessLevel} 
+              steps={[
+                {val: 0, label: 'Barely'},
+                {val: 25, label: 'Hint'},
+                {val: 50, label: 'Standard'},
+                {val: 75, label: 'Sweeter'},
+                {val: 100, label: 'Extra'}
+              ]}
+            />
+          </section>
+        )}
+
+        {/* Milk Options */}
+        <section className="mb-16 lg:mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Milk & Creamers</h3>
+          <div className="flex flex-wrap gap-3">
             {[
-              { id: 'collagen', label: 'Marine Collagen' },
-              { id: 'maca', label: 'Maca Root' },
-              { id: 'ashwagandha', label: 'Ashwagandha' },
-              { id: 'lion_mane', label: "Lion's Mane" }
+              { id: 'whole', name: 'Whole Milk' },
+              { id: 'skim', name: 'Skim' },
+              { id: 'oat', name: 'Oat Milk' },
+              { id: 'almond', name: 'Almond Milk' },
+              { id: 'coconut', name: 'Coconut Milk' },
+              { id: 'water', name: 'Water (Clear Matcha)' }
+            ].map(m => (
+              <button
+                key={m.id}
+                onClick={() => setMilkType(m.id)}
+                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
+                  milkType === m.id 
+                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
+                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
+                }`}
+              >
+                {m.name}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Intensity */}
+        <section className="mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4 flex items-center justify-between">
+            Matcha Intensity
+            <span className="text-sm font-medium text-black/50 dark:text-white/50">
+              {matchaIntensity < 33 ? 'Mild' : matchaIntensity < 66 ? 'Balanced' : matchaIntensity < 90 ? 'Strong' : 'Pure'}
+            </span>
+          </h3>
+          <DiscreteSlider 
+            value={matchaIntensity} 
+            onChange={setMatchaIntensity} 
+            steps={[
+              {val: 0, label: 'Light'},
+              {val: 50, label: 'Balanced'},
+              {val: 100, label: 'Intense'}
+            ]}
+          />
+        </section>
+
+        {/* Flavor Boosts */}
+        <section className="mb-16 lg:mb-20">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Flavor Boosts</h3>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { id: 'collagen', name: 'Marine Collagen' },
+              { id: 'maca', name: 'Maca Root' },
+              { id: 'ashwagandha', name: 'Ashwagandha' }
             ].map(b => (
               <button
                 key={b.id}
                 onClick={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
-                className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 border whitespace-nowrap 
-                  ${boosts[b.id] 
-                    ? 'bg-[#E5E5DC] dark:bg-[#2A2A2A] text-slate-900 dark:text-white border-transparent font-bold shadow-sm' 
-                    : 'bg-white dark:bg-[#111111] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5'}`}
+                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
+                  boosts[b.id] 
+                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
+                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
+                }`}
               >
-                {b.label} {boosts[b.id] && '✓'}
+                {b.name}
               </button>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* 8. Cup Message */}
-        <div className="mb-8">
-          <label className="block text-sm font-bold text-text-dark dark:text-white mb-3">Add a Cup Message (Optional)</label>
-          <input
-            type="text"
-            value={cupMessage}
-            onChange={(e) => setCupMessage(e.target.value)}
-            placeholder="e.g. Good morning! ✨"
-            className="w-full bg-[#f5f5f7] dark:bg-black/20 border-2 border-transparent dark:border-white/10 rounded-xl px-4 py-3 font-serif text-base text-text-dark dark:text-white focus:bg-white dark:focus:bg-transparent focus:border-brand-dark dark:focus:border-white/30 outline-none transition-all placeholder:text-gray-400"
-          />
-        </div>
+        {/* Cup Message */}
+        <section className="mb-4">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Personalize Your Cup</h3>
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="e.g. You got this!" 
+              value={cupMessage}
+              onChange={(e) => setCupMessage(e.target.value)}
+              className="w-full bg-transparent border-b-2 border-gray-200 dark:border-white/20 px-2 py-3 text-xl text-text-dark dark:text-white placeholder-gray-300 dark:placeholder-gray-700 focus:border-text-dark dark:focus:border-white outline-none transition-colors font-serif italic pr-10"
+            />
+            <span className="material-symbols-sharp absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 dark:text-gray-700">edit</span>
+          </div>
+        </section>
 
       </div>
 
       {/* Sticky Bottom Footer */}
-      <div className="absolute bottom-0 left-0 w-full p-4 lg:p-6 bg-gradient-to-t from-white via-white to-transparent dark:from-[#111111] dark:via-[#111111] pointer-events-none">
-        <div className="w-full h-8 bg-gradient-to-t from-white dark:from-[#111111] to-transparent absolute bottom-full left-0 pointer-events-none"></div>
+      <div className="fixed bottom-0 left-0 w-full p-4 pb-8 lg:absolute lg:p-6 lg:pt-12 bg-white lg:bg-gradient-to-t lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:bg-[#111111] lg:dark:from-[#111111]/90 lg:dark:via-[#111111]/80 backdrop-blur-[2px] flex justify-center border-t border-gray-200 lg:border-t-0 dark:border-black/20 z-50 shadow-[0_-4px_24px_rgba(0,0,0,0.05)] lg:shadow-none">
         <button 
           onClick={() => navigate('/checkout')} 
-          className="w-full py-4 bg-[#1c1c1e] dark:bg-white text-white dark:text-black rounded-[2rem] font-bold text-lg shadow-xl hover:bg-black dark:hover:bg-gray-200 transition-colors pointer-events-auto"
+          className="w-full lg:max-w-sm py-4 bg-black text-white rounded-full font-bold text-base tracking-[0.2em] uppercase shadow-lg hover:bg-black/80 transition-all pointer-events-auto active:scale-[0.98]"
         >
           Continue
         </button>
       </div>
+
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 };

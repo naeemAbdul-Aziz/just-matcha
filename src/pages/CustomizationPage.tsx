@@ -53,32 +53,57 @@ export const CustomizationPage: React.FC = () => {
     return 'none';
   }, [sweetener]);
 
+  // Dynamic Cinematic Background Text
+  const backgroundText = useMemo(() => {
+    let line1 = 'ICED';
+    let line2 = base === 'ceremonial' ? 'CEREMONIAL' : 'MATCHA';
+    let line3 = milkType === 'water' ? 'WATER' : 'LATTE';
+
+    if (sweetener) {
+      if (sweetener === 'maple_syrup') line1 = 'MAPLE';
+      else if (sweetener === 'date_syrup') line1 = 'DATE';
+      else if (sweetener === 'white_chocolate') line1 = 'WHITE CHOC';
+      else line1 = sweetener.toUpperCase();
+    } else if (milkType !== 'water' && milkType !== 'whole') {
+       line1 = milkType.toUpperCase();
+    }
+
+    return (
+      <>
+        {line1}<br/>{line2}<br/>{line3}
+      </>
+    );
+  }, [base, sweetener, milkType]);
+
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className={`h-[100dvh] w-full transition-colors duration-1000 ease-in-out ${bgColor} relative overflow-hidden flex flex-col lg:flex-row font-display`}>
       
       {/* Top Header / Back Button */}
-      <div className="absolute top-0 left-0 w-full p-4 z-40 flex justify-between items-center mt-12 md:mt-16">
-         <button onClick={() => navigate('/')} className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/40 backdrop-blur-md border border-white/50 text-brand-dark flex items-center justify-center hover:bg-white/60 transition-colors shadow-sm ml-4 lg:ml-8">
-            <span className="material-symbols-sharp">arrow_back</span>
-         </button>
+      <div className="absolute top-0 left-0 w-full p-4 z-40 flex justify-between items-center mt-4 md:mt-8">
+         <div className="flex items-center gap-4 ml-4 lg:ml-8">
+           <button onClick={() => navigate('/')} className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/40 backdrop-blur-md border border-white/50 text-text-dark dark:text-white flex items-center justify-center hover:bg-white/60 transition-colors shadow-sm">
+              <span className="material-symbols-sharp">arrow_back</span>
+           </button>
+           <span className="font-serif font-bold text-2xl tracking-tight text-text-dark dark:text-white hidden lg:block bg-white/40 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm">Just Matcha<span className="text-primary">.</span></span>
+         </div>
       </div>
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
-      <div className="relative w-full h-[40dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0">
+      <div className="fixed top-0 left-0 w-full h-[50dvh] lg:relative lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0">
         
-        {/* Cinematic Background Text */}
+        {/* Dynamic Background Text (Cinematic) */}
         <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden opacity-40 mix-blend-overlay">
-          <h1 className="text-[25vw] lg:text-[15vw] leading-[0.8] font-black text-black/20 dark:text-white/20 whitespace-nowrap select-none text-center uppercase tracking-tighter transform -rotate-12 mt-12 lg:mt-0">
-            ICED<br/>MATCHA<br/>LATTE
+          <h1 className="text-[25vw] lg:text-[15vw] leading-[0.8] font-black text-black/20 dark:text-white/20 whitespace-nowrap select-none text-center uppercase tracking-tighter transform -rotate-12 mt-12 lg:mt-0 transition-all duration-700">
+            {backgroundText}
           </h1>
         </div>
 
         {/* Hero Photorealistic Cup */}
-        <div className="absolute top-20 md:top-12 lg:relative lg:top-0 w-full max-w-[200px] sm:max-w-[240px] md:max-w-xs lg:max-w-md z-10 flex justify-center">
+        <div className="absolute top-24 md:top-20 lg:relative lg:top-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center transform lg:translate-x-8 xl:translate-x-12">
           <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwcmBY4XMl9RvhxT_ajgjv_H-y-rMnmSZs_Qd2Tda-DZZwSfd3L7aTWfe81EKVEk0RZKZkXk-vPFSLbQkYDpryu2bow1sI3X-tsjtGSnZV2IgV1FbFsqBr1kGmkRvrhjYYqXp3Lc5iLtTY3rdIz1atgHZNu64pYB_KBQ-NO7HoeGq7fe7ecUkoQ44wC59iYWa-bn7Fy1ZUr8H2bTYegx000FJRdB19rpN9XK9SncZcvw6i5UWdwE--EUcvC8xMTPyX0YOukWYIPBI"
+            src="/cup.png"
             alt="Hero Iced Matcha"
-            className="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal opacity-90 transition-all duration-1000 lg:scale-100"
+            className="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal opacity-95 transition-all duration-1000 lg:scale-[1.15]"
             style={{ 
               WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
               filter: cupFilter 
@@ -88,8 +113,8 @@ export const CustomizationPage: React.FC = () => {
       </div>
 
       {/* RIGHT SIDE: Scrolling Bottom Sheet / Sidebar */}
-      <div className="relative z-30 flex-grow lg:w-1/2 w-full lg:h-[100dvh] lg:flex lg:items-center lg:justify-center overflow-hidden">
-         <div className="w-full h-full lg:h-[90dvh] lg:max-w-[550px] bg-white dark:bg-[#111111] rounded-t-[2rem] lg:rounded-[2.5rem] shadow-2xl flex flex-col relative lg:border border-gray-100 dark:border-white/10 lg:mr-8 xl:mr-16">
+      <div className="relative z-30 flex-grow lg:w-1/2 w-full mt-[45dvh] lg:mt-0 lg:h-[100dvh] lg:flex lg:items-center lg:justify-center overflow-hidden">
+         <div className="w-full h-full lg:h-[100dvh] lg:max-w-none bg-[#FDFBF7] dark:bg-[#111111] rounded-t-[2.5rem] lg:rounded-none shadow-[0_-8px_32px_rgba(0,0,0,0.08)] lg:shadow-none flex flex-col relative lg:border-l border-white/50 dark:border-white/10 transition-colors duration-1000">
            <CustomizerControls
              customerName={customerName}
              setCustomerName={setCustomerName}
