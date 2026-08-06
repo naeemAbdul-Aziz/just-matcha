@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const HeroSection: React.FC = () => {
   return (
-    <header className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden">
+    <header className="relative min-h-screen flex items-center pt-32 pb-12 overflow-hidden bg-soft-green">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full matcha-gradient opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-soft-green/30 blur-3xl rounded-full pointer-events-none"></div>
@@ -26,8 +26,8 @@ export const HeroSection: React.FC = () => {
           </p>
 
           <div className="flex flex-row items-center gap-3 sm:gap-6 pt-4">
-            <Link to="/customize" className="group relative px-6 py-3 md:px-8 md:py-4 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1">
-              <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
+            <Link to="/customize" className="group relative px-6 py-3 md:px-8 md:py-4 bg-primary text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1">
+              <span className="absolute inset-0 w-full h-full bg-primary-dark scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
               <span className="relative flex items-center gap-2 font-medium tracking-wide whitespace-nowrap">
                 Order Your Cup
                 <span className="material-symbols-sharp text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
             </Link>
 
             <button className="flex items-center gap-3 text-text-dark hover:text-primary transition-colors group">
-              <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-primary transition-colors">
+              <div className="w-10 h-10 rounded-full bg-cream shadow-sm flex items-center justify-center group-hover:shadow-md transition-all group-hover:scale-105">
                 <span className="material-symbols-sharp text-lg">play_arrow</span>
               </div>
               <span className="font-medium text-sm whitespace-nowrap">See the pour</span>
