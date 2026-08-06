@@ -11,7 +11,7 @@ export const StatusTracker: React.FC = () => {
           {/* Step 1: Completed */}
           <div className="flex items-start gap-4">
             <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30">
-              <span className="material-icons">receipt_long</span>
+              <span className="material-symbols-sharp">receipt_long</span>
             </div>
             <div className="pt-2">
               <h4 className="font-bold text-slate-900 dark:text-white">Order Received</h4>
@@ -24,7 +24,7 @@ export const StatusTracker: React.FC = () => {
             <div className="relative z-10 flex-shrink-0 w-12 h-12 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
               <div className="relative w-12 h-12 rounded-full bg-white dark:bg-slate-800 border-2 border-primary flex items-center justify-center text-primary">
-                <span className="material-icons animate-pulse">blender</span>
+                <span className="material-symbols-sharp animate-pulse">blender</span>
               </div>
             </div>
             <div className="pt-2">
@@ -36,7 +36,7 @@ export const StatusTracker: React.FC = () => {
           {/* Step 3: Pending */}
           <div className="flex items-start gap-4 opacity-50">
             <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center border border-slate-200 dark:border-slate-700">
-              <span className="material-icons">local_shipping</span>
+              <span className="material-symbols-sharp">local_shipping</span>
             </div>
             <div className="pt-2">
               <h4 className="font-medium text-slate-900 dark:text-white">Out for Delivery</h4>
@@ -47,7 +47,7 @@ export const StatusTracker: React.FC = () => {
           {/* Step 4: Pending */}
           <div className="flex items-start gap-4 opacity-50">
             <div className="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center border border-slate-200 dark:border-slate-700">
-              <span className="material-icons">check</span>
+              <span className="material-symbols-sharp">check</span>
             </div>
             <div className="pt-2">
               <h4 className="font-medium text-slate-900 dark:text-white">Delivered</h4>

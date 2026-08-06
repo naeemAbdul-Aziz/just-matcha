@@ -52,11 +52,11 @@ export const Navbar: React.FC = () => {
           {/* Icons */}
           <div className="flex items-center gap-4">
             <button className="relative p-2 hover:bg-white/50 rounded-full transition-colors group">
-              <span className="material-icons text-text-dark group-hover:text-primary transition-colors">shopping_bag</span>
+              <span className="material-symbols-sharp text-text-dark group-hover:text-primary transition-colors">shopping_bag</span>
               <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white"></span>
             </button>
             <button className="md:hidden p-2 hover:bg-white/50 rounded-full transition-colors">
-              <span className="material-icons text-text-dark">menu</span>
+              <span className="material-symbols-sharp text-text-dark">menu</span>
             </button>
           </div>
         </div>

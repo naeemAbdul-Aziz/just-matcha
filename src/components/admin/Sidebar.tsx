@@ -12,35 +12,35 @@ export const Sidebar: React.FC = () => {
 
       <nav className="flex-1 px-4 py-4 space-y-1">
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl bg-primary/10 text-primary-dark dark:text-primary">
-          <span className="material-icons text-[20px]">dashboard</span>
+          <span className="material-symbols-sharp text-[20px]">dashboard</span>
           Dashboard
         </a>
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-          <span className="material-icons text-[20px]">receipt_long</span>
+          <span className="material-symbols-sharp text-[20px]">receipt_long</span>
           Orders
         </a>
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-          <span className="material-icons text-[20px]">inventory_2</span>
+          <span className="material-symbols-sharp text-[20px]">inventory_2</span>
           Inventory
         </a>
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-          <span className="material-icons text-[20px]">analytics</span>
+          <span className="material-symbols-sharp text-[20px]">analytics</span>
           Analytics
         </a>
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-          <span className="material-icons text-[20px]">people</span>
+          <span className="material-symbols-sharp text-[20px]">people</span>
           Customers
         </a>
         {/* Back to Site Link for demo purposes */}
         <Link to="/" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors mt-4">
-          <span className="material-icons text-[20px]">arrow_back</span>
+          <span className="material-symbols-sharp text-[20px]">arrow_back</span>
           Back to Site
         </Link>
       </nav>
 
       <div className="p-4 border-t border-slate-100 dark:border-slate-800">
         <a href="#" className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-          <span className="material-icons text-[20px]">settings</span>
+          <span className="material-symbols-sharp text-[20px]">settings</span>
           Settings
         </a>
         <div className="mt-4 flex items-center gap-3 px-4">

@@ -142,7 +142,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   {activeStep === 1 ? 'Select Your Base' : `Base: ${base === 'ceremonial' ? 'Ceremonial' : 'Premium'}`}
                 </h2>
               </div>
-              <span className={`material-icons text-primary/50 transition-transform duration-300 ${activeStep === 1 ? 'rotate-180' : ''}`}>expand_more</span>
+              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 1 ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
             
             {activeStep === 1 && (
@@ -181,7 +181,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 <div className="flex justify-end mt-8">
                   <button onClick={() => setActiveStep(2)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                     <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-icons text-sm">arrow_forward</span></span>
+                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
                   </button>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   {activeStep === 2 ? 'Matcha/Milk Ratio' : `Milk Level: ${milkLevel}%`}
                 </h2>
               </div>
-              <span className={`material-icons text-primary/50 transition-transform duration-300 ${activeStep === 2 ? 'rotate-180' : ''}`}>expand_more</span>
+              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 2 ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
             
             {activeStep === 2 && (
@@ -229,7 +229,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 <div className="flex justify-end mt-8">
                   <button onClick={() => setActiveStep(3)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                     <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-icons text-sm">arrow_forward</span></span>
+                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
                   </button>
                 </div>
               </div>
@@ -245,7 +245,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   {activeStep === 3 ? 'Flavor Infusion' : `Flavors: ${getFlavorSummary()}`}
                 </h2>
               </div>
-              <span className={`material-icons text-primary/50 transition-transform duration-300 ${activeStep === 3 ? 'rotate-180' : ''}`}>expand_more</span>
+              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 3 ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
             
             {activeStep === 3 && (
@@ -298,7 +298,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                           >
                             <span className="font-medium text-sm tracking-wide">{f.name}</span>
                             {isSelected && (
-                              <span className="ml-auto material-icons text-sm opacity-70 hover:opacity-100">close</span>
+                              <span className="ml-auto material-symbols-sharp text-sm opacity-70 hover:opacity-100">close</span>
                             )}
                           </div>
                           {isSelected && (
@@ -322,7 +322,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 <div className="flex justify-end mt-8">
                   <button onClick={() => setActiveStep(4)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                     <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-icons text-sm">arrow_forward</span></span>
+                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
                   </button>
                 </div>
               </div>
@@ -338,7 +338,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   {activeStep === 4 ? 'Personalize Your Cup' : `For: ${customerName || 'Guest'}`}
                 </h2>
               </div>
-              <span className={`material-icons text-primary/50 transition-transform duration-300 ${activeStep === 4 ? 'rotate-180' : ''}`}>expand_more</span>
+              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 4 ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
             
             {activeStep === 4 && (
@@ -374,13 +374,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                       placeholder="Or write your own sweet message..."
                       className="w-full bg-white dark:bg-black/20 border border-gray-100 dark:border-white/10 rounded-full px-6 py-4 font-serif text-lg text-text-dark focus:bg-white dark:focus:bg-surface-dark focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm pr-12"
                     />
-                    <span className="material-icons absolute right-6 top-1/2 -translate-y-1/2 text-primary/50">edit</span>
+                    <span className="material-symbols-sharp absolute right-6 top-1/2 -translate-y-1/2 text-primary/50">edit</span>
                   </div>
                 </div>
                 <div className="flex justify-end mt-8">
                   <button onClick={() => setActiveStep(5)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                     <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-icons text-sm">arrow_forward</span></span>
+                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
                   </button>
                 </div>
               </div>
@@ -396,7 +396,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   {activeStep === 5 ? 'Boost Your Glow' : `Add-ons: ${collagen ? 'Marine Collagen' : 'None'}`}
                 </h2>
               </div>
-              <span className={`material-icons text-primary/50 transition-transform duration-300 ${activeStep === 5 ? 'rotate-180' : ''}`}>expand_more</span>
+              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 5 ? 'rotate-180' : ''}`}>expand_more</span>
             </button>
             
             {activeStep === 5 && (
@@ -414,7 +414,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                   </div>
                   <div className="ml-4">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${collagen ? 'bg-primary border-primary' : 'border-gray-300 dark:border-gray-600 bg-transparent'}`}>
-                      {collagen && <span className="material-icons text-white text-[14px]">check</span>}
+                      {collagen && <span className="material-symbols-sharp text-white text-[14px]">check</span>}
                     </div>
                     <input type="checkbox" className="sr-only" checked={collagen} onChange={(e) => setCollagen(e.target.checked)} />
                   </div>
@@ -423,7 +423,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
                 <div className="flex justify-end mt-10">
                   <button onClick={() => navigate('/checkout')} className="group relative px-10 py-4 bg-background-dark text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/30">
                     <span className="absolute inset-0 w-full h-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-bold tracking-wide">Review Order <span className="material-icons text-sm">check_circle</span></span>
+                    <span className="relative flex items-center gap-2 font-bold tracking-wide">Review Order <span className="material-symbols-sharp text-sm">check_circle</span></span>
                   </button>
                 </div>
               </div>

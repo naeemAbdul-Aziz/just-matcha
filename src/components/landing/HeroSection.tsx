@@ -30,13 +30,13 @@ export const HeroSection: React.FC = () => {
               <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
               <span className="relative flex items-center gap-2 font-medium tracking-wide whitespace-nowrap">
                 Order Your Cup
-                <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span className="material-symbols-sharp text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </span>
             </Link>
 
             <button className="flex items-center gap-3 text-text-dark hover:text-primary transition-colors group">
               <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-primary transition-colors">
-                <span className="material-icons text-lg">play_arrow</span>
+                <span className="material-symbols-sharp text-lg">play_arrow</span>
               </div>
               <span className="font-medium text-sm whitespace-nowrap">See the pour</span>
             </button>
@@ -67,7 +67,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Floating Badge */}
             <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 bg-white/40 backdrop-blur-md border border-white/50 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.12)] transform transition-transform group-hover:translate-y-[-5px] flex items-center gap-2">
-              <span className="material-icons text-primary-dark text-sm sm:text-base drop-shadow-sm">eco</span>
+              <span className="material-symbols-sharp text-primary-dark text-sm sm:text-base drop-shadow-sm">eco</span>
               <span className="text-xs sm:text-sm font-medium text-slate-900 tracking-wide whitespace-nowrap drop-shadow-sm">Ceremonial Grade</span>
             </div>
           </div>
@@ -80,7 +80,7 @@ export const HeroSection: React.FC = () => {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:flex flex-col items-center gap-2 opacity-60">
         <span className="text-[10px] uppercase tracking-widest">Scroll</span>
-        <span className="material-icons text-sm">keyboard_arrow_down</span>
+        <span className="material-symbols-sharp text-sm">keyboard_arrow_down</span>
       </div>
     </header>
   );

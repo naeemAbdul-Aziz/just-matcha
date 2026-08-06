@@ -7,7 +7,7 @@ export const DashboardStats: React.FC = () => {
       <div className="bg-white dark:bg-[#152a18] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
         <div className="flex justify-between items-start mb-4">
           <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
-            <span className="material-icons text-primary text-[24px]">shopping_bag</span>
+            <span className="material-symbols-sharp text-primary text-[24px]">shopping_bag</span>
           </div>
           <span className="text-xs font-semibold text-green-600 bg-green-100 dark:bg-green-900/40 px-2 py-1 rounded-md">+12%</span>
         </div>
@@ -19,7 +19,7 @@ export const DashboardStats: React.FC = () => {
       <div className="bg-white dark:bg-[#152a18] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
         <div className="flex justify-between items-start mb-4">
           <div className="p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-            <span className="material-icons text-yellow-600 dark:text-yellow-400 text-[24px]">payments</span>
+            <span className="material-symbols-sharp text-yellow-600 dark:text-yellow-400 text-[24px]">payments</span>
           </div>
         </div>
         <h3 className="text-3xl font-bold text-slate-900 dark:text-white">₵ 2,450</h3>
@@ -30,7 +30,7 @@ export const DashboardStats: React.FC = () => {
       <div className="bg-white dark:bg-[#152a18] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
         <div className="flex justify-between items-start mb-4">
           <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <span className="material-icons text-blue-600 dark:text-blue-400 text-[24px]">blender</span>
+            <span className="material-symbols-sharp text-blue-600 dark:text-blue-400 text-[24px]">blender</span>
           </div>
         </div>
         <h3 className="text-3xl font-bold text-slate-900 dark:text-white">Collagen</h3>
@@ -41,7 +41,7 @@ export const DashboardStats: React.FC = () => {
       <div className="bg-white dark:bg-[#152a18] p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
         <div className="flex justify-between items-start mb-4">
           <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-            <span className="material-icons text-purple-600 dark:text-purple-400 text-[24px]">schedule</span>
+            <span className="material-symbols-sharp text-purple-600 dark:text-purple-400 text-[24px]">schedule</span>
           </div>
         </div>
         <h3 className="text-3xl font-bold text-slate-900 dark:text-white">14m</h3>

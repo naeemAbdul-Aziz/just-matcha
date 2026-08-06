@@ -32,12 +32,12 @@ export const StorySection: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-6 pt-4">
               <div className="flex flex-col gap-2">
-                <span className="material-icons text-primary-dark text-3xl">spa</span>
+                <span className="material-symbols-sharp text-primary-dark text-3xl">spa</span>
                 <h4 className="font-serif text-lg text-text-dark">100% Organic</h4>
                 <p className="text-sm text-text-light">Sourced from sustainable farms with zero additives.</p>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="material-icons text-primary-dark text-3xl">volunteer_activism</span>
+                <span className="material-symbols-sharp text-primary-dark text-3xl">volunteer_activism</span>
                 <h4 className="font-serif text-lg text-text-dark">Community First</h4>
                 <p className="text-sm text-text-light">Every purchase supports local growers in Ghana.</p>
               </div>

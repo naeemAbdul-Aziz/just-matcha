@@ -72,7 +72,7 @@ export const OrderSummarySticky: React.FC = () => {
         <div className="pt-8 lg:hidden pb-8">
           <Link to="/success" className="w-full bg-background-dark hover:bg-black text-white font-bold text-lg py-4 rounded-full shadow-luxury flex items-center justify-center gap-2 transition-all">
             <span>Complete Order</span>
-            <span className="material-icons">arrow_forward</span>
+            <span className="material-symbols-sharp">arrow_forward</span>
           </Link>
           <p className="text-center text-xs text-slate-400 mt-4">By placing this order, you agree to our Terms of Service.</p>
         </div>

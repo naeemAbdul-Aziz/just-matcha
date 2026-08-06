@@ -6,8 +6,8 @@ import { OrderDetails } from '../components/success/OrderDetails';
 
 const pageVariants = {
   initial: { opacity: 0, y: 15 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" as const } }
 };
 
 export const OrderSuccessPage: React.FC = () => {
@@ -18,10 +18,10 @@ export const OrderSuccessPage: React.FC = () => {
       <main className="flex-grow flex items-center justify-center pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Abstract Background Illustrations */}
         <div className="absolute top-20 left-10 opacity-[0.03] pointer-events-none transform -rotate-12">
-          <span className="material-icons text-7xl text-primary">local_cafe</span>
+          <span className="material-symbols-sharp text-7xl text-primary">local_cafe</span>
         </div>
         <div className="absolute bottom-20 right-10 opacity-[0.03] pointer-events-none transform rotate-12">
-          <span className="material-icons text-7xl text-primary">eco</span>
+          <span className="material-symbols-sharp text-7xl text-primary">eco</span>
         </div>
 
         <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
@@ -30,7 +30,7 @@ export const OrderSuccessPage: React.FC = () => {
             {/* Success Header */}
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary-dark dark:text-primary text-sm font-semibold mb-2">
-                <span className="material-icons text-sm">check_circle</span>
+                <span className="material-symbols-sharp text-sm">check_circle</span>
                 Order Confirmed
               </div>
               <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
@@ -44,7 +44,7 @@ export const OrderSuccessPage: React.FC = () => {
             {/* Unique Order Code Card */}
             <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-6 lg:p-8 shadow-sm relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span className="material-icons text-6xl text-primary">qr_code_2</span>
+                <span className="material-symbols-sharp text-6xl text-primary">qr_code_2</span>
               </div>
               <p className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Your Unique Order Code</p>
               <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ export const OrderSuccessPage: React.FC = () => {
                   #Matcha-Sweet-Berry
                 </h2>
                 <button className="p-2 text-slate-400 hover:text-primary transition-colors" title="Copy Code">
-                  <span className="material-icons">content_copy</span>
+                  <span className="material-symbols-sharp">content_copy</span>
                 </button>
               </div>
               <p className="text-xs text-slate-400 mt-4">Keep this code handy for pick-up or support inquiries.</p>
@@ -75,7 +75,7 @@ export const OrderSuccessPage: React.FC = () => {
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/10">
                 <button className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">
-                  <span className="material-icons text-primary">near_me</span>
+                  <span className="material-symbols-sharp text-primary">near_me</span>
                   Track on Map
                 </button>
               </div>

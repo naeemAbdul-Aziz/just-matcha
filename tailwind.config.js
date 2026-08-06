@@ -8,19 +8,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#2eb052", // Leafy matcha green
-        "primary-dark": "#16a34a", // Deeper ceremonial green
+        "primary": "#00FF41", // Striking stark green
+        "primary-dark": "#00CC33",
         "soft-green": "#e3f4d8",
         "cream": "#f8f1e7",
-        "cream-accent": "#fdfdfb",
-        "background-light": "#f6f8f6",
-        "background-dark": "#102213",
-        "text-dark": "#1a3c20",
-        "text-light": "#5c7a60",
+        "cream-accent": "#ffffff",
+        "background-light": "#ffffff", // Pure white
+        "background-dark": "#000000", // Pure black
+        "text-dark": "#000000", // Pure black
+        "text-light": "#666666", // Sharp gray
         "surface-light": "#ffffff",
-        "surface-dark": "#1a2e1d",
-        "brand-dark": "#0d270c",
-        "neutral-surface": "#e8ebe8",
+        "surface-dark": "#111111",
+        "brand-dark": "#000000",
+        "neutral-surface": "#f5f5f5",
       },
       fontFamily: {
         "display": ["Plus Jakarta Sans", "sans-serif"],
@@ -35,9 +35,9 @@ export default {
         "full": "9999px",
       },
       boxShadow: {
-        "soft": "0 10px 40px -10px rgba(19, 236, 55, 0.1)",
-        "glow": "0 0 20px rgba(19, 236, 55, 0.3)",
-        "luxury": "0 10px 40px -10px rgba(16, 34, 19, 0.1)",
+        "soft": "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+        "glow": "0 0 0 1px rgba(0, 0, 0, 0.1)",
+        "luxury": "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
       },
       keyframes: {
         "pulse-ring": {

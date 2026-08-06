@@ -44,7 +44,7 @@ export const MenuSection: React.FC = () => {
             <p className="text-sm md:text-base text-text-light max-w-sm line-clamp-2">From the classic ceremonial whisk to adventurous fusions.</p>
           </div>
           <Link to="/customize" className="text-primary-dark hover:text-primary font-medium flex items-center gap-1 transition-colors whitespace-nowrap text-sm md:text-base pb-1">
-            View Menu <span className="material-icons text-sm">arrow_forward</span>
+            View Menu <span className="material-symbols-sharp text-sm">arrow_forward</span>
           </Link>
         </div>
 

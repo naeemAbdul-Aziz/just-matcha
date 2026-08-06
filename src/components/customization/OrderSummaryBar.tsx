@@ -27,7 +27,7 @@ export const OrderSummaryBar: React.FC<OrderSummaryBarProps> = ({ base, collagen
         <div className="flex w-full sm:w-auto">
           <Link to="/checkout" className="w-full sm:w-auto bg-background-dark hover:bg-black text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 min-w-[200px]">
             <span>Proceed to Payment</span>
-            <span className="material-icons text-sm">arrow_forward</span>
+            <span className="material-symbols-sharp text-sm">arrow_forward</span>
           </Link>
         </div>
       </div>

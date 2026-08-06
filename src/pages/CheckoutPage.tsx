@@ -7,8 +7,8 @@ import { OrderSummarySticky } from '../components/checkout/OrderSummarySticky';
 
 const pageVariants = {
   initial: { opacity: 0, y: 15 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" } }
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3, ease: "easeIn" as const } }
 };
 
 export const CheckoutPage: React.FC = () => {
@@ -31,7 +31,7 @@ export const CheckoutPage: React.FC = () => {
             <div className="pt-6 hidden lg:block">
               <Link to="/success" className="w-full bg-background-dark hover:bg-black text-white font-bold text-lg py-4 rounded-full shadow-luxury hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                 <span>Complete Order</span>
-                <span className="material-icons">arrow_forward</span>
+                <span className="material-symbols-sharp">arrow_forward</span>
               </Link>
               <p className="text-center text-xs text-slate-400 mt-4">By placing this order, you agree to our Terms of Service.</p>
             </div>

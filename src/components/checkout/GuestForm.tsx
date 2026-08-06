@@ -70,7 +70,7 @@ export const GuestForm: React.FC = () => {
           >
             Delivery Address & Landmark
           </label>
-          <span className="material-icons absolute right-5 top-4 text-slate-300 pointer-events-none">location_on</span>
+          <span className="material-symbols-sharp absolute right-5 top-4 text-slate-300 pointer-events-none">location_on</span>
         </div>
       </div>
     </section>

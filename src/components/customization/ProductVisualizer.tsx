@@ -20,10 +20,10 @@ export const ProductVisualizer: React.FC = () => {
             </div>
             <div className="flex gap-2">
               <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary" title="Vegan">
-                <span className="material-icons text-sm">spa</span>
+                <span className="material-symbols-sharp text-sm">spa</span>
               </div>
               <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary" title="Gluten Free">
-                <span className="material-icons text-sm">grass</span>
+                <span className="material-symbols-sharp text-sm">grass</span>
               </div>
             </div>
           </div>

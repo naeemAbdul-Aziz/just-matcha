@@ -119,13 +119,13 @@ export const OrderTable: React.FC = () => {
                   <div className="relative inline-block text-left group/dropdown">
                     <button type="button" className={`inline-flex items-center gap-2 justify-between w-32 px-3 py-1.5 text-xs font-semibold border rounded-lg hover:shadow-sm focus:outline-none transition-colors ${order.statusColor}`}>
                       {order.status}
-                      <span className="material-icons text-[16px]">expand_more</span>
+                      <span className="material-symbols-sharp text-[16px]">expand_more</span>
                     </button>
                   </div>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-                    <span className="material-icons text-[20px]">more_vert</span>
+                    <span className="material-symbols-sharp text-[20px]">more_vert</span>
                   </button>
                 </td>
               </tr>
@@ -139,13 +139,13 @@ export const OrderTable: React.FC = () => {
         <span className="text-xs text-slate-500 dark:text-slate-400">Showing 1-4 of 24 orders</span>
         <div className="flex items-center gap-2">
           <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
-            <span className="material-icons text-[16px]">chevron_left</span>
+            <span className="material-symbols-sharp text-[16px]">chevron_left</span>
           </button>
           <button className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-slate-900 font-semibold text-xs">1</button>
           <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">2</button>
           <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">3</button>
           <button className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-            <span className="material-icons text-[16px]">chevron_right</span>
+            <span className="material-symbols-sharp text-[16px]">chevron_right</span>
           </button>
         </div>
       </div>
