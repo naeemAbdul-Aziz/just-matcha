@@ -13,16 +13,16 @@
   }
 
   .matcha-gradient {
-    background: #000000;
+    background: linear-gradient(135deg, #c2e88d 0%, #4a7c59 100%);
   }
 
   .bg-pattern {
-    background-image: radial-gradient(#000000 1px, transparent 1px);
+    background-image: radial-gradient(#4a7c59 1px, transparent 1px);
     background-size: 24px 24px;
-    opacity: 0.05;
+    opacity: 0.1;
   }
   .dark .bg-pattern {
-    background-image: radial-gradient(#ffffff 1px, transparent 1px);
+    background-image: radial-gradient(#c2e88d 1px, transparent 1px);
     background-size: 24px 24px;
     opacity: 0.05;
   }
@@ -47,27 +47,29 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;
   width: 20px;
-  border-radius: 0;
-  background: #000000;
+  border-radius: 50%;
+  background: #4a7c59;
   cursor: pointer;
   margin-top: -8px;
+  box-shadow: 0 2px 6px rgba(74, 124, 89, 0.4);
 }
 
 .dark input[type=range]::-webkit-slider-thumb {
-  background: #ffffff;
+  background: #c2e88d;
 }
 
 input[type=range]::-moz-range-thumb {
   height: 20px;
   width: 20px;
-  border-radius: 0;
-  background: #000000;
+  border-radius: 50%;
+  background: #4a7c59;
   cursor: pointer;
   border: none;
+  box-shadow: 0 2px 6px rgba(74, 124, 89, 0.4);
 }
 
 .dark input[type=range]::-moz-range-thumb {
-  background: #ffffff;
+  background: #c2e88d;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -81,10 +83,10 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #333333;
 }
 
-/* Remove pulse dots completely as it's not sharp/editorial */
+/* Restore pulse dots for dynamic feel */
 .pulse-ring {
-  display: none;
+  display: block;
 }
 .pulse-dot {
-  display: none;
+  display: block;
 }

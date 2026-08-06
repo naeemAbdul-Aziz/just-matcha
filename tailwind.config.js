@@ -8,18 +8,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#000000", // Apple-style flat black
-        "primary-dark": "#1d1d1f", // Apple text dark gray
-        "soft-green": "#f5f5f7", // Apple signature light gray
-        "cream": "#ffffff",
-        "cream-accent": "#ffffff",
-        "background-light": "#ffffff",
-        "background-dark": "#000000",
-        "text-dark": "#1d1d1f",
-        "text-light": "#86868b", // Apple secondary text
+        "primary": "#4a7c59", // Deep matcha green
+        "primary-dark": "#3b6318", // Darker matcha green
+        "soft-green": "#e9f2d9", // Light matcha for backgrounds
+        "cream": "#fdfbf7", // Warm cream
+        "cream-accent": "#f4efe6", // Slightly darker cream for contrast
+        "background-light": "#fdfbf7",
+        "background-dark": "#111111",
+        "text-dark": "#1a1a1a",
+        "text-light": "#666666",
         "surface-light": "#ffffff",
         "surface-dark": "#1d1d1f",
-        "brand-dark": "#000000",
+        "brand-dark": "#111111",
         "neutral-surface": "#f5f5f7",
       },
       fontFamily: {
