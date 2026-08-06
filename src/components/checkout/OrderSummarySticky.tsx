@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const OrderSummarySticky: React.FC = () => {
-  return (
-    <div className="lg:col-span-5 relative">
-      <div className="sticky top-8">
-        <div className="bg-white dark:bg-slate-900 backdrop-blur-sm rounded-3xl p-5 md:p-6 lg:p-8 shadow-sm border border-slate-200 dark:border-white/10 relative overflow-hidden">
+  const [isExpanded, setIsExpanded] = useState(false);
 
-          <h2 className="text-2xl font-bold text-brand-dark dark:text-white mb-6 relative z-10">Your Custom Cup</h2>
+  return (
+    <div className="lg:w-2/5 w-full relative">
+      <div className="sticky top-24">
+        <div className="bg-white dark:bg-slate-900 backdrop-blur-sm rounded-3xl p-5 md:p-6 lg:p-8 shadow-sm border border-slate-200 dark:border-white/10 relative overflow-hidden">
+          
+          {/* Mobile Header (Collapsible) */}
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="lg:hidden flex justify-between items-center w-full"
+          >
+            <div className="text-left">
+              <span className="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mb-1">Your Custom Cup</span>
+              <span className="text-2xl font-extrabold text-brand-dark dark:text-white tracking-tight">GH₵ 65.00</span>
+            </div>
+            <span className={`material-symbols-sharp transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
+          </button>
+
+          <div className={`pt-6 lg:pt-0 border-t border-gray-100 dark:border-white/10 mt-6 lg:border-0 lg:mt-0 ${isExpanded ? 'block' : 'hidden lg:block'}`}>
+            <h2 className="hidden lg:block text-2xl font-bold text-brand-dark dark:text-white mb-6 relative z-10">Your Custom Cup</h2>
 
           {/* Product Visualization */}
           <div className="flex items-center gap-6 mb-8 relative z-10">
@@ -57,7 +72,7 @@ export const OrderSummarySticky: React.FC = () => {
           </div>
 
           {/* Total */}
-          <div className="flex justify-between items-end pt-6 border-t border-brand-dark/10 dark:border-white/10 relative z-10">
+          <div className="hidden lg:flex justify-between items-end pt-6 border-t border-brand-dark/10 dark:border-white/10 relative z-10">
             <div>
               <span className="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mb-1">Total to pay</span>
               <span className="text-xs text-slate-400">Incl. VAT</span>
@@ -66,16 +81,10 @@ export const OrderSummarySticky: React.FC = () => {
               <span className="block text-3xl font-extrabold text-brand-dark dark:text-white tracking-tight">GH₵ 65.00</span>
             </div>
           </div>
+          </div>
         </div>
 
-        {/* Mobile Button (Duplicate for better UX on mobile stacking) */}
-        <div className="pt-8 lg:hidden pb-8">
-          <Link to="/success" className="w-full bg-background-dark hover:bg-black text-white font-bold text-lg py-4 rounded-full shadow-luxury flex items-center justify-center gap-2 transition-all">
-            <span>Complete Order</span>
-            <span className="material-symbols-sharp">arrow_forward</span>
-          </Link>
-          <p className="text-center text-xs text-slate-400 mt-4">By placing this order, you agree to our Terms of Service.</p>
-        </div>
+        {/* Mobile Button placeholder, but actual button is pinned at page level */}
       </div>
     </div>
   );

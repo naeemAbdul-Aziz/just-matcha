@@ -69,14 +69,18 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden font-display">
+    <div className="w-full h-full flex flex-col relative font-display">
       
       {/* Scrollable Content */}
-      <div className="flex-grow overflow-y-auto pb-48 px-6 sm:px-8 lg:px-12 pt-10 lg:pt-14 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      <div className="flex-grow overflow-y-auto pb-32 lg:pb-48 scroll-smooth relative" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
         
-        <h2 className="text-4xl lg:text-5xl font-serif text-text-dark dark:text-white tracking-tight mb-12">Customize</h2>
+        {/* Sticky Glass Header */}
+        <div className="sticky top-0 z-40 w-full px-6 sm:px-8 lg:px-12 pt-8 lg:pt-12 pb-6 mb-8 bg-[#FDFBF7]/85 dark:bg-[#111111]/85 backdrop-blur-xl border-b border-black/5 dark:border-white/5 transition-colors duration-1000">
+          <h2 className="text-4xl lg:text-5xl font-serif text-text-dark dark:text-white tracking-tight">Customize</h2>
+        </div>
 
-        {/* Name */}
+        <div className="px-6 sm:px-8 lg:px-12">
+          {/* Name */}
         <section className="mb-16 lg:mb-20">
           <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Share Your Name</h3>
           <div className="relative">
@@ -247,10 +251,11 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           </div>
         </section>
 
+        </div>
       </div>
 
       {/* Sticky Bottom Footer */}
-      <div className="fixed bottom-0 left-0 w-full p-4 pb-8 lg:absolute lg:p-6 lg:pt-12 bg-white lg:bg-gradient-to-t lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:bg-[#111111] lg:dark:from-[#111111]/90 lg:dark:via-[#111111]/80 backdrop-blur-[2px] flex justify-center border-t border-gray-200 lg:border-t-0 dark:border-black/20 z-50 shadow-[0_-4px_24px_rgba(0,0,0,0.05)] lg:shadow-none">
+      <div className="fixed bottom-0 left-0 w-full p-4 pb-6 lg:absolute lg:p-6 lg:pt-12 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/90 to-transparent lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none flex justify-center z-50">
         <button 
           onClick={() => navigate('/checkout')} 
           className="w-full lg:max-w-sm py-4 bg-black text-white rounded-full font-bold text-base tracking-[0.2em] uppercase shadow-lg hover:bg-black/80 transition-all pointer-events-auto active:scale-[0.98]"
