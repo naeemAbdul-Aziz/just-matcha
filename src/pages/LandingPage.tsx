@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { HeroSection } from '../components/landing/HeroSection';
 import { MenuSection } from '../components/landing/MenuSection';
 import { StorySection } from '../components/landing/StorySection';
+import { FAQSection } from '../components/landing/FAQSection';
 import { Link } from 'react-router-dom';
 
 const pageVariants = {
@@ -17,6 +18,7 @@ export const LandingPage: React.FC = () => {
       <HeroSection />
       <MenuSection />
       <StorySection />
+      <FAQSection />
 
       {/* Floating "Custom Order" Widget */}
       <div className="fixed bottom-6 right-6 z-40">

@@ -1,437 +1,492 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProductVisualizer } from './ProductVisualizer';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CustomizerControlsProps {
-  base: string;
-  setBase: (base: string) => void;
-  flavors: Record<string, number>;
-  setFlavors: (flavors: Record<string, number>) => void;
   customerName: string;
   setCustomerName: (name: string) => void;
+  base: string;
+  setBase: (base: string) => void;
+  milkType: string;
+  setMilkType: (type: string) => void;
+  matchaIntensity: number;
+  setMatchaIntensity: (val: number) => void;
+  sweetener: string | null;
+  setSweetener: (val: string | null) => void;
+  sweetnessLevel: number;
+  setSweetnessLevel: (val: number) => void;
+  boosts: Record<string, boolean>;
+  setBoosts: (boosts: Record<string, boolean>) => void;
   cupMessage: string;
   setCupMessage: (msg: string) => void;
-  collagen: boolean;
-  setCollagen: (value: boolean) => void;
-  milkLevel: number;
-  setMilkLevel: (value: number) => void;
 }
 
 export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
-  base,
-  setBase,
-  flavors,
-  setFlavors,
-  customerName,
-  setCustomerName,
-  cupMessage,
-  setCupMessage,
-  collagen,
-  setCollagen,
-  milkLevel,
-  setMilkLevel,
+  customerName, setCustomerName,
+  base, setBase,
+  milkType, setMilkType,
+  matchaIntensity, setMatchaIntensity,
+  sweetener, setSweetener,
+  sweetnessLevel, setSweetnessLevel,
+  boosts, setBoosts,
+  cupMessage, setCupMessage,
 }) => {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(1);
+  const totalSteps = 5;
 
-  const flavorOptions = [
-    { id: 'strawberry', name: 'Strawberry', bgColor: 'bg-rose-300', color: 'bg-red-50 text-red-600 border-red-200', active: 'border-red-500 shadow-sm' },
-    { id: 'vanilla', name: 'Vanilla', bgColor: 'bg-yellow-200', color: 'bg-yellow-50 text-yellow-700 border-yellow-200', active: 'border-yellow-500 shadow-sm' },
-    { id: 'mango', name: 'Mango', bgColor: 'bg-orange-300', color: 'bg-orange-50 text-orange-600 border-orange-200', active: 'border-orange-500 shadow-sm' },
-    { id: 'lavender', name: 'Lavender', bgColor: 'bg-purple-300', color: 'bg-purple-50 text-purple-600 border-purple-200', active: 'border-purple-500 shadow-sm' },
-    { id: 'rose', name: 'Rose', bgColor: 'bg-pink-300', color: 'bg-pink-50 text-pink-600 border-pink-200', active: 'border-pink-500 shadow-sm' }
+  const milkOptions = [
+    { id: 'full_cream', label: 'Full Cream', desc: 'Rich & Classic' },
+    { id: 'skimmed', label: 'Skimmed', desc: 'Light & Airy' },
+    { id: 'oat', label: 'Oat', desc: 'Creamy Plant-Based' },
+    { id: 'almond', label: 'Almond', desc: 'Nutty & Low-Cal' }
   ];
+
+  const treatOptions = [
+    { 
+      id: 'vanilla', name: 'Vanilla Syrup', bgColor: 'bg-yellow-200', color: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+      description: ["Softens matcha's bitterness", 'Add warmth without overpowering', 'Best used lightly to keep balance']
+    },
+    { 
+      id: 'caramel', name: 'Caramel', bgColor: 'bg-orange-300', color: 'bg-orange-50 text-orange-700 border-orange-200',
+      description: ['Deep, buttery sweetness', "Can mute matcha's grassy notes", 'Best for dessert-style lattes']
+    },
+    { 
+      id: 'white_chocolate', name: 'White Chocolate', bgColor: 'bg-stone-200', color: 'bg-slate-100 text-slate-700 border-slate-200',
+      description: ['Creamy and rich', 'Smooths matcha completely', 'Ideal for first-time matcha drinkers']
+    },
+    { 
+      id: 'biscoff', name: 'Biscoff', bgColor: 'bg-amber-300', color: 'bg-amber-50 text-amber-800 border-amber-300',
+      description: ['Spiced, cookie-like sweetness', 'Strong flavour that dominates matcha', 'Best enjoyed as an occasional indulgence']
+    }
+  ];
+
+  const naturalSweeteners = [
+    {
+      id: 'honey', name: 'Honey', bgColor: 'bg-amber-400', color: 'bg-amber-50 text-amber-800 border-amber-300',
+      description: ['Naturally sweet with added minerals', 'Support digestion and immunity', "Best used sparingly to preserve matcha's flavour"]
+    },
+    {
+      id: 'date_syrup', name: 'Date Syrup', bgColor: 'bg-orange-800', color: 'bg-orange-50 text-orange-900 border-orange-200',
+      description: ['Whole-food sweetness with fibre', 'Adds gentle caramel notes', 'Slightly darkens colour and taste']
+    },
+    {
+      id: 'maple_syrup', name: 'Maple Syrup', bgColor: 'bg-orange-400', color: 'bg-orange-50 text-orange-800 border-orange-300',
+      description: ['Low-glycaemic natural sweetner', 'Smooth, rounded sweetness', "Can soften matcha's grassy edge"]
+    }
+  ];
+
+  const functionalBoosts = [
+    {
+      id: 'ashwagandha', name: 'Ashwagandha', price: 15,
+      description: ['Adaptogen traditionally used to support stress balance', 'Promotes calm and focus', 'Best enjoyed consistently, in small amounts']
+    },
+    {
+      id: 'blue_spirulina', name: 'Blue Spirulina', price: 12,
+      description: ['Antioxidant-rich and naturally vibrant', 'Supports focus and gentle energy', 'Neutral taste when used lightly']
+    },
+    {
+      id: 'green_spirulina', name: 'Green Spirulina', price: 10,
+      description: ['Rich in chlorophyll and plant protein', 'Supports vitality and detox pathways', 'Earthy flavour - balance carefully']
+    },
+    {
+      id: 'collagen', name: 'Collagen', price: 18,
+      description: ['Support skin, hair, nails, and joints', 'Tasteless and easy to dissolve', 'Ideal for daily ritual drinks']
+    },
+    {
+      id: 'maca', name: 'Maca Powder', price: 14,
+      description: ['Root traditionally used for energy and stamina', 'Supports hormone balance', 'Malty flavour pairs well with warm drinks']
+    }
+  ];
+
+  const allFlavors = [...treatOptions, ...naturalSweeteners];
 
   const cupMessages = [
-    'Smile', 
-    'You matter', 
     'Your daily dose of green magic',
     'Two matcha, one love',
-    'You are my favorite distraction',
-    'Sip, smile, and shine on',
-    'A little moment of peace, just for you',
-    'You\'re doing amazing, sweetie!'
+    'A little moment of peace',
+    'Sip, smile, and shine on'
   ];
 
-  const milkLevels = [
-    { value: 0, title: 'Pure Matcha energy', label: '0%' },
-    { value: 25, title: 'Light sweet, balanced.', label: '25%' },
-    { value: 50, title: 'Just right, for most.', label: '50%' },
-    { value: 75, title: 'Creamy & Comforting', label: '75%' },
-    { value: 100, title: 'Full sweet indulgence', label: '100%' },
-  ];
+  const toggleBoost = (id: string) => {
+    setBoosts({
+      ...boosts,
+      [id]: !boosts[id]
+    });
+  };
 
-  const toggleFlavor = (id: string) => {
-    const newFlavors = { ...flavors };
-    if (newFlavors[id]) {
-      delete newFlavors[id];
+  const handleNext = () => {
+    if (activeStep < totalSteps) {
+      setActiveStep(activeStep + 1);
     } else {
-      if (Object.keys(newFlavors).length >= 2) return; // Max 2 flavors
-      newFlavors[id] = 30; // Default 30%
-    }
-    setFlavors(newFlavors);
-  };
-
-  const updateFlavorIntensity = (id: string, intensity: number) => {
-    const newFlavors = { ...flavors };
-    if (newFlavors[id]) {
-      newFlavors[id] = intensity;
-      setFlavors(newFlavors);
+      navigate('/checkout');
     }
   };
 
-  const totalFlavorPercent = Object.values(flavors).reduce((a, b) => a + b, 0);
-  const matchaPercent = Math.max(0, 100 - totalFlavorPercent);
-
-  const getFlavorSummary = () => {
-    const keys = Object.keys(flavors);
-    if (keys.length === 0) return 'Pure Matcha';
-    return keys.map(k => {
-      const f = flavorOptions.find(opt => opt.id === k);
-      return `${flavors[k]}% ${f?.name}`;
-    }).join(', ');
+  const handleBack = () => {
+    if (activeStep > 1) setActiveStep(activeStep - 1);
   };
 
-  // Helper styles for sleek accordion
-  const stepWrapperClass = (step: number) => `
-    transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden
-    ${activeStep === step 
-      ? 'bg-white dark:bg-surface-dark shadow-luxury rounded-[2.5rem] border border-primary/10 dark:border-white/5 my-4' 
-      : 'bg-transparent border-b border-gray-200 dark:border-white/10 rounded-none my-0 hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer'}
-  `;
+  const renderSweetenerOption = (f: typeof treatOptions[0]) => {
+    const isSelected = sweetener === f.id;
+    
+    return (
+      <div key={f.id} className={`flex flex-col rounded-xl overflow-hidden transition-all duration-300 border-2 ${isSelected ? 'border-primary bg-white shadow-sm' : 'border-transparent bg-[#f5f5f7] dark:bg-black/20 hover:border-gray-200'} cursor-pointer w-full`}>
+        <div 
+          className={`px-4 py-4 flex flex-col gap-1 transition-colors ${isSelected ? f.color : 'text-text-light dark:text-slate-300'}`}
+          onClick={() => setSweetener(isSelected ? null : f.id)}
+        >
+          <div className="flex items-center justify-between w-full">
+            <span className="font-serif text-xl font-bold">{f.name}</span>
+            {isSelected ? (
+              <span className="material-symbols-sharp text-sm">check</span>
+            ) : (
+              <div className="w-5 h-5 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center shrink-0"></div>
+            )}
+          </div>
+          <ul className="text-xs space-y-1 mt-2 font-light opacity-80 leading-relaxed">
+            {f.description.map((desc, i) => (
+              <li key={i} className="flex items-start gap-1.5">
+                <span className="opacity-60 text-[10px]">✦</span> {desc}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  };
 
-  const stepHeaderClass = (_step: number) => `
-    w-full flex items-center justify-between px-6 py-6 transition-colors text-left
-  `;
-
-  const stepNumberClass = (step: number) => `
-    w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold tracking-widest
-    ${activeStep === step ? 'bg-primary text-white' : 'bg-soft-green dark:bg-white/10 text-primary-dark dark:text-slate-400'}
-  `;
-
-  const stepTitleClass = (step: number) => `
-    ${activeStep === step 
-      ? 'font-serif text-2xl md:text-3xl text-text-dark dark:text-white' 
-      : 'font-sans text-sm font-bold uppercase tracking-wider text-text-light dark:text-slate-400'}
-  `;
+  // Pricing calculations for Review Step
+  const basePrice = base === 'ceremonial' ? 45 : 35;
+  const boostsPrice = Object.entries(boosts).reduce((acc, [id, selected]) => {
+     if (selected) {
+       const boost = functionalBoosts.find(b => b.id === id);
+       return acc + (boost?.price || 0);
+     }
+     return acc;
+  }, 0);
+  const totalPrice = basePrice + boostsPrice;
 
   return (
-    <div className="w-full flex flex-col pb-20">
-      <div className="border-b border-gray-200/50 dark:border-white/10 pb-6 mb-8 md:pb-8 md:mb-12">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif mb-2 md:mb-4 text-text-dark dark:text-white leading-tight whitespace-nowrap">
-          Craft Your <span className="italic text-primary-dark">Ritual.</span>
-        </h1>
-        <p className="text-text-light dark:text-slate-400 text-sm md:text-lg font-light max-w-lg">Sweet, inviting, and purely authentic. Personalize every layer of your matcha.</p>
-      </div>
+    <div className="relative w-full h-full perspective-[1500px]">
+      <AnimatePresence>
+        {[1, 2, 3, 4, 5].map((stepIndex) => {
+          if (stepIndex < activeStep) return null; // Swipe away past cards
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left Column: Visual Anchor */}
-        <div className="lg:col-span-5 xl:col-span-5 sticky top-32">
-          <ProductVisualizer />
-        </div>
+          const isTop = stepIndex === activeStep;
+          const offset = stepIndex - activeStep; // 0 for top, 1 for next...
 
-        {/* Right Column: Sequential Flow (Accordion) */}
-        <div className="lg:col-span-7 xl:col-span-7 flex flex-col">
-          
-          {/* Step 01: Select Your Base */}
-          <div className={stepWrapperClass(1)}>
-            <button onClick={() => setActiveStep(1)} className={stepHeaderClass(1)}>
-              <div className="flex items-center gap-4">
-                <div className={stepNumberClass(1)}>1</div>
-                <h2 className={stepTitleClass(1)}>
-                  {activeStep === 1 ? 'Select Your Base' : `Base: ${base === 'ceremonial' ? 'Ceremonial' : 'Premium'}`}
-                </h2>
-              </div>
-              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 1 ? 'rotate-180' : ''}`}>expand_more</span>
-            </button>
-            
-            {activeStep === 1 && (
-              <div className="px-6 pb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                <div className="flex items-center justify-end mb-4">
-                  <button className="text-xs text-primary font-medium tracking-wide uppercase hover:opacity-70 transition-opacity">Compare Grades</button>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <label className="relative group cursor-pointer">
-                    <input type="radio" name="base" className="peer sr-only" checked={base === 'ceremonial'} onChange={() => { setBase('ceremonial'); }} />
-                    <div className="p-6 rounded-[2rem] border border-gray-100 bg-white dark:bg-black/20 hover:border-primary/20 transition-all duration-300 peer-checked:border-primary peer-checked:bg-soft-green/30 peer-checked:shadow-soft h-full flex flex-col">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="font-serif text-2xl text-text-dark dark:text-white">Ceremonial</span>
-                        <div className="w-5 h-5 rounded-full border border-gray-300 dark:border-gray-600 peer-checked:border-primary flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-light dark:text-slate-300 mb-6 font-light flex-grow">Highest quality, vibrant green. Best for pure enjoyment.</p>
-                      <span className="text-xs font-bold text-primary-dark tracking-wider uppercase">GH₵ 45.00</span>
-                    </div>
-                  </label>
-                  <label className="relative group cursor-pointer">
-                    <input type="radio" name="base" className="peer sr-only" checked={base === 'premium'} onChange={() => { setBase('premium'); }} />
-                    <div className="p-6 rounded-[2rem] border border-gray-100 bg-white dark:bg-black/20 hover:border-primary/20 transition-all duration-300 peer-checked:border-primary peer-checked:bg-soft-green/30 peer-checked:shadow-soft h-full flex flex-col">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="font-serif text-2xl text-text-dark dark:text-white">Premium</span>
-                        <div className="w-5 h-5 rounded-full border border-gray-300 dark:border-gray-600 peer-checked:border-primary flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-light dark:text-slate-300 mb-6 font-light flex-grow">Robust flavor designed to cut through milk. Ideal for mixed drinks.</p>
-                      <span className="text-xs font-bold text-text-light tracking-wider uppercase">GH₵ 35.00</span>
-                    </div>
-                  </label>
-                </div>
-                <div className="flex justify-end mt-8">
-                  <button onClick={() => setActiveStep(2)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Step 02: Matcha/Milk Level */}
-          <div className={stepWrapperClass(2)}>
-            <button onClick={() => setActiveStep(2)} className={stepHeaderClass(2)}>
-              <div className="flex items-center gap-4">
-                <div className={stepNumberClass(2)}>2</div>
-                <h2 className={stepTitleClass(2)}>
-                  {activeStep === 2 ? 'Matcha/Milk Ratio' : `Milk Level: ${milkLevel}%`}
-                </h2>
-              </div>
-              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 2 ? 'rotate-180' : ''}`}>expand_more</span>
-            </button>
-            
-            {activeStep === 2 && (
-              <div className="px-6 pb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                <div className="flex flex-col gap-3">
-                  {milkLevels.map(level => (
-                    <button
-                      key={level.value}
-                      onClick={() => setMilkLevel(level.value)}
-                      className={`relative w-full px-6 py-4 rounded-full flex items-center justify-between transition-all duration-500 border ${
-                        milkLevel === level.value 
-                          ? 'bg-soft-green/50 border-primary/30 text-text-dark shadow-sm'
-                          : 'bg-white dark:bg-black/20 border-gray-100 dark:border-white/5 text-text-light hover:border-primary/20 hover:bg-soft-green/20'
-                      }`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${milkLevel === level.value ? 'border-primary' : 'border-gray-300 dark:border-gray-600'}`}>
-                          <div className={`w-2.5 h-2.5 rounded-full bg-primary transition-all duration-300 ${milkLevel === level.value ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}></div>
-                        </div>
-                        <span className={`font-serif text-xl md:text-2xl transition-colors ${milkLevel === level.value ? 'text-primary-dark' : ''}`}>{level.label}</span>
-                      </div>
-                      <span className={`text-sm font-light tracking-wide text-right transition-colors ${milkLevel === level.value ? 'text-text-dark font-medium' : ''}`}>
-                        {level.title}
-                      </span>
-                    </button>
+          return (
+            <motion.div
+              key={stepIndex}
+              initial={{ opacity: 0, x: 50, scale: 0.95 }}
+              animate={{
+                opacity: offset > 2 ? 0 : 1,
+                scale: 1 - (offset * 0.04),
+                y: offset * 20,
+                rotate: offset === 0 ? 0 : offset % 2 === 0 ? -1.5 : 1.5,
+                zIndex: 10 - offset
+              }}
+              exit={{ x: -400, opacity: 0, rotate: -5 }} // Smooth left swipe
+              transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              className={`absolute inset-0 bg-white dark:bg-[#111111] p-5 md:p-8 rounded-[2rem] border border-gray-100 dark:border-white/10 flex flex-col shadow-2xl overflow-y-auto custom-scrollbar ${isTop ? 'pointer-events-auto' : 'pointer-events-none'}`}
+            >
+              
+              {/* Dashed Progress */}
+              <div className="flex items-center justify-between mb-8 flex-shrink-0">
+                <div className="flex items-center gap-2 w-28">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <div 
+                      key={s} 
+                      className={`h-1 rounded-full flex-grow transition-colors ${s <= stepIndex ? 'bg-brand-dark dark:bg-white' : 'bg-gray-200 dark:bg-white/10'}`}
+                    />
                   ))}
                 </div>
-
-                <div className="flex justify-end mt-8">
-                  <button onClick={() => setActiveStep(3)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
-                  </button>
-                </div>
               </div>
-            )}
-          </div>
 
-          {/* Step 03: Flavor Infusion */}
-          <div className={stepWrapperClass(3)}>
-            <button onClick={() => setActiveStep(3)} className={stepHeaderClass(3)}>
-              <div className="flex items-center gap-4">
-                <div className={stepNumberClass(3)}>3</div>
-                <h2 className={stepTitleClass(3)}>
-                  {activeStep === 3 ? 'Flavor Infusion' : `Flavors: ${getFlavorSummary()}`}
-                </h2>
+              <div className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mb-4 flex-shrink-0">
+                Question 0{stepIndex}
               </div>
-              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 3 ? 'rotate-180' : ''}`}>expand_more</span>
-            </button>
-            
-            {activeStep === 3 && (
-              <div className="px-6 pb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-sm text-text-light font-light">Select up to 2 flavors.</span>
-                  <span className="text-brand-dark font-bold text-xs uppercase tracking-widest bg-soft-green px-4 py-1.5 rounded-full">{matchaPercent}% Matcha</span>
-                </div>
 
-                <div className="flex flex-col sm:flex-row gap-8 mb-4">
-                  {/* CSS Cup Visualizer */}
-                  <div className="flex-shrink-0 flex justify-center sm:justify-start">
-                    <div className="relative w-28 h-40 border-2 border-primary/20 rounded-b-[2rem] rounded-t-lg shadow-inner overflow-hidden flex flex-col justify-start bg-white/40 dark:bg-black/20 backdrop-blur-sm">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-white/50 z-20"></div>
-                      <div style={{ height: `${matchaPercent}%` }} className="bg-brand-dark/90 transition-all duration-700 ease-in-out w-full flex items-center justify-center relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
-                        {matchaPercent > 15 && (
-                          <span className="text-[10px] font-bold text-white/90 uppercase tracking-widest relative z-10 transition-opacity opacity-70 group-hover:opacity-100">
-                            {matchaPercent}%
-                          </span>
-                        )}
-                      </div>
-                      {Object.entries(flavors).map(([id, pct]) => {
-                        const f = flavorOptions.find(opt => opt.id === id);
-                        return (
-                          <div key={id} style={{ height: `${pct}%` }} className={`${f?.bgColor || 'bg-gray-200'} transition-all duration-700 ease-in-out w-full flex items-center justify-center relative overflow-hidden border-t border-white/20 group`}>
-                            <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-black/5"></div>
-                            {pct > 15 && (
-                              <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest relative z-10 transition-opacity opacity-70 group-hover:opacity-100">
-                                {pct}%
-                              </span>
-                            )}
+              {/* Step Content */}
+              <div className="flex-grow shrink-0 mb-8">
+                
+                {/* Step 1: The Foundation (Name & Base) */}
+                {stepIndex === 1 && (
+                  <div>
+                    <h2 className="font-serif text-3xl text-text-dark dark:text-white mb-6 leading-tight">The Foundation</h2>
+                    
+                    <div className="mb-6">
+                      <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-2 font-bold">1. Share Your Name</label>
+                      <input
+                        type="text"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        placeholder="e.g. Jules"
+                        className="w-full bg-[#f5f5f7] dark:bg-black/20 border-2 border-transparent dark:border-white/10 rounded-xl px-4 py-3 font-serif text-base text-text-dark focus:bg-white dark:focus:bg-surface-dark focus:border-primary outline-none transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-2 font-bold">2. Select Your Drink</label>
+                      <div className="grid grid-cols-1 gap-2">
+                        <label className="relative group cursor-pointer">
+                          <input type="radio" name="base" className="peer sr-only" checked={base === 'ceremonial'} onChange={() => { setBase('ceremonial'); }} />
+                          <div className="px-5 py-4 rounded-2xl border-2 border-transparent bg-[#f5f5f7] dark:bg-black/20 transition-all duration-300 peer-checked:border-primary peer-checked:bg-white dark:peer-checked:bg-surface-dark flex items-center gap-4">
+                            <div className="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-primary flex items-center justify-center shrink-0 bg-white">
+                              <div className="w-2 h-2 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-serif text-lg text-text-dark dark:text-white">Ceremonial Grade <span className="text-xs font-sans text-gray-500 ml-2">GH₵ 45.00</span></span>
+                              <span className="text-sm text-text-light dark:text-slate-400 font-light line-clamp-1">Highest quality, vibrant green.</span>
+                            </div>
                           </div>
+                        </label>
+                        <label className="relative group cursor-pointer">
+                          <input type="radio" name="base" className="peer sr-only" checked={base === 'premium'} onChange={() => { setBase('premium'); }} />
+                          <div className="px-5 py-4 rounded-2xl border-2 border-transparent bg-[#f5f5f7] dark:bg-black/20 transition-all duration-300 peer-checked:border-primary peer-checked:bg-white dark:peer-checked:bg-surface-dark flex items-center gap-4">
+                            <div className="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-primary flex items-center justify-center shrink-0 bg-white">
+                              <div className="w-2 h-2 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-serif text-lg text-text-dark dark:text-white">Latte-Grade Matcha <span className="text-xs font-sans text-gray-500 ml-2">GH₵ 35.00</span></span>
+                              <span className="text-sm text-text-light dark:text-slate-400 font-light line-clamp-1">Best if you want your matcha to feel like a treat.</span>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: The Liquid & Intensity */}
+                {stepIndex === 2 && (
+                  <div>
+                    <h2 className="font-serif text-3xl text-text-dark dark:text-white mb-6 leading-tight">Liquid & Intensity</h2>
+                    
+                    <div className="mb-6">
+                      <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-2 font-bold">3. Preferred Milk</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {milkOptions.map(milk => (
+                          <button
+                            key={milk.id}
+                            onClick={() => setMilkType(milk.id)}
+                            className={`p-3 rounded-xl border-2 text-left transition-all duration-300 ${milkType === milk.id ? 'border-primary bg-white shadow-sm' : 'border-transparent bg-[#f5f5f7] dark:bg-black/20 hover:border-gray-200'}`}
+                          >
+                            <span className={`block font-serif text-sm ${milkType === milk.id ? 'text-primary-dark font-bold' : 'text-text-dark'}`}>{milk.label}</span>
+                            <span className="text-[10px] text-gray-500 font-light mt-0.5">{milk.desc}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-3 font-bold">4. Matcha Intensity</label>
+                      <div className="flex items-center justify-between gap-2">
+                        {[
+                          { val: 25, label: 'Mild' },
+                          { val: 50, label: 'Balanced' },
+                          { val: 75, label: 'Strong' },
+                          { val: 100, label: 'Pure' }
+                        ].map(level => (
+                          <button
+                            key={level.val}
+                            onClick={() => setMatchaIntensity(level.val)}
+                            className={`flex flex-col items-center justify-center flex-1 py-3 px-1 rounded-2xl border-2 transition-all duration-300 ${matchaIntensity === level.val ? 'bg-[#3b6318] border-[#3b6318] text-white shadow-md scale-105 z-10' : 'bg-[#f5f5f7] dark:bg-black/20 border-transparent text-gray-500 hover:border-gray-200'}`}
+                          >
+                            <span className="font-bold text-sm mb-0.5">{level.val}%</span>
+                            <span className="text-[10px] uppercase tracking-wider font-medium opacity-80">{level.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Sweetness & Flavor */}
+                {stepIndex === 3 && (
+                  <div>
+                    <h2 className="font-serif text-3xl text-text-dark dark:text-white mb-6 leading-tight">Sweetness & Flavor</h2>
+                    
+                    <div className="mb-8">
+                      <div className="flex items-center justify-between mb-4">
+                        <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 font-bold">6. Your Sweet Spot</label>
+                        <span className="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-md">{sweetnessLevel}%</span>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        {[
+                          { val: 0, title: 'Barely There', desc: '(clean, pure matcha taste)' },
+                          { val: 25, title: 'Hint of Sweet', desc: '(just a touch)' },
+                          { val: 50, title: 'Balanced Bliss', desc: '(right in the middle)' },
+                          { val: 75, title: 'Sweet Spot', desc: '(noticeably sweet, still refined)' },
+                          { val: 100, title: 'Sugar Rush', desc: '(for the true sweet tooth)' }
+                        ].map(level => (
+                          <button
+                            key={level.val}
+                            onClick={() => setSweetnessLevel(level.val)}
+                            className={`relative w-full px-4 py-3 rounded-xl flex items-center gap-4 transition-all duration-300 border-2 text-left ${
+                              sweetnessLevel === level.val 
+                                ? 'bg-white border-orange-400 shadow-sm'
+                                : 'bg-[#f5f5f7] dark:bg-black/20 border-transparent text-text-light hover:border-gray-200'
+                            }`}
+                          >
+                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-colors ${sweetnessLevel === level.val ? 'bg-orange-400 text-white shadow-inner' : 'bg-gray-200 dark:bg-white/10 text-gray-400'}`}>
+                              <span className="font-black text-lg">{level.val}%</span>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className={`font-serif text-base transition-colors ${sweetnessLevel === level.val ? 'text-orange-950 font-bold' : 'text-text-dark dark:text-slate-300'}`}>{level.title}</span>
+                              <span className="text-xs font-light text-gray-500 tracking-wide">{level.desc}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-2 font-bold">5. Pick Your Sweetener (Optional)</label>
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 ml-1">If you want it to feel like a treat</h3>
+                        <div className="flex flex-col gap-3">
+                          {treatOptions.map(renderSweetenerOption)}
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 ml-1">If you want it light & functional</h3>
+                        <div className="flex flex-col gap-3">
+                          {naturalSweeteners.map(renderSweetenerOption)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 4: Functional Boosts */}
+                {stepIndex === 4 && (
+                  <div>
+                    <h2 className="font-serif text-3xl text-text-dark dark:text-white mb-2 leading-tight">Support Your Body</h2>
+                    <p className="text-text-light text-sm mb-6">Select functional boosts to elevate your matcha ritual.</p>
+                    
+                    <div className="flex flex-col gap-3">
+                      {functionalBoosts.map(boost => {
+                        const isSelected = !!boosts[boost.id];
+                        
+                        return (
+                          <label key={boost.id} className={`relative block p-4 rounded-2xl border-2 transition-all duration-300 cursor-pointer group ${isSelected ? 'border-primary bg-white shadow-sm' : 'border-transparent bg-[#f5f5f7] dark:bg-black/20 hover:border-gray-200'}`}>
+                            <div className="flex items-center gap-4">
+                              <div className="flex-grow min-w-0">
+                                <div className="flex justify-between items-center mb-1">
+                                  <h3 className="font-serif text-xl font-bold text-text-dark dark:text-white transition-colors leading-tight">{boost.name}</h3>
+                                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors bg-white ${isSelected ? 'border-primary' : 'border-gray-300 dark:border-gray-600'}`}>
+                                    {isSelected && <span className="material-symbols-sharp text-primary text-[12px]">check</span>}
+                                  </div>
+                                </div>
+                                <span className="block text-[10px] font-bold text-gray-500 tracking-wider mb-2">+ GH₵ {boost.price.toFixed(2)}</span>
+                                <ul className="text-xs space-y-1 font-light opacity-80 leading-relaxed text-text-light dark:text-slate-300">
+                                  {boost.description.map((desc, i) => (
+                                    <li key={i} className="flex items-start gap-1.5">
+                                      <span className="opacity-60 text-[10px]">✦</span> {desc}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                            <input type="checkbox" className="sr-only" checked={isSelected} onChange={() => toggleBoost(boost.id)} />
+                          </label>
                         );
                       })}
                     </div>
                   </div>
-                  
-                  {/* Flavor Options */}
-                  <div className="flex-grow flex flex-wrap gap-3 content-start items-start">
-                    {flavorOptions.map(f => {
-                      const isSelected = !!flavors[f.id];
-                      const isDisabled = !isSelected && Object.keys(flavors).length >= 2;
-                      
-                      return (
-                        <div key={f.id} className={`flex flex-col rounded-[1.5rem] overflow-hidden transition-all duration-300 border ${isSelected ? 'border-transparent shadow-md' : 'border-gray-100 dark:border-white/5 bg-white dark:bg-black/20 hover:border-primary/20'} ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} w-full sm:w-auto`}>
-                          <div 
-                            className={`px-5 py-3 flex items-center gap-3 transition-colors ${isSelected ? f.color : 'text-text-light dark:text-slate-300'}`}
-                            onClick={() => !isDisabled && toggleFlavor(f.id)}
-                          >
-                            <span className="font-medium text-sm tracking-wide">{f.name}</span>
-                            {isSelected && (
-                              <span className="ml-auto material-symbols-sharp text-sm opacity-70 hover:opacity-100">close</span>
-                            )}
-                          </div>
-                          {isSelected && (
-                            <div className={`flex justify-between px-2 pb-2 pt-1 gap-1 ${f.color}`}>
-                              {[20, 30, 40, 50].map(pct => (
-                                <button 
-                                  key={pct}
-                                  onClick={(e) => { e.stopPropagation(); updateFlavorIntensity(f.id, pct); }}
-                                  className={`text-xs px-2 py-1 rounded-full font-medium transition-all ${flavors[f.id] === pct ? 'bg-white/90 dark:bg-black/20 shadow-sm text-text-dark dark:text-white' : 'text-current opacity-60 hover:opacity-100 hover:bg-white/30'}`}
-                                >
-                                  {pct}%
-                                </button>
-                              ))}
-                            </div>
-                          )}
+                )}
+
+                {/* Step 5: Personalize & Review */}
+                {stepIndex === 5 && (
+                  <div>
+                    <h2 className="font-serif text-3xl text-text-dark dark:text-white mb-6 leading-tight">Review Order</h2>
+                    
+                    <div className="bg-[#f5f5f7] dark:bg-black/20 rounded-2xl p-5 mb-6 border border-gray-100 dark:border-white/5">
+                      <div className="flex justify-between items-start mb-4">
+                         <div>
+                            <h3 className="font-serif text-lg font-bold text-text-dark">{customerName ? `${customerName}'s Matcha` : 'Your Custom Matcha'}</h3>
+                            <p className="text-sm text-gray-500">{base === 'ceremonial' ? 'Ceremonial Grade' : 'Latte-Grade'} • {matchaIntensity}% Intensity</p>
+                         </div>
+                         <span className="font-serif font-bold text-brand-dark">GH₵ {totalPrice.toFixed(2)}</span>
+                      </div>
+
+                      <div className="space-y-2 mb-4 text-sm text-text-dark border-t border-gray-200 dark:border-white/10 pt-4">
+                        <div className="flex justify-between">
+                          <span className="text-gray-500">Milk Base</span>
+                          <span className="font-medium capitalize">{milkType.replace('_', ' ')}</span>
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="flex justify-end mt-8">
-                  <button onClick={() => setActiveStep(4)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Step 04: Personalize Your Cup */}
-          <div className={stepWrapperClass(4)}>
-            <button onClick={() => setActiveStep(4)} className={stepHeaderClass(4)}>
-              <div className="flex items-center gap-4">
-                <div className={stepNumberClass(4)}>4</div>
-                <h2 className={stepTitleClass(4)}>
-                  {activeStep === 4 ? 'Personalize Your Cup' : `For: ${customerName || 'Guest'}`}
-                </h2>
-              </div>
-              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 4 ? 'rotate-180' : ''}`}>expand_more</span>
-            </button>
-            
-            {activeStep === 4 && (
-              <div className="px-6 pb-8 animate-in fade-in slide-in-from-top-4 duration-500 space-y-6">
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-light dark:text-slate-400 mb-2 font-bold">Your Name</label>
-                  <input
-                    type="text"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="e.g. Jules"
-                    className="w-full bg-white dark:bg-black/20 border border-gray-100 dark:border-white/10 rounded-full px-6 py-4 font-serif text-lg text-text-dark focus:bg-white dark:focus:bg-surface-dark focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-light dark:text-slate-400 mb-3 font-bold">Cup Message</label>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {cupMessages.map(msg => (
-                      <button
-                        key={msg}
-                        onClick={() => setCupMessage(msg)}
-                        className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${cupMessage === msg ? 'bg-primary-dark border-primary-dark text-white shadow-md' : 'bg-white dark:bg-black/20 border-gray-100 dark:border-white/10 text-text-light dark:text-slate-300 hover:border-primary/30 hover:bg-soft-green/20'}`}
-                      >
-                        {msg}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={cupMessage}
-                      onChange={(e) => setCupMessage(e.target.value)}
-                      placeholder="Or write your own sweet message..."
-                      className="w-full bg-white dark:bg-black/20 border border-gray-100 dark:border-white/10 rounded-full px-6 py-4 font-serif text-lg text-text-dark focus:bg-white dark:focus:bg-surface-dark focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all shadow-sm pr-12"
-                    />
-                    <span className="material-symbols-sharp absolute right-6 top-1/2 -translate-y-1/2 text-primary/50">edit</span>
-                  </div>
-                </div>
-                <div className="flex justify-end mt-8">
-                  <button onClick={() => setActiveStep(5)} className="group relative px-8 py-3 bg-soft-green text-text-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                    <span className="absolute inset-0 w-full h-full bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-medium tracking-wide">Next Step <span className="material-symbols-sharp text-sm">arrow_forward</span></span>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Step 05: Boost Your Glow */}
-          <div className={stepWrapperClass(5)}>
-            <button onClick={() => setActiveStep(5)} className={stepHeaderClass(5)}>
-              <div className="flex items-center gap-4">
-                <div className={stepNumberClass(5)}>5</div>
-                <h2 className={stepTitleClass(5)}>
-                  {activeStep === 5 ? 'Boost Your Glow' : `Add-ons: ${collagen ? 'Marine Collagen' : 'None'}`}
-                </h2>
-              </div>
-              <span className={`material-symbols-sharp text-primary/50 transition-transform duration-300 ${activeStep === 5 ? 'rotate-180' : ''}`}>expand_more</span>
-            </button>
-            
-            {activeStep === 5 && (
-              <div className="px-6 pb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                <label className={`flex items-center p-5 rounded-[2rem] border transition-all duration-300 cursor-pointer group ${collagen ? 'border-primary/30 bg-soft-green/30 shadow-md' : 'border-gray-100 dark:border-white/5 bg-white dark:bg-black/20 hover:border-primary/20 hover:bg-soft-green/10'}`}>
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden mr-5 flex-shrink-0 bg-gray-100 shadow-inner">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHRF1EbJZpaMipMT-TTqVyNT9J1QYnxp0z7Fd7MeBK6VtiPUNzMrbQ2XL3rDWKn3ycPFPAnQGQ0xygWSSeOpN-13GPzOy8dtp7tWMhez4kj0EW5xHJURf09r4PTW3lbhkEZw1xZgNS17D3zN1FECNd5c7lKw4249SuF9WGaKB7xG37KZq3XMV7s6LhkGCodvMZWWwJBvIDAHfzLAauOpxTNuXmuN0jwtfXN4frXb80LaVYyS2DWkUd4afnUIhMlF81K5OvAjgt5bY" alt="Collagen powder texture" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex justify-between items-center mb-1">
-                      <h3 className="font-serif text-xl text-text-dark dark:text-white group-hover:text-primary-dark transition-colors">Marine Collagen Peptides</h3>
-                      <span className="text-xs font-bold text-primary-dark tracking-wider uppercase bg-primary/10 px-3 py-1 rounded-full">+ GH₵ 12.00</span>
+                        <div className="flex justify-between">
+                          <span className="text-gray-500">Sweetness</span>
+                          <span className="font-medium">
+                            {sweetnessLevel}% {sweetener ? allFlavors.find(f => f.id === sweetener)?.name : 'Unsweetened'}
+                          </span>
+                        </div>
+                        {Object.keys(boosts).length > 0 && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Boosts</span>
+                            <span className="font-medium text-right">
+                              {Object.entries(boosts).filter(([_, v]) => v).map(([id]) => functionalBoosts.find(b => b.id === id)?.name).join(', ')}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-sm font-light text-text-light dark:text-slate-400 leading-relaxed max-w-[90%]">Promotes skin elasticity and hydration. Odorless and tasteless.</p>
-                  </div>
-                  <div className="ml-4">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${collagen ? 'bg-primary border-primary' : 'border-gray-300 dark:border-gray-600 bg-transparent'}`}>
-                      {collagen && <span className="material-symbols-sharp text-white text-[14px]">check</span>}
+
+                    <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-text-dark dark:text-slate-400 mb-2 font-bold">Cup Message</label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                        {cupMessages.map(msg => (
+                          <button
+                            key={msg}
+                            onClick={() => setCupMessage(msg)}
+                            className={`p-2 rounded-xl text-xs font-medium border-2 transition-all duration-300 text-left ${cupMessage === msg ? 'bg-white border-primary text-brand-dark shadow-sm' : 'bg-[#f5f5f7] dark:bg-black/20 border-transparent text-gray-500 hover:border-gray-200'}`}
+                          >
+                            "{msg}"
+                          </button>
+                        ))}
+                      </div>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={cupMessage}
+                          onChange={(e) => setCupMessage(e.target.value)}
+                          placeholder="Write a custom message..."
+                          className="w-full bg-[#f5f5f7] dark:bg-black/20 border-2 border-transparent dark:border-white/10 rounded-xl px-4 py-3 font-serif text-sm text-text-dark focus:bg-white dark:focus:bg-surface-dark focus:border-primary outline-none transition-all pr-12"
+                        />
+                        <span className="material-symbols-sharp absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">edit</span>
+                      </div>
                     </div>
-                    <input type="checkbox" className="sr-only" checked={collagen} onChange={(e) => setCollagen(e.target.checked)} />
                   </div>
-                </label>
-                
-                <div className="flex justify-end mt-10">
-                  <button onClick={() => navigate('/checkout')} className="group relative px-10 py-4 bg-background-dark text-white rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/30">
-                    <span className="absolute inset-0 w-full h-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                    <span className="relative flex items-center gap-2 font-bold tracking-wide">Review Order <span className="material-symbols-sharp text-sm">check_circle</span></span>
-                  </button>
-                </div>
+                )}
               </div>
-            )}
-          </div>
-          
-        </div>
-      </div>
+
+              {/* Persistent Navigation Controls */}
+              <div className="mt-auto flex items-center justify-between flex-shrink-0 pt-4 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-[#111111] sticky bottom-0 z-20 pb-2">
+                {activeStep > 1 ? (
+                  <button 
+                    onClick={handleBack}
+                    className="font-medium text-sm text-gray-400 hover:text-brand-dark transition-colors px-4 py-2"
+                  >
+                    Back
+                  </button>
+                ) : (
+                  <div className="px-4 py-2"></div>
+                )}
+                <button 
+                  onClick={handleNext} 
+                  className="px-8 py-3.5 bg-brand-dark text-white rounded-xl font-medium tracking-wide hover:bg-[#1d1d1f] transition-colors flex items-center justify-center shadow-lg"
+                >
+                  {stepIndex === totalSteps ? 'Confirm Order' : 'Next'}
+                </button>
+              </div>
+
+            </motion.div>
+          )
+        })}
+      </AnimatePresence>
     </div>
   );
 };

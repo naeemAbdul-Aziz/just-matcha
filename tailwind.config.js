@@ -8,19 +8,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#00FF41", // Striking stark green
-        "primary-dark": "#00CC33",
-        "soft-green": "#e3f4d8",
-        "cream": "#f8f1e7",
+        "primary": "#000000", // Apple-style flat black
+        "primary-dark": "#1d1d1f", // Apple text dark gray
+        "soft-green": "#f5f5f7", // Apple signature light gray
+        "cream": "#ffffff",
         "cream-accent": "#ffffff",
-        "background-light": "#ffffff", // Pure white
-        "background-dark": "#000000", // Pure black
-        "text-dark": "#000000", // Pure black
-        "text-light": "#666666", // Sharp gray
+        "background-light": "#ffffff",
+        "background-dark": "#000000",
+        "text-dark": "#1d1d1f",
+        "text-light": "#86868b", // Apple secondary text
         "surface-light": "#ffffff",
-        "surface-dark": "#111111",
+        "surface-dark": "#1d1d1f",
         "brand-dark": "#000000",
-        "neutral-surface": "#f5f5f5",
+        "neutral-surface": "#f5f5f7",
       },
       fontFamily: {
         "display": ["Plus Jakarta Sans", "sans-serif"],
@@ -35,9 +35,9 @@ export default {
         "full": "9999px",
       },
       boxShadow: {
-        "soft": "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-        "glow": "0 0 0 1px rgba(0, 0, 0, 0.1)",
-        "luxury": "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+        "soft": "none",
+        "glow": "none",
+        "luxury": "none",
       },
       keyframes: {
         "pulse-ring": {
