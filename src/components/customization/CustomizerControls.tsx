@@ -183,13 +183,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               animate={{
                 opacity: offset > 2 ? 0 : 1,
                 scale: 1 - (offset * 0.04),
-                y: offset * 20,
+                y: offset * -15, // Stack upwards
                 rotate: offset === 0 ? 0 : offset % 2 === 0 ? -1.5 : 1.5,
                 zIndex: 10 - offset
               }}
               exit={{ x: -400, opacity: 0, rotate: -5 }} // Smooth left swipe
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className={`absolute inset-0 bg-white dark:bg-[#111111] p-5 md:p-8 rounded-[2rem] border border-gray-100 dark:border-white/10 flex flex-col shadow-2xl overflow-y-auto custom-scrollbar ${isTop ? 'pointer-events-auto' : 'pointer-events-none'}`}
+              className={`absolute inset-0 bg-white dark:bg-[#111111] p-5 md:p-8 rounded-[2rem] border border-gray-100 dark:border-white/10 flex flex-col shadow-2xl ${isTop ? 'overflow-y-auto custom-scrollbar pointer-events-auto' : 'overflow-hidden pointer-events-none'}`}
             >
               
               {/* Dashed Progress */}
@@ -464,7 +464,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               </div>
 
               {/* Persistent Navigation Controls */}
-              <div className="mt-auto flex items-center justify-between flex-shrink-0 pt-4 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-[#111111] sticky bottom-0 z-20 pb-2">
+              <div className="mt-auto flex items-center justify-between flex-shrink-0 pt-5 border-t border-gray-100 dark:border-white/10 bg-white dark:bg-[#111111] sticky bottom-0 z-20 pb-4">
                 {activeStep > 1 ? (
                   <button 
                     onClick={handleBack}
