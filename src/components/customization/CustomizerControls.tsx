@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SelectionCard } from '../common/SelectionCard';
 
 interface CustomizerControlsProps {
   customerName: string;
@@ -96,31 +97,32 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
         {/* Base */}
         <section className="mb-16 lg:mb-20">
-          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Select Your Drink</h3>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { id: 'ceremonial', name: 'Ceremonial Grade (GHC 45)' },
-              { id: 'latte', name: 'Latte-Grade (GHC 35)' }
-            ].map(b => (
-              <button
-                key={b.id}
-                onClick={() => setBase(b.id)}
-                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
-                  base === b.id 
-                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
-                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
-                }`}
-              >
-                {b.name}
-              </button>
-            ))}
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider">Select Your Drink</h3>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest cursor-pointer hover:underline">Compare Grades</span>
+          </div>
+          <div className="flex flex-col gap-4">
+            <SelectionCard
+              title="Ceremonial"
+              description="Highest quality, vibrant green. Best for pure enjoyment."
+              price="GHC 45.00"
+              selected={base === 'ceremonial'}
+              onSelect={() => setBase('ceremonial')}
+            />
+            <SelectionCard
+              title="Premium"
+              description="Robust flavor designed to cut through milk. Ideal for mixed drinks."
+              price="GHC 35.00"
+              selected={base === 'latte'}
+              onSelect={() => setBase('latte')}
+            />
           </div>
         </section>
 
         {/* Sweeteners */}
         <section className="mb-16 lg:mb-20">
-          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Sweeteners</h3>
-          <div className="flex flex-wrap gap-3">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Sweeteners</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { id: 'honey', name: 'Honey' },
               { id: 'maple_syrup', name: 'Maple Syrup' },
@@ -130,17 +132,12 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               { id: 'biscoff', name: 'Biscoff' },
               { id: 'white_chocolate', name: 'White Chocolate' }
             ].map(s => (
-              <button
+              <SelectionCard
                 key={s.id}
-                onClick={() => setSweetener(sweetener === s.id ? null : s.id)}
-                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
-                  sweetener === s.id 
-                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
-                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
-                }`}
-              >
-                {s.name}
-              </button>
+                title={s.name}
+                selected={sweetener === s.id}
+                onSelect={() => setSweetener(sweetener === s.id ? null : s.id)}
+              />
             ))}
           </div>
         </section>
@@ -168,8 +165,8 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
         {/* Milk Options */}
         <section className="mb-16 lg:mb-20">
-          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Milk & Creamers</h3>
-          <div className="flex flex-wrap gap-3">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Milk & Creamers</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { id: 'whole', name: 'Whole Milk' },
               { id: 'skim', name: 'Skim' },
@@ -178,17 +175,12 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               { id: 'coconut', name: 'Coconut Milk' },
               { id: 'water', name: 'Water (Clear Matcha)' }
             ].map(m => (
-              <button
+              <SelectionCard
                 key={m.id}
-                onClick={() => setMilkType(m.id)}
-                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
-                  milkType === m.id 
-                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
-                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
-                }`}
-              >
-                {m.name}
-              </button>
+                title={m.name}
+                selected={milkType === m.id}
+                onSelect={() => setMilkType(m.id)}
+              />
             ))}
           </div>
         </section>
@@ -214,24 +206,20 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 
         {/* Flavor Boosts */}
         <section className="mb-16 lg:mb-20">
-          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-4">Flavor Boosts</h3>
-          <div className="flex flex-wrap gap-3">
+          <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Flavor Boosts</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { id: 'collagen', name: 'Marine Collagen' },
               { id: 'maca', name: 'Maca Root' },
               { id: 'ashwagandha', name: 'Ashwagandha' }
             ].map(b => (
-              <button
+              <SelectionCard
                 key={b.id}
-                onClick={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
-                className={`rounded-full px-6 py-3 min-h-[44px] text-[15px] tracking-wide transition-all duration-300 border ${
-                  boosts[b.id] 
-                    ? 'bg-[#E4E3DD] text-black border-transparent font-bold' 
-                    : 'bg-white dark:bg-[#222] text-slate-600 dark:text-slate-400 border-gray-200 dark:border-white/20 font-medium hover:border-gray-400'
-                }`}
-              >
-                {b.name}
-              </button>
+                title={b.name}
+                selected={boosts[b.id]}
+                onSelect={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
+                isMulti={true}
+              />
             ))}
           </div>
         </section>
@@ -255,12 +243,13 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
       </div>
 
       {/* Sticky Bottom Footer */}
-      <div className="fixed bottom-0 left-0 w-full p-4 pb-6 lg:absolute lg:p-6 lg:pt-12 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/90 to-transparent lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none flex justify-center z-50">
+      <div className="fixed bottom-0 left-0 w-full p-4 pb-6 lg:absolute lg:p-6 lg:pt-12 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/90 to-transparent lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none flex justify-end z-50">
         <button 
           onClick={() => navigate('/checkout')} 
-          className="w-full lg:max-w-sm py-4 bg-black text-white rounded-full font-bold text-base tracking-[0.2em] uppercase shadow-lg hover:bg-black/80 transition-all pointer-events-auto active:scale-[0.98]"
+          className="w-full sm:w-auto px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 lg:mr-4 shadow-sm"
         >
-          Continue
+          Next Step
+          <span className="material-symbols-sharp text-xl">arrow_forward</span>
         </button>
       </div>
 

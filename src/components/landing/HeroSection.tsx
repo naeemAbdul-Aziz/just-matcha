@@ -25,11 +25,7 @@ export const HeroSection: React.FC = () => {
         </Link>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center gap-1 opacity-70 z-20 text-white">
-        <span className="text-[10px] uppercase tracking-widest font-bold">Scroll</span>
-        <span className="material-symbols-sharp text-sm">keyboard_arrow_down</span>
-      </div>
+
     </header>
   );
 };

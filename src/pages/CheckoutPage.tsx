@@ -13,9 +13,9 @@ const pageVariants = {
 };
 
 const stepVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
-  exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: "easeIn" as const, position: "absolute" } }
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.2, position: "absolute" } }
 };
 
 export const CheckoutPage: React.FC = () => {
@@ -105,12 +105,9 @@ export const CheckoutPage: React.FC = () => {
                     <PaymentGateway />
                     
                     <div className="pt-12">
-                      <Link to="/success" className="group relative w-full px-12 py-6 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3">
-                        <span className="absolute inset-0 w-full h-full bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></span>
-                        <span className="relative z-10 font-bold text-xl tracking-widest uppercase group-hover:text-white transition-colors">
-                          Complete Ritual
-                        </span>
-                        <span className="relative z-10 material-symbols-sharp group-hover:translate-x-1 transition-transform group-hover:text-white">check_circle</span>
+                      <Link to="/success" className="w-full px-12 py-5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-bold text-lg tracking-widest uppercase flex items-center justify-center gap-3 hover:opacity-90 transition-opacity">
+                        Complete Ritual
+                        <span className="material-symbols-sharp">check_circle</span>
                       </Link>
                       <p className="text-center text-xs text-slate-400 mt-6 uppercase tracking-widest font-bold">By completing this ritual, you agree to our Terms of Service.</p>
                     </div>

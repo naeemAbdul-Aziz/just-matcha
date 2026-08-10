@@ -7,10 +7,8 @@ export const OrderSummarySticky: React.FC = () => {
   return (
     <div className="lg:w-2/5 w-full relative z-20">
       <div className="sticky top-24">
-        <div className="bg-white/80 dark:bg-black/40 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl border border-white/40 dark:border-white/10 relative overflow-hidden">
-          
-          {/* Abstract Receipt Pattern */}
-          <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="bg-white dark:bg-[#222] rounded-[2.5rem] p-8 md:p-10 border border-gray-200 dark:border-white/10 relative overflow-hidden">
+
 
           {/* Mobile Header (Collapsible) */}
           <button 
