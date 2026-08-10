@@ -11,9 +11,7 @@ import { Footer } from './components/layout/Footer';
 function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
-  const isCustomize = location.pathname === '/customize';
-  const isCheckout = location.pathname === '/checkout';
-  const showNavbar = !isAdmin && !isCustomize && !isCheckout;
+  const showNavbar = !isAdmin;
   return (
     <>
       {showNavbar && <Navbar />}
@@ -28,7 +26,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {!isAdmin && !isCustomize && <Footer />}
+      {!isAdmin && <Footer />}
     </>
   );
 }

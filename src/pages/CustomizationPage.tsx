@@ -78,15 +78,7 @@ export const CustomizationPage: React.FC = () => {
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className={`h-[100dvh] w-full overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display`}>
       
-      {/* Top Header / Back Button */}
-      <div className="absolute top-0 left-0 w-full p-4 z-40 flex justify-between items-center mt-4 md:mt-8">
-         <div className="flex items-center gap-4 ml-4 lg:ml-8">
-           <button onClick={() => navigate('/')} className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/40 backdrop-blur-md border border-white/50 text-text-dark dark:text-white flex items-center justify-center hover:bg-white/60 transition-colors shadow-sm">
-              <span className="material-symbols-sharp">arrow_back</span>
-           </button>
-           <span className="font-serif font-bold text-2xl tracking-tight text-text-dark dark:text-white hidden lg:block bg-white/40 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm">Just Matcha<span className="text-primary">.</span></span>
-         </div>
-      </div>
+
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
       <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-16 lg:pt-0">

@@ -33,29 +33,7 @@ export const CheckoutPage: React.FC = () => {
         <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px]"></div>
       </div>
 
-      {/* Checkout Header */}
-      <header className="w-full px-6 py-8 md:px-12 z-40 fixed top-0 left-0 flex items-center justify-between">
-         <Link to="/" className="flex items-center gap-4 group">
-           <div className="w-12 h-12 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-md border border-white/50 dark:border-white/10 flex items-center justify-center shadow-sm">
-             <span className="material-symbols-sharp">spa</span>
-           </div>
-           <span className="font-serif font-bold text-2xl tracking-tight text-brand-dark dark:text-white hidden sm:block">Just Matcha<span className="text-primary">.</span></span>
-         </Link>
-         <div className="flex items-center gap-4">
-           {activeStep > 1 && (
-             <button 
-               onClick={() => setActiveStep(activeStep - 1)} 
-               className="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-brand-dark dark:hover:text-white transition-colors flex items-center gap-1 group"
-             >
-               <span className="material-symbols-sharp text-[14px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
-               Previous
-             </button>
-           )}
-           <Link to="/customize" className="w-12 h-12 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-md border border-white/50 dark:border-white/10 flex items-center justify-center text-slate-500 hover:text-brand-dark dark:hover:text-white transition-colors shadow-sm">
-             <span className="material-symbols-sharp">close</span>
-           </Link>
-         </div>
-      </header>
+
 
       <main className="flex-grow container mx-auto px-6 lg:px-12 pt-32 pb-32 lg:pb-12 z-10 relative">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
