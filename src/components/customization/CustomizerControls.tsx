@@ -219,20 +219,21 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Flavor Boosts</h3>
           <div className="flex overflow-x-auto gap-3 pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {[
-              { id: 'collagen', name: 'Marine Collagen' },
-              { id: 'maca', name: 'Maca Root' },
-              { id: 'ashwagandha', name: 'Ashwagandha' }
+              { id: 'collagen', name: 'Marine Collagen', price: '+GH₵ 25' },
+              { id: 'maca', name: 'Maca Root', price: '+GH₵ 15' },
+              { id: 'ashwagandha', name: 'Ashwagandha', price: '+GH₵ 20' }
             ].map(b => (
               <button
                 key={b.id}
                 onClick={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
-                className={`snap-center flex-shrink-0 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm ${
+                className={`snap-center flex-shrink-0 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm flex flex-col items-center justify-center min-w-[130px] ${
                   boosts[b.id] 
                     ? 'bg-soft-green dark:bg-primary border-primary text-brand-dark dark:text-white shadow-md'
                     : 'bg-white dark:bg-[#222] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                 }`}
               >
-                {b.name}
+                <span>{b.name}</span>
+                <span className={`text-[10px] font-medium tracking-wide mt-0.5 ${boosts[b.id] ? 'opacity-90' : 'opacity-60'}`}>{b.price}</span>
               </button>
             ))}
           </div>
