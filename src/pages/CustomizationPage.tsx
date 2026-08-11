@@ -143,9 +143,9 @@ export const CustomizationPage: React.FC = () => {
         {/* Hero Photorealistic Cup */}
         <div className="relative w-full h-full max-h-[42dvh] lg:max-h-none lg:h-auto max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center items-center transform lg:translate-x-8 xl:translate-x-12">
           <Image 
-            src="/empty-cup.png"
+            src="/cup.png"
             alt="Hero Iced Matcha"
-            className="w-full h-full object-contain opacity-95 transition-all duration-1000 lg:scale-[1.15]"
+            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal opacity-95 transition-all duration-1000 lg:scale-[1.15]"
             style={{ 
               WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
               filter: cupFilter 
