@@ -58,12 +58,25 @@ export const CustomizationPage: React.FC = () => {
     }
 
     const bottomHex = isDark ? '#111111' : '#FDFBF7';
-    document.body.style.background = `linear-gradient(to bottom, ${hex} 50%, ${bottomHex} 50%)`;
-    document.body.style.backgroundAttachment = 'fixed';
+    
+    // Set body to the bottom color so Safari tab bar and bottom overscroll are perfect
+    document.body.style.backgroundColor = bottomHex;
+    document.body.style.transition = 'background-color 1s ease-in-out';
+    
+    // Use theme-color meta tag to color the top address bar and top overscroll
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.setAttribute('name', 'theme-color');
+      document.head.appendChild(metaThemeColor);
+    }
+    metaThemeColor.setAttribute('content', hex);
     
     return () => {
-      document.body.style.background = '';
-      document.body.style.backgroundAttachment = '';
+      document.body.style.backgroundColor = '';
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', '#FDFBF7'); // Reset to default
+      }
     };
   }, [sweetener]);
 
