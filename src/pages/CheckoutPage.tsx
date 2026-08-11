@@ -3,7 +3,7 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GuestForm } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
-import { PaymentGateway } from '../components/checkout/PaymentGateway';
+import { usePaystackPayment } from 'react-paystack';
 import { OrderSummarySticky } from '../components/checkout/OrderSummarySticky';
 
 const pageVariants = {
@@ -29,7 +29,28 @@ export const CheckoutPage: React.FC = () => {
   const [fulfillment, setFulfillment] = React.useState('delivery');
 
   const hasDelivery = fulfillment === 'delivery';
-  const paymentStepNum = hasDelivery ? 3 : 2;
+
+  // Paystack Integration Mockup
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: "customer@example.com", // This would normally come from the GuestForm
+    amount: 6500, // 65 GHC in pesewas
+    publicKey: 'pk_test_dc8fb16223b361a995eefc4a5c9527ec3c3836a5', // A mock test key
+    currency: 'GHS'
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+  const handlePayment = () => {
+    initializePayment({
+      onSuccess: () => {
+        navigate('/success');
+      },
+      onClose: () => {
+        console.log('Payment modal closed');
+      }
+    });
+  };
 
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-[#FDFBF7] dark:bg-[#111111] font-display text-slate-800 dark:text-white transition-colors duration-1000 min-h-screen flex flex-col relative overflow-hidden">
@@ -54,14 +75,14 @@ export const CheckoutPage: React.FC = () => {
             
             {/* Step Indicators */}
             <div className="flex items-center gap-3 mb-16 w-full">
-              {[1, 2, paymentStepNum].map((step, index, arr) => {
+              {[1, 2].map((step, index, arr) => {
                 if (!hasDelivery && step === 2) return null; // Skip delivery step dot if pickup
                 const isActive = activeStep === step;
                 const isPast = activeStep > step;
                 return (
                   <React.Fragment key={step}>
                     <div className={`w-3 h-3 flex-shrink-0 rounded-full transition-all duration-500 ${isActive ? 'bg-primary scale-125' : isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
-                    {index < arr.length - 1 && (hasDelivery || index === 0) && (
+                    {index < arr.length - 1 && hasDelivery && (
                       <div className={`h-px flex-grow transition-colors duration-500 ${isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
                     )}
                   </React.Fragment>
@@ -78,28 +99,14 @@ export const CheckoutPage: React.FC = () => {
                       onSelect={(val) => {
                         setFulfillment(val);
                       }}
-                      onNext={() => setActiveStep(2)} 
+                      onNext={() => hasDelivery ? setActiveStep(2) : handlePayment()} 
                     />
                   </motion.div>
                 )}
 
                 {activeStep === 2 && hasDelivery && (
                   <motion.div key="step2" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
-                    <GuestForm onNext={() => setActiveStep(3)} />
-                  </motion.div>
-                )}
-
-                {activeStep === paymentStepNum && (
-                  <motion.div key="step3" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
-                    <PaymentGateway />
-                    
-                    <div className="pt-12 flex flex-col items-end">
-                      <Link to="/success" className="w-auto px-6 py-2.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm">
-                        Place Order
-                        <span className="material-symbols-sharp text-lg">check_circle</span>
-                      </Link>
-                      <p className="text-right text-xs text-slate-400 mt-6 uppercase tracking-widest font-bold">By placing this order, you agree to our Terms of Service.</p>
-                    </div>
+                    <GuestForm onNext={handlePayment} />
                   </motion.div>
                 )}
               </AnimatePresence>
