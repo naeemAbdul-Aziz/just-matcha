@@ -52,6 +52,26 @@ export const CheckoutPage: React.FC = () => {
     });
   };
 
+  let actionText = '';
+  let actionIcon = '';
+  let onAction: (() => void) | undefined = undefined;
+
+  if (fulfillment === 'pickup') {
+    actionText = 'Pay GH₵ 65.00';
+    actionIcon = 'credit_card';
+    onAction = handlePayment;
+  } else if (fulfillment === 'delivery') {
+    if (activeStep === 1) {
+      actionText = 'Continue to Delivery Details';
+      actionIcon = 'arrow_forward';
+      onAction = () => setActiveStep(2);
+    } else if (activeStep === 2) {
+      actionText = 'Pay GH₵ 65.00';
+      actionIcon = 'credit_card';
+      onAction = handlePayment;
+    }
+  }
+
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-[#FDFBF7] dark:bg-[#111111] font-display text-slate-800 dark:text-white transition-colors duration-1000 min-h-screen flex flex-col relative overflow-hidden">
       
@@ -114,7 +134,11 @@ export const CheckoutPage: React.FC = () => {
           </div>
 
           {/* Right Column: Order Summary (Sticky) */}
-          <OrderSummarySticky />
+          <OrderSummarySticky 
+            actionText={actionText}
+            actionIcon={actionIcon}
+            onAction={onAction}
+          />
         </div>
       </main>
 
