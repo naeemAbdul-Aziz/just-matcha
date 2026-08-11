@@ -125,6 +125,5 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
           )}
         </div>
       </div>
-    </div>
   );
 };
