@@ -81,7 +81,7 @@ export const CustomizationPage: React.FC = () => {
 
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
-      <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-16 lg:pt-0">
+      <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-end lg:justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 lg:pt-0">
         
         {/* Dynamic Background Text (Cinematic) */}
         <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden opacity-40 mix-blend-overlay">
@@ -91,7 +91,7 @@ export const CustomizationPage: React.FC = () => {
         </div>
 
         {/* Hero Photorealistic Cup */}
-        <div className="absolute top-12 md:top-16 lg:relative lg:top-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center transform lg:translate-x-8 xl:translate-x-12">
+        <div className="relative lg:top-0 w-full max-w-[250px] sm:max-w-[300px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center transform translate-y-12 lg:translate-y-0 lg:translate-x-8 xl:translate-x-12 -mb-8 lg:-mb-0">
           <img 
             src="/cup.png"
             alt="Hero Iced Matcha"

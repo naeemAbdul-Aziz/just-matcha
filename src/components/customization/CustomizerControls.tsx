@@ -239,14 +239,25 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           </div>
         </section>
 
+        {/* Footer Next Step Button (Flows at the end on mobile) */}
+        <div className="mt-8 lg:hidden flex justify-center w-full pb-8">
+          <button 
+            onClick={() => navigate('/checkout')} 
+            className="w-auto px-6 py-2.5 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
+          >
+            Next Step
+            <span className="material-symbols-sharp text-lg">arrow_forward</span>
+          </button>
+        </div>
+
         </div>
       </div>
 
-      {/* Sticky Bottom Footer */}
-      <div className="fixed bottom-0 left-0 w-full p-4 pb-6 lg:absolute lg:p-6 lg:pt-12 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/90 to-transparent lg:from-[#FDFBF7]/90 lg:via-[#FDFBF7]/80 lg:to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none flex justify-end z-50">
+      {/* Sticky Bottom Footer (Desktop Only) */}
+      <div className="hidden lg:flex absolute bottom-0 left-0 w-full p-6 pt-12 bg-gradient-to-t from-[#FDFBF7]/90 via-[#FDFBF7]/80 to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none justify-end z-50">
         <button 
           onClick={() => navigate('/checkout')} 
-          className="w-full sm:w-auto px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 lg:mr-4 shadow-sm"
+          className="px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 mr-4 shadow-sm"
         >
           Next Step
           <span className="material-symbols-sharp text-xl">arrow_forward</span>
