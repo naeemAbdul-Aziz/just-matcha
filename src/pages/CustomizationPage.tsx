@@ -85,13 +85,13 @@ export const CustomizationPage: React.FC = () => {
   // Dynamic Cup Filter Logic based on sweetener to tint the liquid
   const cupFilter = useMemo(() => {
     if (!sweetener) return 'none';
-    if (sweetener === 'biscoff') return 'sepia(0.6) hue-rotate(-20deg) saturate(1.5)';
-    if (sweetener === 'caramel') return 'sepia(0.4) hue-rotate(-15deg) saturate(1.2)';
-    if (sweetener === 'vanilla') return 'sepia(0.2) saturate(0.8)';
-    if (sweetener === 'white_chocolate') return 'brightness(1.1) saturate(0.7)';
-    if (sweetener === 'date_syrup') return 'sepia(0.5) hue-rotate(-30deg) brightness(0.9)';
-    if (sweetener === 'honey') return 'sepia(0.3) hue-rotate(-10deg) saturate(1.3)';
-    if (sweetener === 'maple_syrup') return 'sepia(0.4) hue-rotate(-25deg) saturate(1.2)';
+    if (sweetener === 'biscoff') return 'contrast(1.1) saturate(1.2)';
+    if (sweetener === 'caramel') return 'contrast(1.05) saturate(1.1)';
+    if (sweetener === 'vanilla') return 'brightness(1.05)';
+    if (sweetener === 'white_chocolate') return 'brightness(1.1) saturate(0.8)';
+    if (sweetener === 'date_syrup') return 'contrast(1.1) saturate(1.1) brightness(0.95)';
+    if (sweetener === 'honey') return 'saturate(1.2)';
+    if (sweetener === 'maple_syrup') return 'contrast(1.05) saturate(1.1)';
     return 'none';
   }, [sweetener]);
 
