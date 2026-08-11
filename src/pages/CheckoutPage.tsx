@@ -88,10 +88,10 @@ export const CheckoutPage: React.FC = () => {
       </div>
 
       <main className="flex-grow container mx-auto px-6 lg:px-12 pt-32 pb-32 lg:pb-12 z-10 relative">
-        <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-20 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start">
           
           {/* Left Column: Interactive Flow */}
-          <div className="lg:w-3/5 w-full pt-4 relative">
+          <div className="order-2 lg:order-1 lg:w-3/5 w-full pt-4 relative">
             
             {/* Step Indicators */}
             <div className="flex items-center gap-3 mb-16 w-full">
@@ -131,14 +131,29 @@ export const CheckoutPage: React.FC = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Unified CTA Button (Mobile Only) */}
+            {onAction && actionText && (
+              <div className="lg:hidden mt-8 w-full">
+                <button
+                  onClick={onAction}
+                  className="w-full py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] bg-brand-dark dark:bg-white text-white dark:text-brand-dark"
+                >
+                  {actionText}
+                  {actionIcon && <span className="material-symbols-sharp">{actionIcon}</span>}
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Order Summary (Sticky) */}
-          <OrderSummarySticky 
-            actionText={actionText}
-            actionIcon={actionIcon}
-            onAction={onAction}
-          />
+          <div className="order-1 lg:order-2 w-full lg:w-2/5 z-20">
+            <OrderSummarySticky 
+              actionText={actionText}
+              actionIcon={actionIcon}
+              onAction={onAction}
+            />
+          </div>
         </div>
       </main>
 

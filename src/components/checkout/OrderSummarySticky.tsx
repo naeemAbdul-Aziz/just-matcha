@@ -15,6 +15,7 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
   actionIcon, 
   isActionDisabled 
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const basePrice = 65; // 40 + 10 + 15
   const totalPrice = (basePrice * quantity).toFixed(2);
@@ -26,15 +27,21 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
 
 
           {/* Mobile Header */}
-          <div className="lg:hidden flex justify-between items-center w-full mb-8">
-            <div className="text-left">
-              <span className="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1">Your Ritual</span>
-              <span className="text-3xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ {totalPrice}</span>
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="lg:hidden flex justify-between items-center w-full mb-2"
+          >
+            <div className="text-left flex flex-row items-center gap-2">
+              <span className="material-symbols-sharp text-primary text-2xl">shopping_cart</span>
+              <span className="font-serif font-bold text-brand-dark dark:text-white">Show Order Summary</span>
+              <span className={`material-symbols-sharp text-sm text-slate-500 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
             </div>
-            <span className="material-symbols-sharp text-primary text-3xl">spa</span>
-          </div>
+            <div className="text-right">
+              <span className="text-xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ {totalPrice}</span>
+            </div>
+          </button>
 
-          <div className="block border-gray-200 dark:border-white/10 lg:border-0 lg:mt-0">
+          <div className={`${isExpanded ? 'block' : 'hidden'} lg:block pt-6 border-t border-gray-200 dark:border-white/10 lg:border-0 lg:pt-0 mt-6 lg:mt-0`}>
             <div className="hidden lg:flex items-center gap-3 mb-8 relative z-10">
               <span className="material-symbols-sharp text-primary text-xl">spa</span>
               <h2 className="text-2xl font-serif font-bold text-brand-dark dark:text-white">Your Ritual</h2>
@@ -118,9 +125,9 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
             </div>
           </div>
 
-          {/* Unified CTA Button */}
+          {/* Unified CTA Button (Desktop Only) */}
           {onAction && actionText && (
-            <div className="pt-8 lg:pt-8 mt-2 relative z-10">
+            <div className="hidden lg:block pt-8 mt-2 relative z-10">
               <button
                 onClick={onAction}
                 disabled={isActionDisabled}
