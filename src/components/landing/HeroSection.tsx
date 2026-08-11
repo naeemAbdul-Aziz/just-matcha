@@ -9,7 +9,7 @@ export const HeroSection: React.FC = () => {
       <Image
         src="/hero.png"
         alt="Cinematic Matcha Hero"
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute inset-0 w-full h-full object-cover object-center z-0"
         loading="eager"
       />
 
