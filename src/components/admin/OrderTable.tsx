@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from '../ui/Image';
 
 const orders = [
   {
@@ -86,7 +87,7 @@ export const OrderTable: React.FC = () => {
                   <div className="flex items-center gap-3">
                     {order.avatar ? (
                       <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
-                        <img src={order.avatar} alt="Customer Avatar" className="h-full w-full object-cover" />
+                        <Image src={order.avatar} alt="Customer Avatar" className="h-full w-full object-cover rounded-full" />
                       </div>
                     ) : (
                       <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary-dark font-bold text-xs">

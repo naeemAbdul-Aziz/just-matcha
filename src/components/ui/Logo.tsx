@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { Image } from './Image';
 
 interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   className?: string;
@@ -7,10 +8,10 @@ interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export const Logo: React.FC<LogoProps> = ({ className, ...props }) => {
   return (
-    <img 
+    <Image 
       src="/logo.jpeg" 
       alt="Just Matcha Logo" 
-      className={cn("rounded-full object-cover", className)} 
+      className={cn("rounded-full", className)} 
       {...props}
     />
   );

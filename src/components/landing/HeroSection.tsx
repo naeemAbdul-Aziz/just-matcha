@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from '../ui/Image';
 
 export const HeroSection: React.FC = () => {
   return (
     <header className="relative min-h-screen flex items-end justify-center pb-20 overflow-hidden bg-black">
       {/* Cinematic Fullscreen Image */}
-      <img
+      <Image
         src="/hero.png"
         alt="Cinematic Matcha Hero"
-        className="absolute inset-0 w-full h-full object-cover object-center z-0"
+        className="absolute inset-0 w-full h-full z-0"
+        loading="eager"
       />
 
       {/* Gradient Overlay for CTA visibility */}

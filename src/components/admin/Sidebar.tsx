@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
-
+import { Image } from '../ui/Image';
 export const Sidebar: React.FC = () => {
   return (
     <aside className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-[#152a18] border-r border-slate-100 dark:border-slate-800 z-50">
@@ -44,9 +44,9 @@ export const Sidebar: React.FC = () => {
           Settings
         </a>
         <div className="mt-4 flex items-center gap-3 px-4">
-          <img
+          <Image
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkBtpgK8Knm_sezKSmJlrt1Jso488vZ5jCiHMQNo3wYw5kpozk77gaYCYFOX8u8_WP0Y7mhSKTrDAijYE2-sL7tvutLDUjs6ok2zQCqKBETEQHMehaCf5MBnPI-thwM90GNga-CYLvjii99a9l_HBcB_vSkhV3f7-en4Q4ZqnjoHxCB3zHu9uD3GrRDjG5asKMIOG5Zcol7HDH6iecB-KtQPpKTa4s_dyGwVpehkPkQmt0D-kp4UjWAmDRAFLh_-tRqoO2rENc8lg"
-            className="w-9 h-9 rounded-full object-cover border border-slate-200 dark:border-slate-700"
+            className="w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700"
             data-alt="Admin User Profile"
             alt="Admin Profile"
           />

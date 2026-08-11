@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { StatusTracker } from '../components/success/StatusTracker';
 import { OrderDetails } from '../components/success/OrderDetails';
+import { Image } from '../components/ui/Image';
 
 const pageVariants = {
   initial: { opacity: 0, y: 15 },
@@ -68,7 +69,7 @@ export const OrderSuccessPage: React.FC = () => {
 
             {/* Map Preview Card */}
             <div className="bg-slate-200 dark:bg-slate-800 rounded-3xl h-40 md:h-48 w-full relative overflow-hidden group">
-              <img
+              <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCijjJGiJT8lsikuL9SexgqnvFWnyV9Gacpc25zIddLmpVo_ZUA5S0pJJGn2xMZ37fJ1xGBMoYDFiFJr8_t2_wxdVNlFfQaiYCewfWJgkaDWSidTaAS6E_huU_vZpg27LEa7AINCAIdd9bA2lQTTgqxD3C95aNvnm62WEbwzJ_qzOF2Wg0TLujUDOqt5JiCych9aRyEAmxS3oFRVhtfXnJs4mgA1r6OeRo13bU83hE8x-RYA1Ook0tImGCg5Q2O2YiiMBs3yvsemVY"
                 alt="Map showing streets of Accra Ghana"
                 className="w-full h-full object-cover opacity-60 group-hover:opacity-70 transition-opacity"

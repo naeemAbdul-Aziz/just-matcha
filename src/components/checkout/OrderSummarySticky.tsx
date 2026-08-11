@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from '../ui/Image';
 
 export const OrderSummarySticky: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -31,10 +32,10 @@ export const OrderSummarySticky: React.FC = () => {
           {/* Product Visualization */}
           <div className="flex items-center gap-6 mb-10 relative z-10">
             <div className="w-28 h-36 rounded-2xl bg-gradient-to-b from-[#e3fce9] to-[#bbf7c8] dark:from-[#1a3821] dark:to-[#13ec37]/30 shadow-inner flex items-center justify-center relative overflow-hidden group">
-              <img
+              <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuA83jU4_vjUmuDIOGRD0nJg0RPNIrPpJjL6MFzBJjDelY0fqtnuCrrIGoXjfC_uzP3DMiFsJmuThpkLqo1IVRnqC4OZ5Bbq2pu9dusG-9FQBhKssjGFJgoHjL2R0RKcmzupNJdb6kaghCViuXIV0QwcQmNJ2J2_Y8jSCfMr25Xn0bbCCU5SsPcT20lJ7eAYHjXbOWNRvraz87gGJfiGYSp_rPjn5llpA5q9MR2X7EwzMUDsIDZaZ0jrOEU9RckipH70PjPvmp80Bhc"
                 alt="Glass of iced matcha latte with milk layers"
-                className="w-full h-full object-cover opacity-90 mix-blend-multiply dark:mix-blend-normal transform transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full opacity-90 mix-blend-multiply dark:mix-blend-normal transform transition-transform duration-700 group-hover:scale-110"
                 data-alt="Close up of a layered matcha drink in a glass"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>

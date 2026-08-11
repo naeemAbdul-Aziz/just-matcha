@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Image } from '../ui/Image';
 export const StorySection: React.FC = () => {
   return (
     <section id="story" className="py-24 bg-cream relative overflow-hidden">
@@ -7,7 +7,7 @@ export const StorySection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="aspect-[3/4] rounded-tr-[5rem] rounded-bl-[5rem] overflow-hidden shadow-xl">
-              <img
+              <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuZthOPiJLe7ky_2ddsPwDprGY_o5hBSJlZLypChQ3gulUleuwtiRNf0IQDtx464VCulQU-LoQ5BU-VBDL_g_aKqBxP63EIkifsTGXk59gp60Xfwg3qvirSdSEK3Ol94xA2wFZL5nFj8OCaetfcoAZf5d-9K5_1UYGBr66etG7k5QAGzdFaxeWAf4BB_NZxxdHhHVuBbFmHgakSO4nFaHnYAymxD55w_ZYS3VMEd6PTK5ClpX3wedmMGDq3oI6Jp-e2LPFQhJvUW0"
                 alt="Hands preparing matcha with bamboo whisk in a traditional bowl"
                 className="w-full h-full object-cover"

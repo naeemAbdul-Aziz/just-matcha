@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from '../ui/Image';
 
 export const OrderDetails: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ export const OrderDetails: React.FC = () => {
       {/* Item 1 */}
       <div className="flex gap-4 mb-6">
         <div className="h-20 w-20 rounded-[1.5rem] bg-slate-50 dark:bg-slate-800 flex-shrink-0 overflow-hidden relative">
-          <img
+          <Image
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8U_x3JjpsW_seuA-QuK4gFxtxHxVovhLG_9g7mxIvvmJvD9CcBJm4GHw5esRswL672kv49M7BfS0ZLqPDe22etlYuK0krLUgquMrHsmSjEKU6leuGFptMS-UPTkgkpn9yXmDNL3-sZVTbxy5xRrqSplqq72Xc7Of70x3sSLX5r9zMBZM_lrztW9IZOrtgnAXtOixd_-KxU86DR1B9kpe4g9hsC1nsEaYNHgOOEszVBK83sMe_d2ul8lEVZHVki0FsjUYODwlHwGA"
             alt="Close up of matcha latte with foam art"
             className="h-full w-full object-cover"
@@ -30,7 +31,7 @@ export const OrderDetails: React.FC = () => {
       {/* Item 2 */}
       <div className="flex gap-4 mb-6">
         <div className="h-20 w-20 rounded-[1.5rem] bg-slate-50 dark:bg-slate-800 flex-shrink-0 overflow-hidden relative">
-          <img
+          <Image
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfIkhQo-5jpyEIQLA6AYzQdnzmlM5Zd1Y7wURPHKXQeBNw8ZEogoP-dyeuquRaAVHIP__hlH0-vubVl5bUJRm3fYvKtYnl93F8UrdpJfiwH3rYBrk5aXTuPo-tbTbbPmH30iLJWBoQGL01R6CLYfTv2ybWzVeWY0ySW_iqF3f9dSeEPH4sZafSs3a0rt1Yk-ANna_fKiq99q78KEizIe9IzKjYM42vXUeMhN4WzmCpgVSV5I5j0SaXHisLNdGyKM_Ysfv_hAGrzo4"
             alt="Two scoops of matcha ice cream"
             className="h-full w-full object-cover"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from '../ui/Image';
 
 const products = [
   {
@@ -57,10 +58,10 @@ export const MenuSection: React.FC = () => {
                     {product.tag}
                   </div>
                 )}
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full aspect-square object-cover rounded-2xl mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+                  className="w-full aspect-square mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="flex justify-between items-start">
