@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
@@ -38,6 +38,31 @@ export const CustomizationPage: React.FC = () => {
     if (sweetener === 'maple_syrup') return 'bg-orange-200 dark:bg-orange-800/40';
 
     return 'bg-[#C2E88D] dark:bg-[#2A3B22]';
+  }, [sweetener]);
+
+  // Sync body background color to fix iOS rubber-banding pulling down white space
+  useEffect(() => {
+    let hex = '#C2E88D'; // default matcha green
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    if (!isDark) {
+      if (sweetener === 'biscoff') hex = '#fde68a';
+      else if (sweetener === 'caramel') hex = '#fed7aa';
+      else if (sweetener === 'vanilla') hex = '#fef08a';
+      else if (sweetener === 'white_chocolate') hex = '#e7e5e4';
+      else if (sweetener === 'honey') hex = '#fef3c7';
+      else if (sweetener === 'date_syrup') hex = '#fdba74';
+      else if (sweetener === 'maple_syrup') hex = '#fed7aa';
+    } else {
+      hex = '#111111'; // Match dark mode body if needed, or dark versions
+    }
+
+    document.body.style.backgroundColor = hex;
+    document.body.style.transition = 'background-color 1s ease-in-out';
+    
+    return () => {
+      document.body.style.backgroundColor = '';
+    };
   }, [sweetener]);
 
   // Dynamic Cup Filter Logic based on sweetener to tint the liquid
@@ -99,11 +124,11 @@ export const CustomizationPage: React.FC = () => {
         </div>
 
         {/* Hero Photorealistic Cup */}
-        <div className="absolute top-12 md:top-16 lg:relative lg:top-0 w-full max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center transform lg:translate-x-8 xl:translate-x-12">
+        <div className="relative w-full h-full max-h-[35dvh] lg:max-h-none lg:h-auto max-w-[240px] sm:max-w-[300px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center items-center transform lg:translate-x-8 xl:translate-x-12 mt-6 lg:mt-0">
           <Image 
             src="/cup.png"
             alt="Hero Iced Matcha"
-            className="w-full h-auto object-contain mix-blend-multiply dark:mix-blend-normal opacity-95 transition-all duration-1000 lg:scale-[1.15]"
+            className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal opacity-95 transition-all duration-1000 lg:scale-[1.15]"
             style={{ 
               WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
               filter: cupFilter 

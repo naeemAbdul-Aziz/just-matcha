@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GuestForm } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
