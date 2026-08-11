@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
-import { useNavigate } from 'react-router-dom';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -10,8 +9,6 @@ const pageVariants = {
 };
 
 export const CustomizationPage: React.FC = () => {
-  const navigate = useNavigate();
-  
   // Customization State
   const [customerName, setCustomerName] = useState('');
   const [base, setBase] = useState('ceremonial');
