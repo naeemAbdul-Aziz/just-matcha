@@ -16,8 +16,16 @@ export const Image: React.FC<ImageProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  // Extract object-* classes to apply directly to the img, not the wrapper
+  const objectClasses = className.split(' ').filter(c => c.startsWith('object-')).join(' ');
+  const wrapperClasses = className.split(' ').filter(c => !c.startsWith('object-')).join(' ');
+  
+  // Ensure we don't conflict with provided position classes (absolute, fixed, etc.)
+  const hasPosition = /\b(absolute|fixed|sticky|relative|static)\b/.test(wrapperClasses);
+  const positionClass = hasPosition ? '' : 'relative';
+
   return (
-    <div className={`relative overflow-hidden flex-shrink-0 ${className}`} style={style}>
+    <div className={`${positionClass} overflow-hidden flex-shrink-0 ${wrapperClasses}`.trim()} style={style}>
       {/* Skeleton / Blur Placeholder */}
       {(!isLoaded && !hasError) && (
         <div className="absolute inset-0 bg-gray-200 dark:bg-[#222] animate-pulse flex items-center justify-center z-0">
@@ -40,7 +48,7 @@ export const Image: React.FC<ImageProps> = ({
         loading={loading}
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
-        className={`w-full h-full transition-opacity duration-700 ease-in-out relative z-10 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className.includes('object-') ? '' : 'object-cover'}`}
+        className={`w-full h-full transition-opacity duration-700 ease-in-out relative z-10 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${objectClasses || 'object-cover'}`}
         {...props}
       />
     </div>
