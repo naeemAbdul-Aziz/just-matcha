@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
 import { Image } from '../components/ui/Image';
@@ -12,13 +12,15 @@ const pageVariants = {
 
 export const CustomizationPage: React.FC = () => {
   const navigate = useNavigate();
-  // Customization State
+  const [searchParams] = useSearchParams();
+  
+  // Customization State (Initialized from URL if present)
   const [customerName, setCustomerName] = useState('');
-  const [base, setBase] = useState('ceremonial');
-  const [milkType, setMilkType] = useState('oat');
-  const [matchaIntensity, setMatchaIntensity] = useState(50);
-  const [sweetener, setSweetener] = useState<string | null>(null);
-  const [sweetnessLevel, setSweetnessLevel] = useState(50);
+  const [base, setBase] = useState(searchParams.get('base') || 'ceremonial');
+  const [milkType, setMilkType] = useState(searchParams.get('milk') || 'oat');
+  const [matchaIntensity, setMatchaIntensity] = useState(parseInt(searchParams.get('intensity') || '50', 10));
+  const [sweetener, setSweetener] = useState<string | null>(searchParams.get('sweetener') || null);
+  const [sweetnessLevel, setSweetnessLevel] = useState(parseInt(searchParams.get('sweetness') || '50', 10));
   const [boosts, setBoosts] = useState<Record<string, boolean>>({});
   const [cupMessage, setCupMessage] = useState('');
 
