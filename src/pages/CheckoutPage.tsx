@@ -82,12 +82,12 @@ export const CheckoutPage: React.FC = () => {
                   <motion.div key="step3" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
                     <PaymentGateway />
                     
-                    <div className="pt-12">
-                      <Link to="/success" className="w-full px-12 py-5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-bold text-lg tracking-widest uppercase flex items-center justify-center gap-3 hover:opacity-90 transition-opacity">
-                        Complete Ritual
-                        <span className="material-symbols-sharp">check_circle</span>
+                    <div className="pt-12 flex flex-col items-end">
+                      <Link to="/success" className="w-auto px-6 py-2.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm">
+                        Place Order
+                        <span className="material-symbols-sharp text-lg">check_circle</span>
                       </Link>
-                      <p className="text-center text-xs text-slate-400 mt-6 uppercase tracking-widest font-bold">By completing this ritual, you agree to our Terms of Service.</p>
+                      <p className="text-right text-xs text-slate-400 mt-6 uppercase tracking-widest font-bold">By placing this order, you agree to our Terms of Service.</p>
                     </div>
                   </motion.div>
                 )}
@@ -100,15 +100,7 @@ export const CheckoutPage: React.FC = () => {
         </div>
       </main>
 
-      {/* Mobile Sticky CTA for Payment Step only */}
-      <div className={`lg:hidden fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/90 to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent flex justify-center z-50 transition-all duration-500 ${activeStep === paymentStepNum ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-full opacity-0 pointer-events-none'}`}>
-        <div className="w-full flex flex-col gap-3">
-          <Link to="/success" className="w-full bg-brand-dark dark:bg-white text-white dark:text-brand-dark font-bold text-lg py-5 rounded-full shadow-2xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform uppercase tracking-widest">
-            <span>Complete Ritual</span>
-            <span className="material-symbols-sharp">check_circle</span>
-          </Link>
-        </div>
-      </div>
+
     </motion.div>
   );
 };

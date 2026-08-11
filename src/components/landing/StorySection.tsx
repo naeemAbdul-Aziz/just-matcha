@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '../ui/Image';
 export const StorySection: React.FC = () => {
   return (
-    <section id="story" className="py-24 bg-cream relative overflow-hidden">
+    <section id="story" className="pt-24 pb-12 lg:pb-16 bg-cream relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">

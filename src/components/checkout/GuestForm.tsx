@@ -4,7 +4,7 @@ export const GuestForm: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   return (
     <div className="space-y-8">
       <div className="space-y-2 mb-8">
-        <h2 className="text-3xl lg:text-4xl font-serif text-brand-dark dark:text-white">Where to deliver your glow</h2>
+        <h2 className="text-3xl lg:text-4xl font-serif text-brand-dark dark:text-white">Delivery Details</h2>
         <p className="text-slate-500 dark:text-slate-400 font-light text-lg">We need a few details to reach you.</p>
       </div>
 
@@ -50,10 +50,10 @@ export const GuestForm: React.FC<{ onNext: () => void }> = ({ onNext }) => {
       <div className="pt-8 flex justify-end">
         <button 
           onClick={onNext}
-          className="w-full sm:w-auto px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 shadow-sm"
+          className="w-auto px-6 py-2.5 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
         >
-          Continue to Payment
-          <span className="material-symbols-sharp text-xl">arrow_forward</span>
+          Next: Payment
+          <span className="material-symbols-sharp text-lg">arrow_forward</span>
         </button>
       </div>
     </div>

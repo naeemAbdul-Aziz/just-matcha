@@ -31,10 +31,10 @@ export const PaymentMethod: React.FC<{
       <div className="pt-8 flex justify-end">
         <button 
           onClick={onNext}
-          className="w-full sm:w-auto px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 shadow-sm"
+          className="w-auto px-6 py-2.5 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
         >
-          {selected === 'delivery' ? 'Continue to Destination' : 'Complete Your Offering'}
-          <span className="material-symbols-sharp text-xl">arrow_forward</span>
+          {selected === 'delivery' ? 'Next: Details' : 'Next: Payment'}
+          <span className="material-symbols-sharp text-lg">arrow_forward</span>
         </button>
       </div>
     </div>

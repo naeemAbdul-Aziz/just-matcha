@@ -37,7 +37,7 @@ const products = [
 
 export const MenuSection: React.FC = () => {
   return (
-    <section id="menu" className="py-12 md:py-24 bg-white relative">
+    <section id="menu" className="pt-12 md:pt-24 pb-12 lg:pb-16 bg-white relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-row justify-between items-end mb-8 md:mb-16 gap-4">
           <div className="flex-grow pr-4">

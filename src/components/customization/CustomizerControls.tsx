@@ -122,7 +122,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* Sweeteners */}
         <section className="mb-16 lg:mb-20">
           <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Sweeteners</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex overflow-x-auto gap-3 pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {[
               { id: 'honey', name: 'Honey' },
               { id: 'maple_syrup', name: 'Maple Syrup' },
@@ -132,12 +132,17 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
               { id: 'biscoff', name: 'Biscoff' },
               { id: 'white_chocolate', name: 'White Chocolate' }
             ].map(s => (
-              <SelectionCard
+              <button
                 key={s.id}
-                title={s.name}
-                selected={sweetener === s.id}
-                onSelect={() => setSweetener(sweetener === s.id ? null : s.id)}
-              />
+                onClick={() => setSweetener(sweetener === s.id ? null : s.id)}
+                className={`snap-center flex-shrink-0 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm ${
+                  sweetener === s.id 
+                    ? 'bg-soft-green dark:bg-primary border-primary text-brand-dark dark:text-white shadow-md'
+                    : 'bg-white dark:bg-[#222] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                }`}
+              >
+                {s.name}
+              </button>
             ))}
           </div>
         </section>
@@ -166,21 +171,26 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* Milk Options */}
         <section className="mb-16 lg:mb-20">
           <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Milk & Creamers</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex overflow-x-auto gap-3 pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {[
               { id: 'whole', name: 'Whole Milk' },
               { id: 'skim', name: 'Skim' },
               { id: 'oat', name: 'Oat Milk' },
               { id: 'almond', name: 'Almond Milk' },
               { id: 'coconut', name: 'Coconut Milk' },
-              { id: 'water', name: 'Water (Clear Matcha)' }
+              { id: 'water', name: 'Water (Clear)' }
             ].map(m => (
-              <SelectionCard
+              <button
                 key={m.id}
-                title={m.name}
-                selected={milkType === m.id}
-                onSelect={() => setMilkType(m.id)}
-              />
+                onClick={() => setMilkType(m.id)}
+                className={`snap-center flex-shrink-0 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm ${
+                  milkType === m.id 
+                    ? 'bg-soft-green dark:bg-primary border-primary text-brand-dark dark:text-white shadow-md'
+                    : 'bg-white dark:bg-[#222] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                }`}
+              >
+                {m.name}
+              </button>
             ))}
           </div>
         </section>
@@ -207,19 +217,23 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* Flavor Boosts */}
         <section className="mb-16 lg:mb-20">
           <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider mb-6">Flavor Boosts</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex overflow-x-auto gap-3 pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {[
               { id: 'collagen', name: 'Marine Collagen' },
               { id: 'maca', name: 'Maca Root' },
               { id: 'ashwagandha', name: 'Ashwagandha' }
             ].map(b => (
-              <SelectionCard
+              <button
                 key={b.id}
-                title={b.name}
-                selected={boosts[b.id]}
-                onSelect={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
-                isMulti={true}
-              />
+                onClick={() => setBoosts({ ...boosts, [b.id]: !boosts[b.id] })}
+                className={`snap-center flex-shrink-0 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm ${
+                  boosts[b.id] 
+                    ? 'bg-soft-green dark:bg-primary border-primary text-brand-dark dark:text-white shadow-md'
+                    : 'bg-white dark:bg-[#222] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                }`}
+              >
+                {b.name}
+              </button>
             ))}
           </div>
         </section>

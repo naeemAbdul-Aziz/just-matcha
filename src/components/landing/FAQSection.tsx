@@ -28,7 +28,7 @@ export const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <section className="pt-12 lg:pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
       <div className="bg-[#f5f5f7] dark:bg-[#111111] rounded-[3rem] p-8 md:p-16 lg:p-24 flex flex-col items-center">
         
         {/* Top Tag */}
