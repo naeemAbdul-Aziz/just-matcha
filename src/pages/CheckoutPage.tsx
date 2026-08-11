@@ -36,22 +36,22 @@ export const CheckoutPage: React.FC = () => {
 
 
       <main className="flex-grow container mx-auto px-6 lg:px-12 pt-32 pb-32 lg:pb-12 z-10 relative">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+        <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-20 items-start">
           
           {/* Left Column: Interactive Flow */}
           <div className="lg:w-3/5 w-full pt-4 relative">
             
             {/* Step Indicators */}
-            <div className="flex items-center gap-3 mb-16">
+            <div className="flex items-center gap-3 mb-16 w-full">
               {[1, 2, paymentStepNum].map((step, index, arr) => {
                 if (!hasDelivery && step === 2) return null; // Skip delivery step dot if pickup
                 const isActive = activeStep === step;
                 const isPast = activeStep > step;
                 return (
                   <React.Fragment key={step}>
-                    <div className={`w-3 h-3 rounded-full transition-all duration-500 ${isActive ? 'bg-primary scale-125' : isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
+                    <div className={`w-3 h-3 flex-shrink-0 rounded-full transition-all duration-500 ${isActive ? 'bg-primary scale-125' : isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
                     {index < arr.length - 1 && (hasDelivery || index === 0) && (
-                      <div className={`h-px w-8 transition-colors duration-500 ${isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
+                      <div className={`h-px flex-grow transition-colors duration-500 ${isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
                     )}
                   </React.Fragment>
                 );
