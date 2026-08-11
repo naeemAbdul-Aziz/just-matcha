@@ -4,7 +4,7 @@ import { Image } from '../ui/Image';
 
 export const HeroSection: React.FC = () => {
   return (
-    <header className="relative min-h-screen flex items-end justify-center pb-20 overflow-hidden bg-black">
+    <header className="relative h-[100dvh] flex items-end justify-center pb-24 lg:pb-32 overflow-hidden bg-black">
       {/* Cinematic Fullscreen Image */}
       <Image
         src="/hero.png"

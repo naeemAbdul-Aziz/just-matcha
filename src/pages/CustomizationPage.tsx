@@ -57,11 +57,13 @@ export const CustomizationPage: React.FC = () => {
       hex = '#111111'; // Match dark mode body if needed, or dark versions
     }
 
-    document.body.style.backgroundColor = hex;
-    document.body.style.transition = 'background-color 1s ease-in-out';
+    const bottomHex = isDark ? '#111111' : '#FDFBF7';
+    document.body.style.background = `linear-gradient(to bottom, ${hex} 50%, ${bottomHex} 50%)`;
+    document.body.style.backgroundAttachment = 'fixed';
     
     return () => {
-      document.body.style.backgroundColor = '';
+      document.body.style.background = '';
+      document.body.style.backgroundAttachment = '';
     };
   }, [sweetener]);
 
@@ -114,7 +116,7 @@ export const CustomizationPage: React.FC = () => {
       </div>
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
-      <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-16 lg:pt-0">
+      <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-4 lg:pt-0">
         
         {/* Dynamic Background Text (Cinematic) */}
         <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden opacity-40 mix-blend-overlay">
@@ -124,7 +126,7 @@ export const CustomizationPage: React.FC = () => {
         </div>
 
         {/* Hero Photorealistic Cup */}
-        <div className="relative w-full h-full max-h-[35dvh] lg:max-h-none lg:h-auto max-w-[240px] sm:max-w-[300px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center items-center transform lg:translate-x-8 xl:translate-x-12 mt-6 lg:mt-0">
+        <div className="relative w-full h-full max-h-[42dvh] lg:max-h-none lg:h-auto max-w-[280px] sm:max-w-[340px] md:max-w-md lg:max-w-2xl xl:max-w-3xl z-10 flex justify-center items-center transform lg:translate-x-8 xl:translate-x-12">
           <Image 
             src="/cup.png"
             alt="Hero Iced Matcha"
