@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
 import { Image } from '../components/ui/Image';
@@ -10,6 +11,7 @@ const pageVariants = {
 };
 
 export const CustomizationPage: React.FC = () => {
+  const navigate = useNavigate();
   // Customization State
   const [customerName, setCustomerName] = useState('');
   const [base, setBase] = useState('ceremonial');
@@ -76,7 +78,15 @@ export const CustomizationPage: React.FC = () => {
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className={`h-[100dvh] w-full overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display`}>
       
-
+      {/* Minimal Navigation Overlay */}
+      <div className="absolute top-0 left-0 w-full p-6 lg:p-8 z-50 flex justify-between items-center pointer-events-none">
+        <button onClick={() => navigate(-1)} className="pointer-events-auto w-10 h-10 bg-black/5 dark:bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark dark:text-white hover:bg-black/10 transition-colors shadow-sm">
+          <span className="material-symbols-sharp text-sm ml-1">arrow_back_ios</span>
+        </button>
+        <button onClick={() => navigate('/checkout')} className="pointer-events-auto w-10 h-10 bg-black/5 dark:bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark dark:text-white hover:bg-black/10 transition-colors shadow-sm">
+          <span className="material-symbols-sharp text-sm">arrow_forward_ios</span>
+        </button>
+      </div>
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
       <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-16 lg:pt-0">

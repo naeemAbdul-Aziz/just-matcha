@@ -4,6 +4,9 @@ import { Image } from '../ui/Image';
 
 export const OrderSummarySticky: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const basePrice = 65; // 40 + 10 + 15
+  const totalPrice = (basePrice * quantity).toFixed(2);
 
   return (
     <div className="lg:w-2/5 w-full relative z-20">
@@ -18,7 +21,7 @@ export const OrderSummarySticky: React.FC = () => {
           >
             <div className="text-left">
               <span className="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold mb-1">Your Ritual</span>
-              <span className="text-3xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ 65.00</span>
+              <span className="text-3xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ {totalPrice}</span>
             </div>
             <span className={`material-symbols-sharp transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>expand_more</span>
           </button>
@@ -76,6 +79,26 @@ export const OrderSummarySticky: React.FC = () => {
             </div>
           </div>
 
+          {/* Quantity Selector */}
+          <div className="flex justify-between items-center py-6 border-t border-gray-200 dark:border-white/10 relative z-10">
+            <span className="text-sm font-bold text-brand-dark dark:text-white uppercase tracking-widest">Quantity</span>
+            <div className="flex items-center gap-4 bg-gray-50 dark:bg-white/5 rounded-full px-4 py-2 border border-gray-200 dark:border-white/10">
+              <button 
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="text-gray-400 hover:text-brand-dark dark:hover:text-white transition-colors flex items-center justify-center"
+              >
+                <span className="material-symbols-sharp text-sm">remove</span>
+              </button>
+              <span className="font-bold text-brand-dark dark:text-white w-4 text-center">{quantity}</span>
+              <button 
+                onClick={() => setQuantity(quantity + 1)}
+                className="text-gray-400 hover:text-brand-dark dark:hover:text-white transition-colors flex items-center justify-center"
+              >
+                <span className="material-symbols-sharp text-sm">add</span>
+              </button>
+            </div>
+          </div>
+
           {/* Total */}
           <div className="hidden lg:flex justify-between items-end pt-8 border-t border-gray-200 dark:border-white/10 relative z-10">
             <div>
@@ -83,7 +106,7 @@ export const OrderSummarySticky: React.FC = () => {
               <span className="text-xs text-slate-400 font-light">Incl. VAT</span>
             </div>
             <div className="text-right">
-              <span className="block text-4xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ 65.00</span>
+              <span className="block text-4xl font-serif font-bold text-brand-dark dark:text-white tracking-tight">GH₵ {totalPrice}</span>
             </div>
           </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GuestForm } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
@@ -19,7 +19,13 @@ const stepVariants = {
 };
 
 export const CheckoutPage: React.FC = () => {
-  const [activeStep, setActiveStep] = React.useState(1);
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeStep = parseInt(searchParams.get('step') || '1', 10);
+  
+  const setActiveStep = (step: number) => {
+    setSearchParams({ step: step.toString() });
+  };
   const [fulfillment, setFulfillment] = React.useState('delivery');
 
   const hasDelivery = fulfillment === 'delivery';
@@ -33,7 +39,12 @@ export const CheckoutPage: React.FC = () => {
         <div className="absolute -top-40 -right-40 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px]"></div>
       </div>
 
-
+      {/* Minimal Navigation Overlay */}
+      <div className="absolute top-0 left-0 w-full p-6 lg:p-8 z-50 flex justify-between items-center pointer-events-none">
+        <button onClick={() => navigate(-1)} className="pointer-events-auto w-10 h-10 bg-black/5 dark:bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark dark:text-white hover:bg-black/10 transition-colors shadow-sm">
+          <span className="material-symbols-sharp text-sm ml-1">arrow_back_ios</span>
+        </button>
+      </div>
 
       <main className="flex-grow container mx-auto px-6 lg:px-12 pt-32 pb-32 lg:pb-12 z-10 relative">
         <div className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-20 items-start">

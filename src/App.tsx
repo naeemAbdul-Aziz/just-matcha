@@ -12,7 +12,9 @@ function App() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
   const isCustomize = location.pathname === '/customize';
-  const showNavbar = !isAdmin;
+  const isCheckout = location.pathname.startsWith('/checkout');
+  const isSuccess = location.pathname === '/success';
+  const showNavbar = !isAdmin && !isCustomize && !isCheckout && !isSuccess;
   return (
     <>
       {showNavbar && <Navbar />}
@@ -27,7 +29,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {!isAdmin && !isCustomize && <Footer />}
+      {!isAdmin && !isCustomize && !isCheckout && !isSuccess && <Footer />}
     </>
   );
 }
