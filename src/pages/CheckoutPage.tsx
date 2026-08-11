@@ -52,26 +52,6 @@ export const CheckoutPage: React.FC = () => {
     });
   };
 
-  let actionText = '';
-  let actionIcon = '';
-  let onAction: (() => void) | undefined = undefined;
-
-  if (fulfillment === 'pickup') {
-    actionText = 'Pay GH₵ 65.00';
-    actionIcon = 'credit_card';
-    onAction = handlePayment;
-  } else if (fulfillment === 'delivery') {
-    if (activeStep === 1) {
-      actionText = 'Continue to Delivery Details';
-      actionIcon = 'arrow_forward';
-      onAction = () => setActiveStep(2);
-    } else if (activeStep === 2) {
-      actionText = 'Pay GH₵ 65.00';
-      actionIcon = 'credit_card';
-      onAction = handlePayment;
-    }
-  }
-
   return (
     <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className="bg-[#FDFBF7] dark:bg-[#111111] font-display text-slate-800 dark:text-white transition-colors duration-1000 min-h-screen flex flex-col relative overflow-hidden">
       
@@ -88,71 +68,54 @@ export const CheckoutPage: React.FC = () => {
       </div>
 
       <main className="flex-grow container mx-auto px-6 lg:px-12 pt-32 pb-32 lg:pb-12 z-10 relative">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 items-start">
+        <div className="w-full max-w-2xl mx-auto pt-4 relative">
           
-          {/* Left Column: Interactive Flow */}
-          <div className="order-2 lg:order-1 lg:w-3/5 w-full pt-4 relative">
-            
-            {/* Step Indicators */}
-            <div className="flex items-center gap-3 mb-16 w-full">
-              {[1, 2].map((step, index, arr) => {
-                if (!hasDelivery && step === 2) return null; // Skip delivery step dot if pickup
-                const isActive = activeStep === step;
-                const isPast = activeStep > step;
-                return (
-                  <React.Fragment key={step}>
-                    <div className={`w-3 h-3 flex-shrink-0 rounded-full transition-all duration-500 ${isActive ? 'bg-primary scale-125' : isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
-                    {index < arr.length - 1 && hasDelivery && (
-                      <div className={`h-px flex-grow transition-colors duration-500 ${isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
-                    )}
-                  </React.Fragment>
-                );
-              })}
-            </div>
-
-            <div className="relative">
-              <AnimatePresence mode="wait">
-                {activeStep === 1 && (
-                  <motion.div key="step1" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
-                    <PaymentMethod 
-                      selected={fulfillment}
-                      onSelect={(val) => {
-                        setFulfillment(val);
-                      }}
-                      onNext={() => hasDelivery ? setActiveStep(2) : handlePayment()} 
-                    />
-                  </motion.div>
-                )}
-
-                {activeStep === 2 && hasDelivery && (
-                  <motion.div key="step2" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
-                    <GuestForm onNext={handlePayment} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Unified CTA Button (Mobile Only) */}
-            {onAction && actionText && (
-              <div className="lg:hidden mt-8 w-full">
-                <button
-                  onClick={onAction}
-                  className="w-full py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] bg-brand-dark dark:bg-white text-white dark:text-brand-dark"
-                >
-                  {actionText}
-                  {actionIcon && <span className="material-symbols-sharp">{actionIcon}</span>}
-                </button>
-              </div>
-            )}
+          {/* Step Indicators */}
+          <div className="flex items-center gap-3 mb-16 w-full max-w-sm mx-auto">
+            {[1, 2, hasDelivery ? 3 : null].filter(Boolean).map((step, index, arr) => {
+              const isActive = activeStep === step;
+              const isPast = activeStep > (step as number);
+              return (
+                <React.Fragment key={step}>
+                  <div className={`w-3 h-3 flex-shrink-0 rounded-full transition-all duration-500 ${isActive ? 'bg-primary scale-125' : isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
+                  {index < arr.length - 1 && (
+                    <div className={`h-px flex-grow transition-colors duration-500 ${isPast ? 'bg-primary/40' : 'bg-gray-200 dark:bg-white/10'}`}></div>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </div>
 
-          {/* Right Column: Order Summary (Sticky) */}
-          <div className="order-1 lg:order-2 w-full lg:w-2/5 z-20">
-            <OrderSummarySticky 
-              actionText={actionText}
-              actionIcon={actionIcon}
-              onAction={onAction}
-            />
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              {activeStep === 1 && (
+                <motion.div key="step1" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
+                  <PaymentMethod 
+                    selected={fulfillment}
+                    onSelect={(val) => {
+                      setFulfillment(val);
+                    }}
+                    onNext={() => setActiveStep(2)} 
+                  />
+                </motion.div>
+              )}
+
+              {activeStep === 2 && hasDelivery && (
+                <motion.div key="step2" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
+                  <GuestForm onNext={() => setActiveStep(3)} />
+                </motion.div>
+              )}
+
+              {((!hasDelivery && activeStep === 2) || (hasDelivery && activeStep === 3)) && (
+                <motion.div key="stepFinal" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
+                  <OrderSummarySticky 
+                    actionText="Pay GH₵ 65.00"
+                    actionIcon="credit_card"
+                    onAction={handlePayment}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </main>

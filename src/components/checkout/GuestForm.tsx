@@ -47,6 +47,15 @@ export const GuestForm: React.FC<{ onNext: () => void }> = ({ onNext }) => {
         </div>
       </div>
       
+      <div className="pt-8 flex justify-end">
+        <button 
+          onClick={onNext}
+          className="w-auto px-6 py-2.5 bg-brand-dark dark:bg-white text-white dark:text-brand-dark rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
+        >
+          Review Order
+          <span className="material-symbols-sharp text-lg">arrow_forward</span>
+        </button>
+      </div>
     </div>
   );
 };
