@@ -61,9 +61,11 @@ export const CustomizationPage: React.FC = () => {
 
     const bottomHex = isDark ? '#111111' : '#FDFBF7';
     
-    // Set body to the bottom color so Safari tab bar and bottom overscroll are perfect
-    document.body.style.backgroundColor = bottomHex;
-    document.body.style.transition = 'background-color 1s ease-in-out';
+    // Use a fixed linear gradient on the body. 
+    // This ensures the top overscroll and iOS status bar sample the cinematic top color,
+    // while the bottom overscroll samples the bottom sheet color.
+    document.body.style.background = `linear-gradient(to bottom, ${hex} 0%, ${hex} 50%, ${bottomHex} 50%, ${bottomHex} 100%)`;
+    document.body.style.backgroundAttachment = 'fixed';
     
     // Use theme-color meta tag to color the top address bar and top overscroll
     let metaThemeColor = document.querySelector('meta[name="theme-color"]');
@@ -75,12 +77,35 @@ export const CustomizationPage: React.FC = () => {
     metaThemeColor.setAttribute('content', hex);
     
     return () => {
-      document.body.style.backgroundColor = '';
+      document.body.style.background = '';
+      document.body.style.backgroundAttachment = '';
       if (metaThemeColor) {
         metaThemeColor.setAttribute('content', '#FDFBF7'); // Reset to default
       }
     };
   }, [sweetener]);
+
+  // Handle iOS Safari Keyboard Panning by strictly locking to VisualViewport
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        setViewportHeight(window.visualViewport.height);
+      }
+    };
+    
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+      handleResize(); // Initial check
+    }
+    
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize);
+      }
+    };
+  }, []);
 
   // Dynamic Cup Filter Logic based on sweetener to tint the liquid
   const cupFilter = useMemo(() => {
@@ -117,8 +142,17 @@ export const CustomizationPage: React.FC = () => {
     );
   }, [base, sweetener, milkType]);
 
+  const containerStyle = viewportHeight ? { height: `${viewportHeight}px` } : {};
+
   return (
-    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" className={`h-[100dvh] w-full overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display`}>
+    <motion.div 
+      variants={pageVariants} 
+      initial="initial" 
+      animate="animate" 
+      exit="exit" 
+      className={`w-full overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display ${!viewportHeight ? 'h-[100dvh]' : ''}`}
+      style={containerStyle}
+    >
       
       {/* Minimal Navigation Overlay */}
       <div className="absolute top-0 left-0 w-full p-6 lg:p-8 z-50 flex justify-between items-center pointer-events-none">
@@ -131,7 +165,7 @@ export const CustomizationPage: React.FC = () => {
       </div>
 
       {/* LEFT SIDE: Visuals (Desktop) / Top Section (Mobile) */}
-      <div className="relative w-full h-[45dvh] lg:h-[100dvh] lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-4 lg:pt-0">
+      <div className="relative w-full h-[45%] lg:h-full lg:w-1/2 flex flex-col items-center justify-center pointer-events-none z-0 lg:z-10 flex-shrink-0 pt-4 lg:pt-0">
         
         {/* Dynamic Background Text (Cinematic) */}
         <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden opacity-40 mix-blend-overlay">
@@ -156,7 +190,7 @@ export const CustomizationPage: React.FC = () => {
       </div>
 
       {/* RIGHT SIDE: Scrolling Bottom Sheet / Sidebar */}
-      <div className="relative z-30 flex-grow lg:w-1/2 w-full lg:h-[100dvh] h-[55dvh]">
+      <div className="relative z-30 flex-grow lg:w-1/2 w-full lg:h-[100dvh] h-[55%]">
          <div className="w-full h-full lg:max-w-none bg-[#FDFBF7] dark:bg-[#111111] rounded-t-[2.5rem] lg:rounded-none shadow-[0_-8px_32px_rgba(0,0,0,0.08)] lg:shadow-none flex flex-col relative lg:border-l border-white/50 dark:border-white/10 transition-colors duration-1000 overflow-hidden">
            <CustomizerControls
              customerName={customerName}
