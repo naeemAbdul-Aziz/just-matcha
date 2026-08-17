@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '../ui/Image';
+import { formatPrice } from '../../lib/menuData';
 
 export interface OrderSummaryProps {
+  drinkName?: string;
+  drinkPrice?: number;
+  boosts?: Record<string, boolean>;
   onAction?: () => void;
   actionText?: string;
   actionIcon?: string;
   isActionDisabled?: boolean;
 }
 
+const BOOST_PRICES: Record<string, { name: string; price: number }> = {
+  collagen: { name: 'Marine Collagen', price: 25 },
+  maca: { name: 'Maca Root', price: 15 },
+  ashwagandha: { name: 'Ashwagandha', price: 20 },
+};
+
 export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({ 
+  drinkName = 'Maple Moments',
+  drinkPrice = 90,
+  boosts = {},
   onAction, 
   actionText, 
   actionIcon, 
   isActionDisabled 
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const basePrice = 65; // 40 + 10 + 15
-  const totalPrice = (basePrice * quantity).toFixed(2);
+
+  // Calculate boost add-on total
+  const boostTotal = Object.entries(boosts)
+    .filter(([_, active]) => active)
+    .reduce((sum, [id]) => sum + (BOOST_PRICES[id]?.price || 0), 0);
+
+  const unitPrice = drinkPrice + boostTotal;
+  const totalPrice = (unitPrice * quantity).toFixed(2);
+
+  const activeBoosts = Object.entries(boosts).filter(([_, active]) => active);
 
   return (
     <div className="w-full max-w-2xl mx-auto relative z-20">
@@ -33,14 +54,13 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
             <div className="w-28 h-36 rounded-2xl bg-gradient-to-b from-[#e3fce9] to-[#bbf7c8] dark:from-[#1a3821] dark:to-[#13ec37]/30 shadow-inner flex items-center justify-center relative overflow-hidden group">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuA83jU4_vjUmuDIOGRD0nJg0RPNIrPpJjL6MFzBJjDelY0fqtnuCrrIGoXjfC_uzP3DMiFsJmuThpkLqo1IVRnqC4OZ5Bbq2pu9dusG-9FQBhKssjGFJgoHjL2R0RKcmzupNJdb6kaghCViuXIV0QwcQmNJ2J2_Y8jSCfMr25Xn0bbCCU5SsPcT20lJ7eAYHjXbOWNRvraz87gGJfiGYSp_rPjn5llpA5q9MR2X7EwzMUDsIDZaZ0jrOEU9RckipH70PjPvmp80Bhc"
-                alt="Glass of iced matcha latte with milk layers"
+                alt={`Glass of ${drinkName}`}
                 className="w-full h-full object-cover opacity-90 mix-blend-multiply dark:mix-blend-normal transform transition-transform duration-700 group-hover:scale-110"
-                data-alt="Close up of a layered matcha drink in a glass"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
             <div>
-              <h3 className="font-serif font-bold text-xl text-brand-dark dark:text-white mb-1">Iced Matcha Latte</h3>
+              <h3 className="font-serif font-bold text-xl text-brand-dark dark:text-white mb-1">{drinkName}</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-3 font-light">Large Size (16oz)</p>
               <Link to="/customize" className="text-xs font-bold text-primary uppercase tracking-widest hover:text-brand-dark transition-colors flex items-center gap-1 group">
                 Edit Blend
@@ -53,22 +73,18 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
           <div className="space-y-5 mb-10 relative z-10">
             <div className="flex justify-between items-center text-sm font-light">
               <span className="text-slate-600 dark:text-slate-300">
-                Ceremonial Grade Base
+                {drinkName}
               </span>
-              <span className="font-medium text-brand-dark dark:text-white">GH₵ 40.00</span>
+              <span className="font-medium text-brand-dark dark:text-white">{formatPrice(drinkPrice)}</span>
             </div>
-            <div className="flex justify-between items-center text-sm font-light">
-              <span className="text-slate-600 dark:text-slate-300">
-                Oat Milk Layer
-              </span>
-              <span className="font-medium text-brand-dark dark:text-white">GH₵ 10.00</span>
-            </div>
-            <div className="flex justify-between items-center text-sm font-light">
-              <span className="text-slate-600 dark:text-slate-300">
-                Marine Collagen Boost
-              </span>
-              <span className="font-medium text-brand-dark dark:text-white">GH₵ 15.00</span>
-            </div>
+            {activeBoosts.map(([id]) => (
+              <div key={id} className="flex justify-between items-center text-sm font-light">
+                <span className="text-slate-600 dark:text-slate-300">
+                  {BOOST_PRICES[id]?.name || id}
+                </span>
+                <span className="font-medium text-brand-dark dark:text-white">{formatPrice(BOOST_PRICES[id]?.price || 0)}</span>
+              </div>
+            ))}
             <div className="flex justify-between items-center text-sm font-light pt-4 border-t border-gray-200 dark:border-white/10">
               <span className="text-slate-500 dark:text-slate-400">Delivery Fee</span>
               <span className="font-medium text-primary">Complimentary</span>

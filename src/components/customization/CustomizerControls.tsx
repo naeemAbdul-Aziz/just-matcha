@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectionCard } from '../common/SelectionCard';
+import { MENU_CATEGORIES, getItemsByCategory, getMenuItemById, formatPrice, type MenuCategory } from '../../lib/menuData';
 
 interface CustomizerControlsProps {
   customerName: string;
   setCustomerName: (name: string) => void;
-  base: string;
-  setBase: (base: string) => void;
+  selectedDrinkId: string;
+  setSelectedDrinkId: (id: string) => void;
   milkType: string;
   setMilkType: (milk: string) => void;
   matchaIntensity: number;
@@ -59,7 +60,7 @@ const DiscreteSlider = ({ value, onChange, steps }: { value: number, onChange: (
 
 export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   customerName, setCustomerName,
-  base, setBase,
+  selectedDrinkId, setSelectedDrinkId,
   milkType, setMilkType,
   matchaIntensity, setMatchaIntensity,
   sweetener, setSweetener,
@@ -68,6 +69,8 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   cupMessage, setCupMessage
 }) => {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<MenuCategory>('signature');
+  const selectedDrink = getMenuItemById(selectedDrinkId);
 
   return (
     <div className="w-full h-full flex flex-col relative font-display">
@@ -95,28 +98,55 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           </div>
         </section>
 
-        {/* Base */}
+        {/* Select Your Drink — Categorized Menu */}
         <section className="mb-16 lg:mb-20">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-xl font-black text-black dark:text-white uppercase tracking-wider">Select Your Drink</h3>
-            <span className="text-xs font-bold text-primary uppercase tracking-widest cursor-pointer hover:underline">Compare Grades</span>
           </div>
+
+          {/* Category Tabs */}
+          <div className="flex overflow-x-auto gap-2 pb-4 snap-x snap-mandatory -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden mb-6" style={{ scrollbarWidth: 'none' }}>
+            {MENU_CATEGORIES.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`snap-center flex-shrink-0 px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-300 border shadow-sm whitespace-nowrap ${
+                  activeCategory === cat.id 
+                    ? 'bg-soft-green dark:bg-primary border-primary text-brand-dark dark:text-white shadow-md'
+                    : 'bg-white dark:bg-[#222] border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                }`}
+              >
+                {cat.emoji} {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Drink Cards for Active Category */}
           <div className="flex flex-col gap-4">
-            <SelectionCard
-              title="Ceremonial"
-              description="Highest quality, vibrant green. Best for pure enjoyment."
-              price="GHC 45.00"
-              selected={base === 'ceremonial'}
-              onSelect={() => setBase('ceremonial')}
-            />
-            <SelectionCard
-              title="Premium"
-              description="Robust flavor designed to cut through milk. Ideal for mixed drinks."
-              price="GHC 35.00"
-              selected={base === 'latte'}
-              onSelect={() => setBase('latte')}
-            />
+            {getItemsByCategory(activeCategory).map(item => (
+              <SelectionCard
+                key={item.id}
+                title={item.name}
+                description={item.description}
+                price={formatPrice(item.price)}
+                selected={selectedDrinkId === item.id}
+                onSelect={() => setSelectedDrinkId(item.id)}
+              />
+            ))}
           </div>
+
+          {/* Selected Drink Summary */}
+          {selectedDrink && (
+            <div className="mt-6 p-4 rounded-2xl bg-soft-green/30 dark:bg-primary/10 border border-primary/20 animate-fade-in-up">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-xs font-bold text-primary uppercase tracking-widest">Selected</span>
+                  <p className="text-lg font-serif font-bold text-brand-dark dark:text-white">{selectedDrink.name}</p>
+                </div>
+                <span className="text-xl font-bold text-brand-dark dark:text-white">{formatPrice(selectedDrink.price)}</span>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Sweeteners */}

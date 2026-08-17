@@ -1,42 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '../ui/Image';
+import { FEATURED_ITEMS, formatPrice } from '../../lib/menuData';
 
-const products = [
-  {
-    id: 1,
-    name: "The Signature Iced",
-    description: "Ceremonial grade, oat milk, honey.",
-    price: "GH₵ 80.00",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAS4aOOofiudUDHuhjejeMXUiNV1OWfvLKmg1z8FnINDNElSSdYNKTsN8Rr2f2dFFNDaTfGk5wrAmw0uHkY4ZNL_7EbS54rAOd2AdWDD75ekW5LHM19wHH-vrpE9sfJCB8cSiN8767o_8TYJSkEGztCuteHSkVqZP6gz6WLyP4dyDUtw-tmNf64RhQmDg14NDPmV8kjYopiDehXAf4hRJoXpRzCIUTzwWolJDFrU1c2eGh_LHu2xZgY0-mj281A5GNdkI8xqbdH-rA",
-    tag: "Bestseller",
-    tagColor: "bg-white",
-    tagTextColor: "text-text-dark",
-    urlParams: "?base=ceremonial&milk=oat&sweetener=honey&intensity=50"
-  },
-  {
-    id: 2,
-    name: "Biscoff Cloud",
-    description: "Premium grade, oat milk, biscoff.",
-    price: "GH₵ 85.00",
-    image: "/biscoff-matcha.png",
-    tag: "Trending",
-    tagColor: "bg-amber-800",
-    tagTextColor: "text-white",
-    urlParams: "?base=latte&milk=oat&sweetener=biscoff&intensity=75"
-  },
-  {
-    id: 3,
-    name: "Ceremonial Clear",
-    description: "Pure ceremonial grade, spring water.",
-    price: "GH₵ 65.00",
-    image: "/ceremonial-clear.png",
-    tag: "Purist",
-    tagColor: "bg-primary-dark",
-    tagTextColor: "text-white",
-    urlParams: "?base=ceremonial&milk=water&intensity=100"
-  }
-];
+// Hero images for the three featured drinks
+const featuredImages: Record<string, string> = {
+  'thirst-trap': 'https://lh3.googleusercontent.com/aida-public/AB6AXuAS4aOOofiudUDHuhjejeMXUiNV1OWfvLKmg1z8FnINDNElSSdYNKTsN8Rr2f2dFFNDaTfGk5wrAmw0uHkY4ZNL_7EbS54rAOd2AdWDD75ekW5LHM19wHH-vrpE9sfJCB8cSiN8767o_8TYJSkEGztCuteHSkVqZP6gz6WLyP4dyDUtw-tmNf64RhQmDg14NDPmV8kjYopiDehXAf4hRJoXpRzCIUTzwWolJDFrU1c2eGh_LHu2xZgY0-mj281A5GNdkI8xqbdH-rA',
+  'biscoff-behavior': '/biscoff-matcha.png',
+  'matchatwi': '/ceremonial-clear.png',
+};
 
 export const MenuSection: React.FC = () => {
   return (
@@ -53,26 +25,26 @@ export const MenuSection: React.FC = () => {
         </div>
 
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-8 pb-8 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
-          {products.map((product) => (
-            <Link to={`/customize${product.urlParams}`} key={product.id} className="group cursor-pointer flex-shrink-0 w-[80vw] sm:w-[60vw] md:w-auto snap-center block">
+          {FEATURED_ITEMS.map((item) => (
+            <Link to={`/customize?drink=${item.id}`} key={item.id} className="group cursor-pointer flex-shrink-0 w-[80vw] sm:w-[60vw] md:w-auto snap-center block">
               <div className="relative bg-background-light rounded-3xl p-6 md:p-8 mb-4 md:mb-6 overflow-hidden transition-all duration-300 group-hover:bg-soft-green/30">
-                {product.tag && (
-                  <div className={`absolute top-4 right-4 ${product.tagColor} ${product.tagTextColor} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm z-10`}>
-                    {product.tag}
+                {item.tag && (
+                  <div className={`absolute top-4 right-4 ${item.tagColor} ${item.tagTextColor} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm z-10`}>
+                    {item.tag}
                   </div>
                 )}
                 <Image
-                  src={product.image}
-                  alt={product.name}
+                  src={featuredImages[item.id] || '/cup.png'}
+                  alt={item.name}
                   className="w-full aspect-square object-cover rounded-2xl mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-serif text-lg md:text-xl text-text-dark mb-1 group-hover:text-primary-dark transition-colors">{product.name}</h3>
-                  <p className="text-xs md:text-sm text-text-light">{product.description}</p>
+                  <h3 className="font-serif text-lg md:text-xl text-text-dark mb-1 group-hover:text-primary-dark transition-colors">{item.name}</h3>
+                  <p className="text-xs md:text-sm text-text-light">{item.description}</p>
                 </div>
-                <span className="font-medium text-lg text-text-dark whitespace-nowrap flex-shrink-0 ml-4">{product.price}</span>
+                <span className="font-medium text-lg text-text-dark whitespace-nowrap flex-shrink-0 ml-4">{formatPrice(item.price)}</span>
               </div>
             </Link>
           ))}

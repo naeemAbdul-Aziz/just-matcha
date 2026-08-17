@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CustomizerControls } from '../components/customization/CustomizerControls';
 import { Image } from '../components/ui/Image';
+import { getMenuItemById } from '../lib/menuData';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -16,13 +17,15 @@ export const CustomizationPage: React.FC = () => {
   
   // Customization State (Initialized from URL if present)
   const [customerName, setCustomerName] = useState('');
-  const [base, setBase] = useState(searchParams.get('base') || 'ceremonial');
+  const [selectedDrinkId, setSelectedDrinkId] = useState(searchParams.get('drink') || 'maple-moments');
   const [milkType, setMilkType] = useState(searchParams.get('milk') || 'oat');
   const [matchaIntensity, setMatchaIntensity] = useState(parseInt(searchParams.get('intensity') || '50', 10));
   const [sweetener, setSweetener] = useState<string | null>(searchParams.get('sweetener') || null);
   const [sweetnessLevel, setSweetnessLevel] = useState(parseInt(searchParams.get('sweetness') || '50', 10));
   const [boosts, setBoosts] = useState<Record<string, boolean>>({});
   const [cupMessage, setCupMessage] = useState('');
+
+  const selectedDrink = getMenuItemById(selectedDrinkId);
 
   // Dynamic Background Logic based on sweetener
   const bgColor = useMemo(() => {
@@ -120,27 +123,20 @@ export const CustomizationPage: React.FC = () => {
     return 'none';
   }, [sweetener]);
 
-  // Dynamic Cinematic Background Text
+  // Dynamic Cinematic Background Text — now shows selected drink name
   const backgroundText = useMemo(() => {
-    let line1 = 'ICED';
-    let line2 = base === 'ceremonial' ? 'CEREMONIAL' : 'MATCHA';
-    let line3 = milkType === 'water' ? 'WATER' : 'LATTE';
-
-    if (sweetener) {
-      if (sweetener === 'maple_syrup') line1 = 'MAPLE';
-      else if (sweetener === 'date_syrup') line1 = 'DATE';
-      else if (sweetener === 'white_chocolate') line1 = 'WHITE CHOC';
-      else line1 = sweetener.toUpperCase();
-    } else if (milkType !== 'water' && milkType !== 'whole') {
-       line1 = milkType.toUpperCase();
+    if (selectedDrink) {
+      // Split drink name into lines for cinematic display
+      const words = selectedDrink.name.toUpperCase().split(' ');
+      if (words.length <= 2) {
+        return <>{words.join(' ')}<br/>MATCHA</>;
+      }
+      // Split roughly in half
+      const mid = Math.ceil(words.length / 2);
+      return <>{words.slice(0, mid).join(' ')}<br/>{words.slice(mid).join(' ')}</>;
     }
-
-    return (
-      <>
-        {line1}<br/>{line2}<br/>{line3}
-      </>
-    );
-  }, [base, sweetener, milkType]);
+    return <>JUST<br/>MATCHA</>;
+  }, [selectedDrink]);
 
   const containerStyle = viewportHeight ? { height: `${viewportHeight}px` } : {};
 
@@ -195,8 +191,8 @@ export const CustomizationPage: React.FC = () => {
            <CustomizerControls
              customerName={customerName}
              setCustomerName={setCustomerName}
-             base={base}
-             setBase={setBase}
+             selectedDrinkId={selectedDrinkId}
+             setSelectedDrinkId={setSelectedDrinkId}
              milkType={milkType}
              setMilkType={setMilkType}
              matchaIntensity={matchaIntensity}

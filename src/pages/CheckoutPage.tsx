@@ -5,6 +5,7 @@ import { GuestForm } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
 import { usePaystackPayment } from 'react-paystack';
 import { OrderSummarySticky } from '../components/checkout/OrderSummarySticky';
+import { getMenuItemById, formatPrice, MENU_ITEMS } from '../lib/menuData';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -16,6 +17,13 @@ const stepVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.3 } },
   exit: { opacity: 0, transition: { duration: 0.2, position: "absolute" } }
+};
+
+// Boost prices in GH₵
+const BOOST_PRICES: Record<string, number> = {
+  collagen: 25,
+  maca: 15,
+  ashwagandha: 20,
 };
 
 export const CheckoutPage: React.FC = () => {
@@ -30,11 +38,29 @@ export const CheckoutPage: React.FC = () => {
 
   const hasDelivery = fulfillment === 'delivery';
 
-  // Paystack Integration Mockup
+  // Get drink selection from URL params (passed from customizer)
+  const drinkId = searchParams.get('drink') || 'maple-moments';
+  const selectedDrink = getMenuItemById(drinkId) || MENU_ITEMS[0];
+  
+  // Parse boost selections from URL
+  const boostParam = searchParams.get('boosts') || '';
+  const boosts: Record<string, boolean> = {};
+  if (boostParam) {
+    boostParam.split(',').forEach(b => { if (b) boosts[b] = true; });
+  }
+
+  // Calculate dynamic total
+  const boostTotal = Object.entries(boosts)
+    .filter(([_, active]) => active)
+    .reduce((sum, [id]) => sum + (BOOST_PRICES[id] || 0), 0);
+  const totalAmount = selectedDrink.price + boostTotal;
+  const totalAmountPesewas = totalAmount * 100; // Convert to pesewas for Paystack
+
+  // Paystack Integration
   const config = {
     reference: (new Date()).getTime().toString(),
     email: "customer@example.com", // This would normally come from the GuestForm
-    amount: 6500, // 65 GHC in pesewas
+    amount: totalAmountPesewas,
     publicKey: 'pk_test_dc8fb16223b361a995eefc4a5c9527ec3c3836a5', // A mock test key
     currency: 'GHS'
   };
@@ -109,7 +135,10 @@ export const CheckoutPage: React.FC = () => {
               {((!hasDelivery && activeStep === 2) || (hasDelivery && activeStep === 3)) && (
                 <motion.div key="stepFinal" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
                   <OrderSummarySticky 
-                    actionText="Pay GH₵ 65.00"
+                    drinkName={selectedDrink.name}
+                    drinkPrice={selectedDrink.price}
+                    boosts={boosts}
+                    actionText={`Pay ${formatPrice(totalAmount)}`}
                     actionIcon="credit_card"
                     onAction={handlePayment}
                   />
