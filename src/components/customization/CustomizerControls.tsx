@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SelectionCard } from '../common/SelectionCard';
-import { MENU_CATEGORIES, getItemsByCategory, getMenuItemById, formatPrice, type MenuCategory } from '../../lib/menuData';
+import { MENU_CATEGORIES, getItemsByCategory, formatPrice, type MenuCategory } from '../../lib/menuData';
 
 interface CustomizerControlsProps {
   customerName: string;
@@ -70,7 +70,6 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
 }) => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<MenuCategory>('signature');
-  const selectedDrink = getMenuItemById(selectedDrinkId);
 
   return (
     <div className="w-full h-full flex flex-col relative font-display">
