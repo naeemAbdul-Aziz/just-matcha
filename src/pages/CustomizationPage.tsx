@@ -78,16 +78,23 @@ export const CustomizationPage: React.FC = () => {
     }
     metaThemeColor.setAttribute('content', hex);
 
-    // Force iOS Safari to paint the safe area correctly
-    document.documentElement.style.backgroundColor = hex;
-    document.body.style.backgroundColor = hex;
+    // Force iOS Safari to paint the top safe area as the cinematic bg, and the bottom safe area as the form bg
+    const bottomHex = isDark ? '#111111' : '#FDFBF7';
+    document.documentElement.style.background = `linear-gradient(to bottom, ${hex} 0%, ${hex} 50%, ${bottomHex} 50%, ${bottomHex} 100%)`;
+    document.documentElement.style.backgroundAttachment = 'fixed';
+    
+    // Also apply to body to cover all bases for older Safari
+    document.body.style.background = `linear-gradient(to bottom, ${hex} 0%, ${hex} 50%, ${bottomHex} 50%, ${bottomHex} 100%)`;
+    document.body.style.backgroundAttachment = 'fixed';
     
     return () => {
       if (metaThemeColor) {
         metaThemeColor.setAttribute('content', isDark ? '#111111' : '#FDFBF7'); // Reset to default app bg
       }
-      document.documentElement.style.backgroundColor = '';
-      document.body.style.backgroundColor = '';
+      document.documentElement.style.background = '';
+      document.documentElement.style.backgroundAttachment = '';
+      document.body.style.background = '';
+      document.body.style.backgroundAttachment = '';
     };
   }, [sweetener]);
 
