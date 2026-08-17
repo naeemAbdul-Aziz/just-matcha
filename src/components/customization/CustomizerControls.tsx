@@ -273,7 +273,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         </section>
 
         {/* Footer Next Step Button (Flows at the end on mobile) */}
-        <div className="mt-8 lg:hidden flex justify-center w-full pb-8">
+        <div className="mt-8 lg:hidden flex justify-center w-full pb-[max(2rem,env(safe-area-inset-bottom))]">
           <button 
             onClick={() => navigate('/checkout')} 
             className="w-auto px-6 py-2.5 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"

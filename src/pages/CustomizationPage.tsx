@@ -124,11 +124,11 @@ export const CustomizationPage: React.FC = () => {
       initial="initial" 
       animate="animate" 
       exit="exit" 
-      className={`w-full h-[100dvh] overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display`}
+      className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} flex flex-col lg:flex-row font-display`}
     >
       
       {/* Minimal Navigation Overlay */}
-      <div className="absolute top-0 left-0 w-full p-6 lg:p-8 z-50 flex justify-between items-center pointer-events-none">
+      <div className="absolute top-0 left-0 w-full p-6 lg:p-8 pt-[max(1.5rem,env(safe-area-inset-top))] z-50 flex justify-between items-center pointer-events-none">
         <button onClick={() => navigate(-1)} className="pointer-events-auto w-10 h-10 bg-black/5 dark:bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark dark:text-white hover:bg-black/10 transition-colors shadow-sm">
           <span className="material-symbols-sharp text-sm ml-1">arrow_back_ios</span>
         </button>
