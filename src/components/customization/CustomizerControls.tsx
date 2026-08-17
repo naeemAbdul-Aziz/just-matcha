@@ -135,18 +135,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
             ))}
           </div>
 
-          {/* Selected Drink Summary */}
-          {selectedDrink && (
-            <div className="mt-6 p-4 rounded-2xl bg-soft-green/30 dark:bg-primary/10 border border-primary/20 animate-fade-in-up">
-              <div className="flex justify-between items-center">
-                <div>
-                  <span className="text-xs font-bold text-primary uppercase tracking-widest">Selected</span>
-                  <p className="text-lg font-serif font-bold text-brand-dark dark:text-white">{selectedDrink.name}</p>
-                </div>
-                <span className="text-xl font-bold text-brand-dark dark:text-white">{formatPrice(selectedDrink.price)}</span>
-              </div>
-            </div>
-          )}
+
         </section>
 
         {/* Sweeteners */}

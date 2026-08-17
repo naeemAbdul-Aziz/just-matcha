@@ -88,27 +88,7 @@ export const CustomizationPage: React.FC = () => {
     };
   }, [sweetener]);
 
-  // Handle iOS Safari Keyboard Panning by strictly locking to VisualViewport
-  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.visualViewport) {
-        setViewportHeight(window.visualViewport.height);
-      }
-    };
-    
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleResize);
-      handleResize(); // Initial check
-    }
-    
-    return () => {
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', handleResize);
-      }
-    };
-  }, []);
 
   // Dynamic Cup Filter Logic based on sweetener to tint the liquid
   const cupFilter = useMemo(() => {
@@ -138,16 +118,13 @@ export const CustomizationPage: React.FC = () => {
     return <>JUST<br/>MATCHA</>;
   }, [selectedDrink]);
 
-  const containerStyle = viewportHeight ? { height: `${viewportHeight}px` } : {};
-
   return (
     <motion.div 
       variants={pageVariants} 
       initial="initial" 
       animate="animate" 
       exit="exit" 
-      className={`w-full overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display ${!viewportHeight ? 'h-[100dvh]' : ''}`}
-      style={containerStyle}
+      className={`w-full h-[100dvh] overflow-hidden transition-colors duration-1000 ease-in-out ${bgColor} relative flex flex-col lg:flex-row font-display`}
     >
       
       {/* Minimal Navigation Overlay */}
