@@ -45,7 +45,7 @@ export const CustomizationPage: React.FC = () => {
     return 'bg-[#C2E88D] dark:bg-[#2A3B22]';
   }, [sweetener]);
 
-  // Sync body background color to fix iOS rubber-banding pulling down white space
+  // Sync theme-color to match the current background exactly
   useEffect(() => {
     let hex = '#C2E88D'; // default matcha green
     const isDark = document.documentElement.classList.contains('dark');
@@ -59,17 +59,16 @@ export const CustomizationPage: React.FC = () => {
       else if (sweetener === 'date_syrup') hex = '#fdba74';
       else if (sweetener === 'maple_syrup') hex = '#fed7aa';
     } else {
-      hex = '#111111'; // Match dark mode body if needed, or dark versions
+      if (sweetener === 'biscoff') hex = '#78350f'; // amber-900/40 approx
+      else if (sweetener === 'caramel') hex = '#7c2d12'; // orange-900/40 approx
+      else if (sweetener === 'vanilla') hex = '#713f12'; // yellow-900/40 approx
+      else if (sweetener === 'white_chocolate') hex = '#44403c'; // stone-900/40 approx
+      else if (sweetener === 'honey') hex = '#92400e'; // amber-800/40 approx
+      else if (sweetener === 'date_syrup') hex = '#431407'; // orange-950/40 approx
+      else if (sweetener === 'maple_syrup') hex = '#9a3412'; // orange-800/40 approx
+      else hex = '#2A3B22'; // Default dark matcha green
     }
 
-    const bottomHex = isDark ? '#111111' : '#FDFBF7';
-    
-    // Use a fixed linear gradient on the body. 
-    // This ensures the top overscroll and iOS status bar sample the cinematic top color,
-    // while the bottom overscroll samples the bottom sheet color.
-    document.body.style.background = `linear-gradient(to bottom, ${hex} 0%, ${hex} 50%, ${bottomHex} 50%, ${bottomHex} 100%)`;
-    document.body.style.backgroundAttachment = 'fixed';
-    
     // Use theme-color meta tag to color the top address bar and top overscroll
     let metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (!metaThemeColor) {
@@ -78,13 +77,17 @@ export const CustomizationPage: React.FC = () => {
       document.head.appendChild(metaThemeColor);
     }
     metaThemeColor.setAttribute('content', hex);
+
+    // Force iOS Safari to paint the safe area correctly
+    document.documentElement.style.backgroundColor = hex;
+    document.body.style.backgroundColor = hex;
     
     return () => {
-      document.body.style.background = '';
-      document.body.style.backgroundAttachment = '';
       if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', '#FDFBF7'); // Reset to default
+        metaThemeColor.setAttribute('content', isDark ? '#111111' : '#FDFBF7'); // Reset to default app bg
       }
+      document.documentElement.style.backgroundColor = '';
+      document.body.style.backgroundColor = '';
     };
   }, [sweetener]);
 
