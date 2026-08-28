@@ -69,6 +69,24 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
   cupMessage, setCupMessage
 }) => {
   const navigate = useNavigate();
+
+  const goToCheckout = () => {
+    const activeBoostIds = Object.entries(boosts)
+      .filter(([, active]) => active)
+      .map(([id]) => id)
+      .join(',');
+    const params = new URLSearchParams({
+      drink: selectedDrinkId,
+      milk: milkType,
+      intensity: matchaIntensity.toString(),
+      sweetness: sweetnessLevel.toString(),
+      ...(sweetener ? { sweetener } : {}),
+      ...(activeBoostIds ? { boosts: activeBoostIds } : {}),
+      ...(customerName ? { name: encodeURIComponent(customerName) } : {}),
+      ...(cupMessage ? { message: encodeURIComponent(cupMessage) } : {}),
+    });
+    navigate(`/checkout?${params.toString()}`);
+  };
   const [activeCategory, setActiveCategory] = useState<MenuCategory>('signature');
 
   return (
@@ -275,7 +293,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
         {/* Footer Next Step Button (Flows at the end on mobile) */}
         <div className="mt-8 lg:hidden flex justify-center w-full pb-[max(2rem,env(safe-area-inset-bottom))]">
           <button 
-            onClick={() => navigate('/checkout')} 
+            onClick={goToCheckout} 
             className="w-auto px-6 py-2.5 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-sm hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
           >
             Next Step
@@ -289,7 +307,7 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
       {/* Sticky Bottom Footer (Desktop Only) */}
       <div className="hidden lg:flex absolute bottom-0 left-0 w-full p-6 pt-12 bg-gradient-to-t from-[#FDFBF7]/90 via-[#FDFBF7]/80 to-transparent dark:from-[#111111] dark:via-[#111111]/90 dark:to-transparent backdrop-blur-[2px] pointer-events-none justify-end z-50">
         <button 
-          onClick={() => navigate('/checkout')} 
+          onClick={goToCheckout} 
           className="px-8 py-4 bg-soft-green dark:bg-primary text-brand-dark dark:text-white rounded-full font-semibold text-[17px] hover:opacity-90 transition-all pointer-events-auto active:scale-[0.98] flex items-center justify-center gap-3 mr-4 shadow-sm"
         >
           Next Step

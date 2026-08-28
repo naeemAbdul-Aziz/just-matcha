@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GuestForm } from '../components/checkout/GuestForm';
+import { GuestForm, type GuestFormData } from '../components/checkout/GuestForm';
 import { PaymentMethod } from '../components/checkout/PaymentMethod';
 import { usePaystackPayment } from 'react-paystack';
 import { OrderSummarySticky } from '../components/checkout/OrderSummarySticky';
 import { getMenuItemById, formatPrice, MENU_ITEMS } from '../lib/menuData';
+import { saveOrder } from '../lib/orderStore';
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -30,51 +31,107 @@ export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeStep = parseInt(searchParams.get('step') || '1', 10);
-  
-  const setActiveStep = (step: number) => {
-    setSearchParams({ step: step.toString() });
-  };
-  const [fulfillment, setFulfillment] = React.useState('delivery');
 
+  const setActiveStep = (step: number) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev.toString());
+      next.set('step', step.toString());
+      return next;
+    });
+  };
+
+  // Fulfillment method
+  const [fulfillment, setFulfillment] = React.useState<'delivery' | 'pickup'>('delivery');
   const hasDelivery = fulfillment === 'delivery';
+
+  // Guest form state — lifted here so we can read it in Paystack config
+  const [guestData, setGuestData] = React.useState<GuestFormData>({
+    name: decodeURIComponent(searchParams.get('name') || ''),
+    email: '',
+    phone: '',
+    city: '',
+    address: '',
+  });
+
+  // Quantity state — lifted here so Paystack gets correct amount
+  const [quantity, setQuantity] = React.useState(1);
 
   // Get drink selection from URL params (passed from customizer)
   const drinkId = searchParams.get('drink') || 'maple-moments';
   const selectedDrink = getMenuItemById(drinkId) || MENU_ITEMS[0];
-  
+
   // Parse boost selections from URL
   const boostParam = searchParams.get('boosts') || '';
   const boosts: Record<string, boolean> = {};
   if (boostParam) {
-    boostParam.split(',').forEach(b => { if (b) boosts[b] = true; });
+    boostParam.split(',').forEach((b) => { if (b) boosts[b] = true; });
   }
 
-  // Calculate dynamic total
+  // Parse other customization params
+  const milkType = searchParams.get('milk') || 'oat';
+  const sweetener = searchParams.get('sweetener') || null;
+  const sweetnessLevel = parseInt(searchParams.get('sweetness') || '50', 10);
+  const matchaIntensity = parseInt(searchParams.get('intensity') || '50', 10);
+  const cupMessage = decodeURIComponent(searchParams.get('message') || '');
+
+  // Calculate dynamic total including quantity
   const boostTotal = Object.entries(boosts)
-    .filter(([_, active]) => active)
+    .filter(([, active]) => active)
     .reduce((sum, [id]) => sum + (BOOST_PRICES[id] || 0), 0);
-  const totalAmount = selectedDrink.price + boostTotal;
+  const unitAmount = selectedDrink.price + boostTotal;
+  const totalAmount = unitAmount * quantity;
   const totalAmountPesewas = totalAmount * 100; // Convert to pesewas for Paystack
 
   // Paystack Integration
   const config = {
-    reference: (new Date()).getTime().toString(),
-    email: "customer@example.com", // This would normally come from the GuestForm
+    reference: `JM-${Date.now()}`,
+    email: guestData.email || 'guest@justmatcha.co',
     amount: totalAmountPesewas,
-    publicKey: 'pk_test_dc8fb16223b361a995eefc4a5c9527ec3c3836a5', // A mock test key
-    currency: 'GHS'
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_dc8fb16223b361a995eefc4a5c9527ec3c3836a5',
+    currency: 'GHS',
   };
 
   const initializePayment = usePaystackPayment(config);
 
   const handlePayment = () => {
     initializePayment({
-      onSuccess: () => {
-        navigate('/success');
+      onSuccess: (transaction) => {
+        // Persist order to localStorage so admin can see it
+        const savedOrder = saveOrder({
+          customer: {
+            name: guestData.name || 'Guest',
+            email: guestData.email,
+            phone: guestData.phone,
+            city: guestData.city,
+            address: guestData.address,
+          },
+          drink: {
+            id: selectedDrink.id,
+            name: selectedDrink.name,
+            price: selectedDrink.price,
+          },
+          customizations: {
+            milkType,
+            sweetener,
+            sweetnessLevel,
+            matchaIntensity,
+            boosts,
+            cupMessage,
+          },
+          fulfillment,
+          quantity,
+          boostTotal,
+          totalAmount,
+          status: 'Pending',
+          paymentRef: (transaction as { reference?: string })?.reference || config.reference,
+        });
+
+        // Pass real order data to success page
+        navigate('/success', { state: { order: savedOrder } });
       },
       onClose: () => {
         console.log('Payment modal closed');
-      }
+      },
     });
   };
 
@@ -118,9 +175,7 @@ export const CheckoutPage: React.FC = () => {
                 <motion.div key="step1" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
                   <PaymentMethod 
                     selected={fulfillment}
-                    onSelect={(val) => {
-                      setFulfillment(val);
-                    }}
+                    onSelect={(val) => setFulfillment(val as 'delivery' | 'pickup')}
                     onNext={() => setActiveStep(2)} 
                   />
                 </motion.div>
@@ -128,7 +183,11 @@ export const CheckoutPage: React.FC = () => {
 
               {activeStep === 2 && hasDelivery && (
                 <motion.div key="step2" variants={stepVariants} initial="initial" animate="animate" exit="exit" className="w-full">
-                  <GuestForm onNext={() => setActiveStep(3)} />
+                  <GuestForm
+                    data={guestData}
+                    onChange={setGuestData}
+                    onNext={() => setActiveStep(3)}
+                  />
                 </motion.div>
               )}
 
@@ -138,6 +197,8 @@ export const CheckoutPage: React.FC = () => {
                     drinkName={selectedDrink.name}
                     drinkPrice={selectedDrink.price}
                     boosts={boosts}
+                    quantity={quantity}
+                    onQuantityChange={setQuantity}
                     actionText={`Pay ${formatPrice(totalAmount)}`}
                     actionIcon="credit_card"
                     onAction={handlePayment}
@@ -148,8 +209,6 @@ export const CheckoutPage: React.FC = () => {
           </div>
         </div>
       </main>
-
-
     </motion.div>
   );
 };

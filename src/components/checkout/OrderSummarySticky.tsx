@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Image } from '../ui/Image';
 import { formatPrice } from '../../lib/menuData';
@@ -7,6 +7,8 @@ export interface OrderSummaryProps {
   drinkName?: string;
   drinkPrice?: number;
   boosts?: Record<string, boolean>;
+  quantity?: number;
+  onQuantityChange?: (q: number) => void;
   onAction?: () => void;
   actionText?: string;
   actionIcon?: string;
@@ -23,12 +25,13 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
   drinkName = 'Maple Moments',
   drinkPrice = 90,
   boosts = {},
+  quantity = 1,
+  onQuantityChange,
   onAction, 
   actionText, 
   actionIcon, 
   isActionDisabled 
 }) => {
-  const [quantity, setQuantity] = useState(1);
 
   // Calculate boost add-on total
   const boostTotal = Object.entries(boosts)
@@ -96,14 +99,14 @@ export const OrderSummarySticky: React.FC<OrderSummaryProps> = ({
             <span className="text-sm font-bold text-brand-dark dark:text-white uppercase tracking-widest">Quantity</span>
             <div className="flex items-center gap-4 bg-gray-50 dark:bg-white/5 rounded-full px-4 py-2 border border-gray-200 dark:border-white/10">
               <button 
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                onClick={() => onQuantityChange ? onQuantityChange(Math.max(1, quantity - 1)) : null}
                 className="text-gray-400 hover:text-brand-dark dark:hover:text-white transition-colors flex items-center justify-center"
               >
                 <span className="material-symbols-sharp text-sm">remove</span>
               </button>
               <span className="font-bold text-brand-dark dark:text-white w-4 text-center">{quantity}</span>
               <button 
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() => onQuantityChange ? onQuantityChange(quantity + 1) : null}
                 className="text-gray-400 hover:text-brand-dark dark:hover:text-white transition-colors flex items-center justify-center"
               >
                 <span className="material-symbols-sharp text-sm">add</span>

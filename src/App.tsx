@@ -5,6 +5,7 @@ import { CustomizationPage } from './pages/CustomizationPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { OrderSuccessPage } from './pages/OrderSuccessPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { LegalPage } from './pages/LegalPage';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/customize" element={<CustomizationPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/success" element={<OrderSuccessPage />} />
+            <Route path="/legal" element={<LegalPage />} />
             <Route path="/admin" element={<AdminDashboardPage />} />
           </Routes>
         </AnimatePresence>

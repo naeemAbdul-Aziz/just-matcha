@@ -174,7 +174,7 @@ export const CustomizationPage: React.FC = () => {
 
       {/* RIGHT SIDE: Scrolling Bottom Sheet / Sidebar */}
       <div className="relative z-30 flex-grow lg:w-1/2 w-full lg:h-[100dvh] h-[55%]">
-         <div className="w-full h-full lg:max-w-none bg-[#FDFBF7] dark:bg-[#111111] rounded-t-[2.5rem] lg:rounded-none shadow-[0_-8px_32px_rgba(0,0,0,0.08)] lg:shadow-none flex flex-col relative lg:border-l border-white/50 dark:border-white/10 transition-colors duration-1000 overflow-hidden">
+         <div className="w-full h-full lg:max-w-none bg-[#FDFBF7] dark:bg-[#111111] rounded-t-[2.5rem] lg:rounded-none shadow-[0_-8px_32px_rgba(0,0,0,0.08)] lg:shadow-none flex flex-col relative lg:border-l border-white/50 dark:border-white/10 transition-colors duration-1000 overflow-hidden pb-[env(safe-area-inset-bottom)]">
            <CustomizerControls
              customerName={customerName}
              setCustomerName={setCustomerName}

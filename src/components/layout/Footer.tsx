@@ -17,37 +17,27 @@ export const Footer: React.FC = () => {
             </form>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:justify-items-end">
-            <div>
-              <h4 className="font-serif text-lg mb-4">Shop</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><Link to="/customize" className="hover:text-primary transition-colors">All Drinks</Link></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Kits & Tools</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Gift Cards</a></li>
+            <div className="space-y-4">
+              <h4 className="text-white font-bold tracking-wider uppercase text-sm">Help & Contact</h4>
+              <ul className="space-y-3 text-slate-400 text-sm">
+                <li><a href="mailto:hello@justmatcha.co" className="hover:text-primary transition-colors">hello@justmatcha.co</a></li>
               </ul>
             </div>
-            <div>
-              <h4 className="font-serif text-lg mb-4">Company</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><a href="#story" className="hover:text-primary transition-colors">Our Story</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Locations</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-serif text-lg mb-4">Social</h4>
-              <ul className="space-y-3 text-sm text-white/60">
-                <li><a href="#" className="hover:text-primary transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">TikTok</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Twitter</a></li>
+            <div className="space-y-4">
+              <h4 className="text-white font-bold tracking-wider uppercase text-sm">Social</h4>
+              <ul className="space-y-3 text-slate-400 text-sm">
+                <li><a href="https://instagram.com/justmatcha" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Instagram</a></li>
+                <li><a href="https://tiktok.com/@justmatcha" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">TikTok</a></li>
+                <li><a href="https://twitter.com/justmatcha" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Twitter</a></li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/40">
-          <p>© 2023 Just Matcha Ghana. All rights reserved.</p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+          <p>© {new Date().getFullYear()} Just Matcha. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/legal" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/legal" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
         <div className="absolute bottom-4 right-1/2 translate-x-1/2 text-[150px] font-serif font-bold text-white/5 select-none pointer-events-none whitespace-nowrap hidden lg:block">

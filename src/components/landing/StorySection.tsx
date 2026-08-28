@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from '../ui/Image';
+
 export const StorySection: React.FC = () => {
   return (
     <section id="story" className="pt-24 pb-12 lg:pb-16 bg-cream relative overflow-hidden">
@@ -41,10 +42,6 @@ export const StorySection: React.FC = () => {
                 <h4 className="font-serif text-lg text-text-dark">Community First</h4>
                 <p className="text-sm text-text-light">Every purchase supports local growers in Ghana.</p>
               </div>
-            </div>
-
-            <div className="pt-6">
-              <a href="#" className="text-text-dark font-medium border-b border-primary hover:border-text-dark pb-1 transition-colors">Read our full story</a>
             </div>
           </div>
         </div>

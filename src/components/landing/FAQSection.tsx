@@ -96,7 +96,7 @@ export const FAQSection: React.FC = () => {
         {/* Footer Contact */}
         <div className="text-center flex flex-col items-center gap-2">
           <p className="text-sm text-gray-500 font-medium">Have any other questions?</p>
-          <a href="#" className="text-sm font-bold text-brand-dark dark:text-white flex items-center gap-1 group">
+          <a href="mailto:hello@justmatcha.co" className="text-sm font-bold text-brand-dark dark:text-white flex items-center gap-1 group">
             <span className="border-b border-brand-dark dark:border-white pb-0.5">Contact Us</span>
             <span className="material-symbols-sharp text-[14px] text-gray-400 group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </a>
